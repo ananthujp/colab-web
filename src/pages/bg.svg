@@ -1,0 +1,134 @@
+<!-- FOR DESKTOP -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1570" height="1084" viewBox="0 0 1570 1084" fill="none">
+  
+  <g filter="url(#bg-blue)">
+    <path d="M1928 636.584C1928 1026.82 1690.79 612.54 1346.72 612.54C1002.64 612.54 682 1026.82 682 636.584C682 246.348 960.927 -70 1305 -70C1649.07 -70 1928 246.348 1928 636.584Z" fill="url(#paint-bg-blue)" fill-opacity="0.8"/>
+  </g>
+  
+  <g filter="url(#bg-pink)">
+    <ellipse cx="1138" cy="688.5" rx="691" ry="308.5" fill="url(#paint-bg-pink)"/>
+  </g>
+  
+  <g filter="url(#bg-yellow)">
+    <path d="M1311 455.778C1311 768.73 970.616 1110 732.019 1110C493.421 1110 300 856.303 300 543.351C300 230.399 710.064 -163 948.662 -163C1187.26 -163 1311 142.826 1311 455.778Z" fill="url(#paint-bg-yellow)" fill-opacity="0.8"/>
+  </g>
+  <defs>
+    
+    <filter id="bg-blue" x="532" y="-220" width="1546" height="1174" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="75" result="effect1_foregroundBlur_215_3496"/>
+    </filter>
+    
+    <filter id="bg-pink" x="247" y="180" width="1782" height="1017" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_215_3496"/>
+    </filter>
+    
+    <filter id="bg-yellow" x="0" y="-463" width="1611" height="1873" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur_215_3496"/>
+    </filter>
+    
+    <linearGradient id="paint-bg-blue" x1="1305.68" y1="-169.278" x2="1304.8" y2="1343.17" gradientUnits="userSpaceOnUse">
+      <stop offset="20%" stop-color="#907AE7">
+        <animate attributeName="stop-color" values="#907AE7;#FFEE95;#FFAAB6;#907AE7;" dur="10s" repeatCount="indefinite"></animate>
+      </stop>      
+      <stop offset="100%" stop-color="#907AE7">
+        <animate attributeName="stop-color" values="907AE7;#FFAAB6;#FFAAB6;#907AE7;" dur="10s" repeatCount="indefinite"></animate>
+      </stop>
+    </linearGradient>
+    
+    <linearGradient id="paint-bg-pink" x1="1138" y1="380" x2="1138" y2="997" gradientUnits="userSpaceOnUse">
+      <stop offset="20%" stop-color="#FFAAB6">
+         <animate attributeName="stop-color" values="#FFAAB6;#907AE7;#FFEE95;#FFAAB6;" dur="10s" repeatCount="indefinite"></animate>
+      </stop>
+      <stop offset="100%" stop-color="#FFAAB6">
+          <animate attributeName="stop-color" values="#FFAAB6;#FFEE95;#907AE7;#FFAAB6;" dur="10s" repeatCount="indefinite"></animate>
+      </stop>
+    </linearGradient>
+
+    <linearGradient id="paint-bg-yellow" x1="732.019" y1="-23.298" x2="732.019" y2="1110" gradientUnits="userSpaceOnUse">
+      <stop offset="20%" stop-color="#FFEE95">
+        <animate attributeName="stop-color" values="#FFEE95;#FFAAB6;#FFEE95;" dur="10s" repeatCount="indefinite"></animate>
+      </stop>
+      <stop offset="100%" stop-color="#FFEE95">
+        <animate attributeName="stop-color" values="#FFEE95;#FFAAB6;#FFEE95;" dur="10s" repeatCount="indefinite"></animate>
+      </stop>
+       <animateTransform attributeName="gradientTransform" type="rotate" from="0 .5 .5" to="360 .5 .5" dur="10s" repeatCount="indefinite" />
+    </linearGradient>
+  </defs>
+</svg>
+
+
+<!-- FOR MOBILE  -->
+<!-- <svg xmlns="http://www.w3.org/2000/svg" width="375" height="744" viewBox="0 0 375 744" fill="none">
+  <g clip-path="url(#clip0_3_354)">
+    <rect width="375" height="744" fill="#F9F8FF"/>
+    <g filter="url(#filter0_f_3_354)">
+     <path d="M1118 1097.07C1118 1523.47 858.896 1070.8 483.066 1070.8C107.236 1070.8 -243 1523.47 -243 1097.07C-243 670.667 61.6702 325 437.5 325C813.33 325 1118 670.667 1118 1097.07Z" fill="url(#paint0_linear_3_354)" fill-opacity="0.8"/>
+    </g>
+    
+  <g filter="url(#filter1_f_3_354)">
+    <ellipse cx="255.5" cy="1154" rx="754.5" ry="337" fill="url(#paint1_linear_3_354)"/>
+  </g>
+    
+    <g filter="url(#filter2_f_3_354)">
+      <path d="M444 899.649C444 1241.36 72.305 1614 -188.241 1614C-448.786 1614 -660 1336.99 -660 995.271C-660 653.556 -212.215 224 48.3309 224C308.876 224 444 557.935 444 899.649Z" fill="url(#paint2_linear_3_354)" fill-opacity="0.8"/>
+    </g>
+  </g>
+  
+  <defs>
+    <filter id="filter0_f_3_354" x="-393" y="175" width="1661" height="1255" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="75" result="effect1_foregroundBlur_3_354"/>
+    </filter>
+
+    <filter id="filter1_f_3_354" x="-699" y="617" width="1909" height="1074" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_3_354"/>
+    </filter>
+
+    <filter id="filter2_f_3_354" x="-960" y="-76" width="1704" height="1990" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur_3_354"/>
+    </filter>
+
+    <linearGradient id="paint0_linear_3_354" x1="438.247" y1="216.521" x2="437.285" y2="1869.13" gradientUnits="userSpaceOnUse">
+      <stop offset="20%" stop-color="#907AE7"/>
+         <animate attributeName="stop-color" values="#907AE7;#FFEE95;#907AE7;" dur="8s" repeatCount="indefinite"></animate>
+      </stop>
+      <stop offset="100%" stop-color="#C3B4FF" stop-opacity="0">
+         <animate attributeName="stop-color" values="907AE7;#FFAAB6;#C3B4FF;" dur="8s" repeatCount="indefinite"></animate>
+      </stop>
+    </linearGradient>
+
+    <linearGradient id="paint1_linear_3_354" x1="255.5" y1="817" x2="255.5" y2="1491" gradientUnits="userSpaceOnUse">
+      <stop offset="20%" stop-color="#FFAAB6">
+         <animate attributeName="stop-color" values="#FFAAB6;#FFEE95;#FFAAB6;" dur="8s" repeatCount="indefinite"></animate>
+      </stop>
+      <stop offset="100%" stop-color="#FFAAB6">
+          <animate attributeName="stop-color" values="#FFAAB6;#FFEE95;#FFAAB6;" dur="8s" repeatCount="indefinite"></animate>
+      </stop>
+    </linearGradient>
+
+    <linearGradient id="paint2_linear_3_354" x1="-188.241" y1="376.542" x2="-188.241" y2="1614" gradientUnits="userSpaceOnUse">
+      <stop offset="20%" stop-color="#FFEE95">
+        <animate attributeName="stop-color" values="#FFEE95;FFAAB6;#FFEE95;" dur="8s" repeatCount="indefinite"></animate>
+      </stop>
+      <stop offset="100%" stop-color="#FFEE95" stop-opacity=".5">
+        <animate attributeName="stop-color" values="#FFEE95;#FFAAB6;#FFEE95;" dur="8s" repeatCount="indefinite"></animate>
+      </stop>
+       <animateTransform attributeName="gradientTransform" type="rotate" from="0 .5 .5" to="360 .5 .5" dur="8s" repeatCount="indefinite" />
+    </linearGradient>
+
+    <clipPath id="clip0_3_354">
+      <rect width="375" height="744" fill="white"/>
+    </clipPath>
+  </defs>
+</svg> -->
