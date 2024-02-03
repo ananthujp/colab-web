@@ -7,6 +7,8 @@ import ai from "../imgs/ai.png";
 import food from "../imgs/food.png";
 import def from "../imgs/def.png";
 import arch from "../imgs/arch.png";
+import useReducer from "../hook/reducerHook";
+import { useNavigate } from "react-router-dom";
 const cardVar = [
   {
     label: "Bioengineering, Healthcare, Pharma",
@@ -47,12 +49,29 @@ const cardVar = [
 function ExpandCard() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const { nav, setNav } = useReducer();
+  const navigate = useNavigate();
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { duration: 0.5 } }}
-      exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      layoutId={`pgm.themes`}
+      initial={nav.from !== "themes" && { opacity: 0, translateY: -20 }}
+      animate={
+        nav.from !== "themes" && {
+          opacity: 1,
+          translateY: 0,
+          transition: { duration: 0.5, delay: 0.5 },
+        }
+      }
+      exit={
+        nav.to !== "themes"
+          ? {
+              opacity: 0,
+              translateY: 20,
+              transition: { duration: 0.5 },
+            }
+          : null
+      }
       className=" flex flex-row mt-16 justify-between cursor-default transition-all m-1  w-full  h-64 rounded-lg shadow-md border border-gray-100/60"
     >
       {cardVar.map((item, index) => (
@@ -89,6 +108,10 @@ function ExpandCard() {
           </h1>
           <div>
             <motion.div
+              onClick={() => {
+                setNav({ from: "/", to: "themes" });
+                navigate("/" + "themes");
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.5 } }}
               exit={{ opacity: 0, transition: { duration: 0.5 } }}

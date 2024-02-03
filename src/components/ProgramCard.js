@@ -9,8 +9,11 @@ import {
   MagnifyingGlassPlusIcon,
   MicrophoneIcon,
 } from "@heroicons/react/24/solid";
+import { Link, useNavigate } from "react-router-dom";
+import useReducer from "../hook/reducerHook";
 const BlogSlider = ({ delay }) => {
   const ref = useRef(null);
+
   const isInView = useInView(ref, { once: true });
   const theme = "w-32 text-white bg-gradient-to-br p-4 rounded-full ";
   const sliderItems = [
@@ -60,21 +63,29 @@ const BlogSlider = ({ delay }) => {
       ),
     },
   ];
-
+  const navigate = useNavigate();
+  const { nav, setNav } = useReducer();
   return (
     <motion.div
+      layoutId={`pgm.page`}
       ref={ref}
-      initial={{ opacity: 0, translateY: -20 }}
-      animate={{
-        opacity: 1,
-        translateY: 0,
-        transition: { duration: 0.5, delay: 0.5 * delay },
-      }}
-      exit={{
-        opacity: 0,
-        translateY: 20,
-        transition: { duration: 0.5 },
-      }}
+      initial={nav.from !== "program" && { opacity: 0, translateY: -20 }}
+      animate={
+        nav.from !== "program" && {
+          opacity: 1,
+          translateY: 0,
+          transition: { duration: 0.5, delay: 0.5 * delay },
+        }
+      }
+      exit={
+        nav.to !== "program"
+          ? {
+              opacity: 0,
+              translateY: 20,
+              transition: { duration: 0.5 },
+            }
+          : null
+      }
       className="bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[53%] flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
@@ -91,10 +102,32 @@ const BlogSlider = ({ delay }) => {
               translateY: 20,
               transition: { duration: 0.5 },
             }}
-            className="text-lg flex items-start gap-2   flex-row font-pop font-semibold text-slate-600"
+            className="text-lg flex items-start gap-2 justify-between  flex-row font-pop font-semibold text-slate-600"
           >
-            <CalendarDaysIcon className="w-6" />
-            <h1>Event Highlights</h1>
+            <div className="flex flex-row">
+              <CalendarDaysIcon className="w-6" />
+              <h1>Event Highlights</h1>
+            </div>
+            <motion.button
+              onClick={() => {
+                setNav({ from: "/", to: "program" });
+                navigate("/" + "program");
+              }}
+              initial={{ opacity: 0, translateY: -20 }}
+              animate={{
+                opacity: 1,
+                translateY: 0,
+                transition: { duration: 0.5, delay: 0.4 },
+              }}
+              exit={{
+                opacity: 0,
+                translateY: 20,
+                transition: { duration: 0.5 },
+              }}
+              className="rounded-full font-semibold w-24 text-sm px-2 py-1 text-slate-600 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
+            >
+              More
+            </motion.button>
           </motion.h1>
           <Carousel dotPosition={"right"} autoplay>
             {sliderItems.map((item, i) => (

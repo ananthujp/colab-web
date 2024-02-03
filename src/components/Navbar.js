@@ -9,15 +9,15 @@ import { Menu, Transition } from "@headlessui/react";
 
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
+import useReducer from "../hook/reducerHook";
 
 const items = [
-  { label: "Home", link: "/" },
+  { label: "Home", link: "" },
   { label: "About", link: "about" },
   { label: "Program", link: "program" },
-  { label: "Domains/Themes", link: "" },
+  { label: "Themes", link: "themes" },
   { label: "Speakers", link: "" },
-  { label: "Registration", link: "" },
-  { label: "Contact", link: "" },
+  { label: "Contact", link: "contact" },
 ];
 
 function MyDropdown() {
@@ -79,25 +79,29 @@ function MyDropdown() {
   );
 }
 
-function Navbar() {
-  const [selected, setSelected] = React.useState(0);
+function Navbar({ sel, dark }) {
+  const [selected, setSelected] = React.useState(sel ? sel : 0);
   const navigate = useNavigate();
-
+  const { nav, setNav } = useReducer();
   return (
     <AnimatePresence>
       <motion.div
-        // initial={{ opacity: 0, translateY: -10 }}
-        // animate={{
-        //   opacity: 1,
-        //   translateY: 0,
-        //   transition: { duration: 0.5 },
-        // }}
-        // exit={{
-        //   opacity: 0,
-        //   translateY: -20,
-        //   transition: { duration: 0.5 },
-        // }}
-        className=" bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 md:flex hidden mx-2  font-medium flex-row hover:bg-slate-100/20 transition-all rounded-full font-mont"
+        //layoutId="nav_bar-lay"
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.5 },
+        }}
+        exit={{
+          opacity: 0,
+          transition: { duration: 0.5 },
+        }}
+        className={
+          "  md:flex hidden mx-2  font-medium flex-row transition-all rounded-full font-mont " +
+          (!dark
+            ? "bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:bg-slate-100/20"
+            : " bg-gradient-to-tl from-gray-600 via-purple-400 to-violet-400 backdrop-filter backdrop-blur-sm  bg-opacity-45 border border-slate-200")
+        }
       >
         {items.map((item, i) => (
           <motion.div
@@ -113,16 +117,24 @@ function Navbar() {
             //   transition: { duration: 0.5, delay: 0.1 * i + 0.1 },
             // }}
             onClick={() => {
+              setNav({ from: items[selected].link, to: item.link });
               setSelected(i);
-              navigate(item.link);
+              navigate("/" + item.link);
             }}
             className="relative cursor-pointer  py-2 px-4"
           >
             {i === selected && (
               <motion.div
                 layoutId="nav_bg"
-                style={{ borderRadius: 999999 }}
-                className="absolute border border-slate-300 rounded-full inset-0 bg-gradient-to-br from-slate-50 to-slate-200"
+                //style={{ borderRadius: 999999 }}
+                className={
+                  `absolute ${i === 0 && "rounded-l-full"} ${
+                    i === items.length - 1 && "rounded-r-full"
+                  } inset-0 ` +
+                  (!dark
+                    ? " bg-gradient-to-br border border-slate-300 from-slate-50 to-slate-200"
+                    : " bg-gradient-to-br border border-slate-400 from-slate-50 to-slate-200")
+                }
               />
             )}
             <span

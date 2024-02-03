@@ -1,16 +1,36 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import lalm from "../imgs/lalminar.png";
+import useReducer from "../hook/reducerHook";
+import { useNavigate } from "react-router-dom";
 function Card() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  const navigate = useNavigate();
+  const { nav, setNav } = useReducer();
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, translateY: -20 }}
-      animate={{ opacity: 1, translateY: 0, transition: { duration: 0.5 } }}
-      exit={{ opacity: 0, translateY: 20, transition: { duration: 0.5 } }}
-      className=" flex flex-col justify-between font-mont transition-all gap-2 p-4 w-[45%] border border-orange-400 hover:border-orange-100  h-64 bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 rounded-lg shadow-md "
+      layoutId={`pgm.about`}
+      initial={nav.from !== "about" && { opacity: 0, translateY: -20 }}
+      animate={
+        nav.from !== "about" && {
+          opacity: 1,
+          translateY: 0,
+          transition: { duration: 0.5, delay: 0.5 },
+        }
+      }
+      exit={
+        nav.to !== "about"
+          ? {
+              opacity: 0,
+              translateY: 20,
+              transition: { duration: 0.5 },
+            }
+          : null
+      }
+      className=" flex flex-col justify-between font-mont transition-all gap-2 p-4 w-[45%]  hover:border-orange-100  h-64 border border-orange-400 bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 rounded-lg shadow-md "
     >
       {isInView && (
         <div className="flex flex-row relative">
@@ -69,6 +89,10 @@ function Card() {
               15 years...
             </motion.h1>
             <motion.button
+              onClick={() => {
+                setNav({ from: "/", to: "about" });
+                navigate("/" + "about");
+              }}
               initial={{ opacity: 0, translateY: -20 }}
               animate={{
                 opacity: 1,

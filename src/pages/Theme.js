@@ -10,11 +10,17 @@ import {
   MicrophoneIcon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
+import bio from "../imgs/bio.png";
+import man from "../imgs/man.png";
+import ene from "../imgs/energy.png";
+import ai from "../imgs/ai.png";
+import food from "../imgs/food.png";
+import def from "../imgs/def.png";
+import arch from "../imgs/arch.png";
 import Navbar from "../components/Navbar";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
-
-function Program() {
+function Theme() {
   const { nav, setNav } = useReducer();
   const navigate = useNavigate();
   const theme = "w-16 text-white bg-gradient-to-br p-4 rounded-full ";
@@ -65,6 +71,43 @@ function Program() {
       ),
     },
   ];
+  const cardVar = [
+    {
+      label: "Bioengineering, Healthcare, Pharma",
+      bg: "hover:from-cyan-400 hover:to-blue-300",
+      img: bio,
+    },
+    {
+      label: "Manufacturing",
+      bg: "hover:from-fuchsia-300 hover:to-purple-400",
+      img: man,
+    },
+    {
+      label: "Energy and Water",
+      bg: "hover:from-green-400 hover:to-cyan-300",
+      img: ene,
+    },
+    {
+      label: "AI and Computing",
+      bg: "hover:from-purple-300 hover:to-indigo-300",
+      img: ai,
+    },
+    {
+      label: "Agro and Food processing",
+      bg: "hover:from-yellow-400 hover:to-orange-300",
+      img: food,
+    },
+    {
+      label: "Defence, Military & Space Technology ",
+      bg: "hover:from-pink-300 hover:to-rose-300",
+      img: def,
+    },
+    {
+      label: "Archaeology",
+      bg: "hover:from-blue-400 hover:to-indigo-300",
+      img: arch,
+    },
+  ];
   return (
     <motion.div
       style={{
@@ -79,7 +122,7 @@ function Program() {
         <div className="flex relative flex-col w-[95%] gap-4 shadow-md border border-white bg-gradient-to-br from-white to-slate-200 mt-4 rounded-lg h-[85%] ">
           <XMarkIcon
             onClick={() => {
-              setNav({ from: "program", to: "/" });
+              setNav({ from: "themes", to: "/" });
               navigate("/");
             }}
             className="absolute cursor-pointer hover:text-slate-400 text-slate-600 right-4 w-8 h-8 m-4"
@@ -115,16 +158,16 @@ function Program() {
               }}
               class="text-5xl font-pop text-center font-black bg-gradient-to-r from-purple-400 to-yellow-400 bg-clip-text text-transparent"
             >
-              EVENT HIGHLIGHTS
+              DOMAINS
             </motion.p>
           </div>
           <motion.div
-            layoutId={`pgm.theme`}
-            className="w-full px-24 mt-4 flex flex-col md:flex-wrap h-[90%]"
+            layoutId={`pgm.themes`}
+            className="w-full px-16 flex flex-col md:flex-wrap h-[90%]"
           >
-            {sliderItems.map((item, i) => (
-              <div className="h-36 w-1/2 m-4">
-                <div className="flex flex-row items-start gap-6">
+            {cardVar.map((item, i) => (
+              <div className="w-1/2 mx-4 my-2">
+                <div className="flex flex-row items-start gap-4">
                   <motion.div
                     initial={{ opacity: 0, translateY: -20 }}
                     animate={{
@@ -138,7 +181,12 @@ function Program() {
                       transition: { duration: 0.5, delay: i * 0.1 },
                     }}
                   >
-                    {item.ico}
+                    <img
+                      key={`img.exp.${i}`}
+                      src={item.img}
+                      alt=""
+                      className="w-16 filter "
+                    />
                   </motion.div>
 
                   <div className="flex flex-col ">
@@ -156,7 +204,7 @@ function Program() {
                       }}
                       className="text-xl font-pop font-semibold"
                     >
-                      {sliderItems[i].title}
+                      {cardVar[i].label}
                     </motion.h1>
                     <motion.h1
                       initial={{ opacity: 0, translateY: -20 }}
@@ -170,9 +218,9 @@ function Program() {
                         translateY: 20,
                         transition: { duration: 0.5, delay: i * 0.1 + 0.1 },
                       }}
-                      className="text-xs mt-2 w-[85%] text-slate-400 font-pop text-justify font-light"
+                      className="text-xs mt-2 w-[85%] font-pop text-justify font-light"
                     >
-                      {sliderItems[i].description}
+                      {cardVar[i].bg}
                     </motion.h1>
                   </div>
                 </div>
@@ -182,10 +230,10 @@ function Program() {
         </div>
       </motion.div>
       <div className="absolute z-50 scale-90 bottom-4 pointer-events-auto">
-        <Navbar sel={2} dark />
+        <Navbar sel={3} dark />
       </div>
     </motion.div>
   );
 }
 
-export default Program;
+export default Theme;

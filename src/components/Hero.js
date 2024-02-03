@@ -1,5 +1,5 @@
 import React from "react";
-
+import hero from "../imgs/hero.png";
 function Hero() {
   return (
     <div className="py-12 h-[60vh] px-8 w-full justify-between flex flex-row">
@@ -15,7 +15,9 @@ function Hero() {
         </div>
         <div>f</div>
       </div>
-      <div>Image</div>
+      <div>
+        <img src={hero} className="w-64" />
+      </div>
     </div>
   );
 }

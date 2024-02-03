@@ -4,17 +4,20 @@ import { motion } from "framer-motion";
 import {
   BuildingOffice2Icon,
   CalendarDaysIcon,
+  EnvelopeIcon,
   LightBulbIcon,
   LinkIcon,
   MagnifyingGlassPlusIcon,
   MicrophoneIcon,
+  PencilSquareIcon,
+  PhoneArrowDownLeftIcon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 import Navbar from "../components/Navbar";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
-
-function Program() {
+import mapImg from "../imgs/map-cont.png";
+function Contact() {
   const { nav, setNav } = useReducer();
   const navigate = useNavigate();
   const theme = "w-16 text-white bg-gradient-to-br p-4 rounded-full ";
@@ -76,10 +79,10 @@ function Program() {
       <div class="absolute w-full h-full pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
 
       <motion.div className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
-        <div className="flex relative flex-col w-[95%] gap-4 shadow-md border border-white bg-gradient-to-br from-white to-slate-200 mt-4 rounded-lg h-[85%] ">
+        <div className="flex relative flex-col w-[95%] gap-4 bg-gradient-to-br shadow-md border border-white from-white to-slate-200 mt-4 rounded-lg h-[85%] ">
           <XMarkIcon
             onClick={() => {
-              setNav({ from: "program", to: "/" });
+              setNav({ from: "contact", to: "/" });
               navigate("/");
             }}
             className="absolute cursor-pointer hover:text-slate-400 text-slate-600 right-4 w-8 h-8 m-4"
@@ -115,77 +118,101 @@ function Program() {
               }}
               class="text-5xl font-pop text-center font-black bg-gradient-to-r from-purple-400 to-yellow-400 bg-clip-text text-transparent"
             >
-              EVENT HIGHLIGHTS
+              CONTACT
             </motion.p>
           </div>
           <motion.div
-            layoutId={`pgm.theme`}
+            layoutId={`pgm.contact`}
             className="w-full px-24 mt-4 flex flex-col md:flex-wrap h-[90%]"
           >
-            {sliderItems.map((item, i) => (
-              <div className="h-36 w-1/2 m-4">
-                <div className="flex flex-row items-start gap-6">
+            <motion.div
+              initial={{ opacity: 0, translateY: -20 }}
+              animate={{
+                opacity: 1,
+                translateY: 0,
+                transition: { duration: 0.5, delay: 0.5 },
+              }}
+              exit={{
+                opacity: 0,
+                translateY: 20,
+                transition: { duration: 0.5 },
+              }}
+              className=" bg-gradient-to-br from-slate-100/50 to-slate-200/50 my-auto hover:border-white flex flex-col justify-between p-4 rounded-lg"
+            >
+              <motion.div className="flex flex-row gap-3 justify-between">
+                <motion.img
+                  initial={{ opacity: 0, translateY: -20 }}
+                  animate={{
+                    opacity: 1,
+                    translateY: 0,
+                    transition: { duration: 0.5, delay: 0.5 + 0.4 },
+                  }}
+                  src={mapImg}
+                  className="h-44 rounded-md origin-bottom-left  object-cover border border-slate-100"
+                  alt=""
+                />
+                <div className="flex flex-col items-start gap-2">
+                  <motion.h1
+                    initial={{ opacity: 0, translateY: -20 }}
+                    animate={{
+                      opacity: 1,
+                      translateY: 0,
+                      transition: { duration: 0.5, delay: 0.5 + 0.5 },
+                    }}
+                    className="text-lg font-semibold font-pop"
+                  >
+                    Indian Institute of Technology Gandhinagar
+                  </motion.h1>
+                  <motion.h1
+                    initial={{ opacity: 0, translateY: -20 }}
+                    animate={{
+                      opacity: 1,
+                      translateY: 0,
+                      transition: { duration: 0.5, delay: 0.5 + 0.6 },
+                    }}
+                    className="text-xs font-light font-mont"
+                  >
+                    Palaj, Gandhinagar - 382055, Gujarat
+                  </motion.h1>
                   <motion.div
                     initial={{ opacity: 0, translateY: -20 }}
                     animate={{
                       opacity: 1,
                       translateY: 0,
-                      transition: { duration: 0.5, delay: i * 0.1 },
+                      transition: { duration: 0.5, delay: 0.5 + 0.7 },
                     }}
-                    exit={{
-                      opacity: 0,
-                      translateY: 20,
-                      transition: { duration: 0.5, delay: i * 0.1 },
-                    }}
+                    className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
                   >
-                    {item.ico}
+                    <EnvelopeIcon className="w-5 text-orange-400" />
+                    <h1 className="text-xs font-normal font-mont">
+                      industryconnect@iitgn.ac.in
+                    </h1>
                   </motion.div>
-
-                  <div className="flex flex-col ">
-                    <motion.h1
-                      initial={{ opacity: 0, translateY: -20 }}
-                      animate={{
-                        opacity: 1,
-                        translateY: 0,
-                        transition: { duration: 0.5, delay: i * 0.1 },
-                      }}
-                      exit={{
-                        opacity: 0,
-                        translateY: 20,
-                        transition: { duration: 0.5, delay: i * 0.1 },
-                      }}
-                      className="text-xl font-pop font-semibold"
-                    >
-                      {sliderItems[i].title}
-                    </motion.h1>
-                    <motion.h1
-                      initial={{ opacity: 0, translateY: -20 }}
-                      animate={{
-                        opacity: 1,
-                        translateY: 0,
-                        transition: { duration: 0.5, delay: i * 0.1 + 0.1 },
-                      }}
-                      exit={{
-                        opacity: 0,
-                        translateY: 20,
-                        transition: { duration: 0.5, delay: i * 0.1 + 0.1 },
-                      }}
-                      className="text-xs mt-2 w-[85%] text-slate-400 font-pop text-justify font-light"
-                    >
-                      {sliderItems[i].description}
-                    </motion.h1>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, translateY: -20 }}
+                    animate={{
+                      opacity: 1,
+                      translateY: 0,
+                      transition: { duration: 0.5, delay: 0.5 + 0.8 },
+                    }}
+                    className="flex flex-row gap-2 cursor-pointer items-center bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                  >
+                    <PencilSquareIcon className="w-5 text-white" />
+                    <h1 className="text-xs font-normal text-white font-mont">
+                      Openhouse Registration form
+                    </h1>
+                  </motion.div>
                 </div>
-              </div>
-            ))}
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
       <div className="absolute z-50 scale-90 bottom-4 pointer-events-auto">
-        <Navbar sel={2} dark />
+        <Navbar sel={5} dark />
       </div>
     </motion.div>
   );
 }
 
-export default Program;
+export default Contact;
