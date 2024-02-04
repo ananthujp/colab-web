@@ -14,7 +14,7 @@ function Imageslider() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
-    <div className=" w-[45%]" ref={ref}>
+    <div className="w-[90%] md:w-[45%]" ref={ref}>
       {isInView && (
         <motion.div
           className="bg-yellow-100 mt-8 group overflow-hidden relative bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-2 border-gray-200 hover:border-white flex flex-col justify-between rounded-lg"

@@ -30,7 +30,7 @@ function Card() {
             }
           : null
       }
-      className=" flex flex-col justify-between font-mont transition-all gap-2 p-4 w-[45%]  hover:border-orange-100  h-64 border border-orange-400 bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 rounded-lg shadow-md "
+      className=" flex flex-col justify-between font-mont transition-all gap-2 p-4 w-[90%] md:w-[45%]  hover:border-orange-100  h-64 border border-orange-400 bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 rounded-lg shadow-md "
     >
       {isInView && (
         <div className="flex flex-row relative">

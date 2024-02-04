@@ -6,7 +6,8 @@ import ene from "../imgs/energy.png";
 import ai from "../imgs/ai.png";
 import food from "../imgs/food.png";
 import def from "../imgs/def.png";
-import arch from "../imgs/arch.png";
+import pharma from "../imgs/pharma.png";
+import climate from "../imgs/climate.png";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
 const cardVar = [
@@ -41,9 +42,14 @@ const cardVar = [
     img: def,
   },
   {
-    label: "Archaeology",
+    label: "Climate Challange & Solutions",
     bg: "hover:from-blue-400 hover:to-indigo-300",
-    img: arch,
+    img: climate,
+  },
+  {
+    label: "Pharma and Healthcare",
+    bg: "hover:from-cyan-400  hover:to-blue-500",
+    img: pharma,
   },
 ];
 function ExpandCard() {
@@ -72,7 +78,7 @@ function ExpandCard() {
             }
           : null
       }
-      className=" flex flex-row mt-16 justify-between cursor-default transition-all m-1  w-full  h-64 rounded-lg shadow-md border border-gray-100/60"
+      className=" flex flex-col-reverse md:flex-row mt-6 md:mt-16 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-gray-100/60"
     >
       {cardVar.map((item, index) => (
         <motion.div
@@ -88,10 +94,10 @@ function ExpandCard() {
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
           key={`exp.card.${index}`}
           className={`relative ${
-            index === 0 && "rounded-l-lg"
-          } group bg-gradient-to-br group gap-3 hover:bg-opacity-20 from-slate-100 to-slate-300 group flex flex-col justify-around text-xs md:text-sm ${
+            index === 0 && "rounded-t-lg md:rounded-l-lg"
+          } group bg-gradient-to-br group gap-3 hover:bg-opacity-20 from-slate-100 to-slate-300 group flex flex-row md:flex-col md:justify-around text-xs md:text-sm ${
             item.bg
-          } text-center font-mont w-full hover:p-6 transition-all duration-250 text-white flex justify-between items-center`}
+          } text-center font-mont w-full h-24 md:h-auto hover:p-6 transition-all duration-250 text-white flex justify-between items-center`}
         >
           <div>
             {item.img && (
@@ -99,7 +105,7 @@ function ExpandCard() {
                 key={`img.exp.${index}`}
                 src={item.img}
                 alt=""
-                className="w-24 filter saturate-0 transition-all group-hover:saturate-100 sgroup-hover:w-32 -mt-10"
+                className="w-12 md:w-24 ml-8 md:ml-0 filter saturate-0 transition-all group-hover:saturate-100 sgroup-hover:w-32 md:-mt-10"
               />
             )}
           </div>
@@ -123,8 +129,8 @@ function ExpandCard() {
           </div>
         </motion.div>
       ))}
-      <div className="flex flex-col items-start justify-start bg-opacity-75 w-8 transition-all rounded-r-lg bg-gradient-to-br from-indigo-400 to-indigo-400 ">
-        <h1 className="whitespace-nowrap font-pop font-medium text-white text-base transform origin-bottom-left rotate-90">
+      <div className="flex flex-col items-start justify-start p-2 md:p-0 bg-opacity-75 md:w-8 transition-all rounded-t-lg md:rounded-r-lg bg-gradient-to-br from-indigo-400 to-indigo-400 ">
+        <h1 className="whitespace-nowrap font-pop font-medium text-white text-base transform origin-bottom-left md:rotate-90">
           Theme/Domain
         </h1>
       </div>

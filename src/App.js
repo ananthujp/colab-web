@@ -5,6 +5,7 @@ import Program from "./pages/Program";
 import About from "./pages/About";
 import Theme from "./pages/Theme";
 import Contact from "./pages/Contact";
+import Speakers from "./pages/Speakers";
 function App() {
   const location = useLocation();
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="program" element={<Program />} />
         <Route path="themes" element={<Theme />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="speakers" element={<Speakers />} />
       </Routes>
     </AnimatePresence>
   );

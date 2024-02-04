@@ -86,7 +86,7 @@ const BlogSlider = ({ delay }) => {
             }
           : null
       }
-      className="bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[53%] flex flex-col justify-between p-4 rounded-lg"
+      className="bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[90%] md:w-[53%] flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
         <>
@@ -102,9 +102,9 @@ const BlogSlider = ({ delay }) => {
               translateY: 20,
               transition: { duration: 0.5 },
             }}
-            className="text-lg flex items-start gap-2 justify-between  flex-row font-pop font-semibold text-slate-600"
+            className="text-lg mb-4 md:mb-0 flex items-start gap-2 justify-between  flex-row font-pop font-semibold text-slate-800"
           >
-            <div className="flex flex-row">
+            <div className="flex flex-row gap-2 items-center">
               <CalendarDaysIcon className="w-6" />
               <h1>Event Highlights</h1>
             </div>
@@ -131,7 +131,7 @@ const BlogSlider = ({ delay }) => {
           </motion.h1>
           <Carousel dotPosition={"right"} autoplay>
             {sliderItems.map((item, i) => (
-              <div className="h-36">
+              <div className="h-44 md:h-36">
                 <div className="flex flex-row items-start gap-8">
                   {item.ico && item.ico}
 

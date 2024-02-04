@@ -16,7 +16,7 @@ function Contact({ delay }) {
   const { nav, setNav } = useReducer();
   const navigate = useNavigate();
   return (
-    <div ref={ref} className=" w-[52%]">
+    <div ref={ref} className="w-[90%] md:w-[52%]">
       {isInView && (
         <motion.div
           initial={{ opacity: 0, translateY: -20 }}
@@ -30,7 +30,7 @@ function Contact({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 h-64 bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col justify-between p-4 rounded-lg"
+          className="mt-8 md:h-64 bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col justify-between p-4 rounded-lg"
         >
           <div className="flex flex-row  justify-between">
             <motion.h1
@@ -61,7 +61,7 @@ function Contact({ delay }) {
               </motion.div>
             </div>
           </div>
-          <motion.div className="flex flex-row gap-3">
+          <motion.div className="flex flex-col md:flex-row gap-3">
             <motion.img
               initial={{ opacity: 0, translateY: -20 }}
               animate={{
