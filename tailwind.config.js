@@ -28,8 +28,10 @@ module.exports = {
       fontFamily: {
         pop: ['"Poppins"'],
         mont: ['"Montserrat"'],
+        beb: ['"Bebas Neue"'],
       },
     },
   },
+
   plugins: [require("tailwindcss-bg-patterns")],
 };

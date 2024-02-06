@@ -30,11 +30,11 @@ function Card() {
             }
           : null
       }
-      className=" flex flex-col justify-between font-mont transition-all gap-2 p-4 w-[90%] md:w-[45%]  hover:border-orange-100  h-64 border border-orange-400 bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 rounded-lg shadow-md "
+      className=" flex flex-col justify-between font-mont transition-all gap-2 p-4 w-[90%] md:w-full  hover:border-orange-100  h-64 border border-orange-400 bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 rounded-lg shadow-md "
     >
       {isInView && (
         <div className="flex flex-row relative">
-          <div className="flex flex-col gap-4 p-4">
+          <div className="flex flex-col gap-2 p-4">
             <div>
               <motion.h1
                 initial={{ opacity: 0, translateY: -20 }}
@@ -66,7 +66,7 @@ function Card() {
                 }}
                 className="text-2xl font-semibold text-white "
               >
-                IIT Gandhinagar
+                CoLab 2024
               </motion.h1>
             </div>
             <motion.h1
@@ -83,10 +83,12 @@ function Card() {
               }}
               className="text-xs text-justify font-light text-white"
             >
-              Founded in 2008, the Indian Institute of Technology Gandhinagar
-              (IITGN) has made significant strides in academics,
-              interdisciplinary research, and institutional governance in just
-              15 years...
+              CoLab 2024 is a dynamic convergence of academia and industry at
+              the Indian Institute of Technology Gandhinagar. This event aims to
+              nurture robust partnerships to create smart solutions for key
+              societal challenges. Join us and become a part of a collaborative
+              research space where industry professionals, academicians, and
+              students pave the way for a better tomorrow
             </motion.h1>
             <motion.button
               onClick={() => {

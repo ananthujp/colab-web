@@ -119,10 +119,10 @@ function Theme() {
     <Page no={3} page="themes" title="Themes">
       <motion.div
         layoutId={`pgm.themes`}
-        className="w-full px-16 flex flex-col md:flex-wrap md:h-[90%]"
+        className="w-full px-16 grid grid-cols-1 md:grid-cols-2 xmd:flex-wrap md:h-[90%]"
       >
         {cardVar.map((item, i) => (
-          <div className="w-full md:w-1/2 mx-4 my-2">
+          <div className="w-full xmd:w-1/2 mx-4 my-2">
             <div className="flex flex-row items-start gap-4">
               <motion.div
                 initial={{ opacity: 0, translateY: -20 }}

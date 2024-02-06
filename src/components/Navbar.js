@@ -54,7 +54,7 @@ function MyDropdown({ sel }) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-indigo-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200 shadow-lg ring-1 ring-black/5 focus:outline-none">
             <div className="px-1 py-1 ">
               {items.map((item, i) => (
                 <Menu.Item key={`menu.${i}`}>
@@ -65,16 +65,18 @@ function MyDropdown({ sel }) {
                         setSelected(i);
                         navigate("/" + item.link);
                       }}
-                      className={`group relative flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                      className={`group font-mont font-medium relative flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     >
-                      <h1 className={`z-50 ${active && " invert"}`}>
+                      <h1
+                        className={`z-50 text-slate-600 group-hover:text-white`}
+                      >
                         {item.label}
                       </h1>
 
                       {active && (
                         <motion.div
                           // layoutId="mobile.menu"
-                          className="absolute inset-0 bg-indigo-400 w-full h-full rounded-md"
+                          className="absolute inset-0 bg-gradient-to-br from-purple-800 to-yellow-100 via-indigo-400 w-full h-full rounded-md"
                         />
                       )}
                     </button>
