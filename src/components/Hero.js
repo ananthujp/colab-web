@@ -12,7 +12,7 @@ function Hero() {
         " bg-slate-900"
       }
     >
-      <div class="absolute w-full h-screen pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
+      <div class="absolute w-full h-screen pointer-events-none pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
       <div
         class="absolute  blur-2xl opacity-40 pointer-events-none"
         aria-hidden="true"
@@ -99,12 +99,12 @@ function Hero() {
             }}
             className=" font-mont xtext-slate-500 text-slate-400 text-xs text-justify"
           >
-            Join us for a dynamic convergence of academia and industry at the
-            CoLab 2024, Industry Open House hosted by the Indian Institute of
-            Technology Gandhinagar (IITGN). This brief yet impactful event is
-            designed to bridge the gap between theoretical knowledge and
-            real-world applications, fostering collaboration, innovation, and
-            meaningful partnerships.
+            CoLab 2024 is a dynamic convergence of academia and industry at the
+            Indian Institute of Technology Gandhinagar. This event aims to
+            nurture robust partnerships to create smart solutions for key
+            societal challenges. Join us and become a part of a collaborative
+            research space where industry professionals, academicians, and
+            students pave the way for a better tomorrow.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, translateY: -20 }}
@@ -141,7 +141,7 @@ function Hero() {
         >
           <img
             src={hero}
-            className="scale-150 sfilter mix-blend-lighten object-contain ml-auto"
+            className="scale-150 pointer-events-none mix-blend-lighten object-contain ml-auto"
             alt=""
           />
         </motion.div>

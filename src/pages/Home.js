@@ -27,6 +27,9 @@ import { Button, Checkbox, Form, Input, Modal } from "antd";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import WhyCard from "../components/WhyCard";
+import Speakers from "../components/Speakers";
+import QuickLinks from "../components/QuickLinks";
+import Venue from "../components/Venue";
 
 function Home() {
   const [hidden, setHidden] = useState(false);
@@ -226,11 +229,20 @@ function Home() {
               <Agenda />
             </div>
           </div>
-          <BlogSlider delay={2} />
+
           <ExpandCard />
+          <div className="grid grid-cols-2 gap-6">
+            <BlogSlider delay={1} />
+            <Speakers />
+          </div>
+          <Venue />
           <FAQCard />
-          <Imageslider />
-          <Contact delay={2} />
+          <div className="grid grid-cols-2 gap-6">
+            <QuickLinks />
+            <Contact delay={1} />
+          </div>
+          {/* <Imageslider /> */}
+
           {/* <SwipeCard /> */}
           {/* <Carousel /> */}
         </div>

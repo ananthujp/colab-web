@@ -102,7 +102,7 @@ function FAQCard({ delay = 0 }) {
   });
   const { nav, setNav } = useReducer();
   return (
-    <div className="bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[90%] md:w-[56%] flex flex-col justify-between p-4 rounded-lg">
+    <div className="bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg">
       <motion.h1
         initial={{ opacity: 0, translateY: -20 }}
         animate={{
@@ -142,7 +142,11 @@ function FAQCard({ delay = 0 }) {
           More
         </motion.button>
       </motion.h1>
-      <Collapse items={items} defaultActiveKey={["1"]} />
+      <Collapse
+        items={items}
+        className="w-full min-w-full"
+        defaultActiveKey={["1"]}
+      />
     </div>
   );
 }

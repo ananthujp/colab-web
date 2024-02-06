@@ -1,4 +1,4 @@
-import { PhoneArrowDownLeftIcon } from "@heroicons/react/24/solid";
+import { PhoneArrowDownLeftIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import {
   EnvelopeIcon,
   MapIcon,
@@ -16,7 +16,7 @@ function Contact({ delay }) {
   const { nav, setNav } = useReducer();
   const navigate = useNavigate();
   return (
-    <div ref={ref} className="w-[90%] md:w-[52%]">
+    <div ref={ref} className="w-[90%] md:w-full md:h-auto">
       {isInView && (
         <motion.div
           initial={{ opacity: 0, translateY: -20 }}
@@ -30,9 +30,9 @@ function Contact({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 md:h-64 bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col justify-between p-4 rounded-lg"
+          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col justify-between p-4 rounded-lg"
         >
-          <div className="flex flex-row  justify-between">
+          <div className="flex flex-row mb-2 justify-between">
             <motion.h1
               initial={{ opacity: 0, translateY: -20 }}
               animate={{
@@ -61,19 +61,9 @@ function Contact({ delay }) {
               </motion.div>
             </div>
           </div>
-          <motion.div className="flex flex-col md:flex-row gap-3">
-            <motion.img
-              initial={{ opacity: 0, translateY: -20 }}
-              animate={{
-                opacity: 1,
-                translateY: 0,
-                transition: { duration: 0.5, delay: 0.5 * delay + 0.4 },
-              }}
-              src={mapImg}
-              className="h-44 rounded-md origin-bottom-left  object-cover border border-slate-100"
-              alt=""
-            />
-            <div className="flex flex-col items-start gap-2">
+
+          <motion.div className="flex flex-col w-full md:flex-row justify-between h-full">
+            <div className="flex flex-col items-start w-full gap-2">
               <motion.h1
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
@@ -96,6 +86,20 @@ function Contact({ delay }) {
               >
                 Palaj, Gandhinagar - 382055, Gujarat
               </motion.h1>
+              <motion.div
+                initial={{ opacity: 0, translateY: -20 }}
+                animate={{
+                  opacity: 1,
+                  translateY: 0,
+                  transition: { duration: 0.5, delay: 0.5 * delay + 0.7 },
+                }}
+                className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+              >
+                <PhoneIcon className="w-5 text-orange-400" />
+                <h1 className="text-xs font-normal font-mont">
+                  +91 98 47 45 32 17
+                </h1>
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
