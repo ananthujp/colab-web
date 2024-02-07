@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "./static/css/main.5ba3c6ed.css",
+    "main.js": "./static/js/main.21f9465a.js",
+    "static/js/787.7c045110.chunk.js": "./static/js/787.7c045110.chunk.js",
+    "static/media/hero.gif": "./static/media/hero.172faf878b27e8ab6c05.gif",
+    "static/media/tp238-background-03.png": "./static/media/tp238-background-03.d989fdbf0b8a4d9c31c1.png",
+    "static/media/ray.svg": "./static/media/ray.d91b8da515ed829a99ed26883167fa68.svg",
+    "static/media/lalminar.png": "./static/media/lalminar.a5b7f2bcb5421d56fb6f.png",
+    "static/media/map-cont.png": "./static/media/map-cont.644c15086e580654b48b.png",
+    "static/media/qrcode.png": "./static/media/qrcode.e098e932213eac4fa37d.png",
+    "static/media/venue.avif": "./static/media/venue.4f38c2e676232aff2e86.avif",
+    "static/media/pharma.png": "./static/media/pharma.9b9cf9b36a8f7591bdf2.png",
+    "static/media/climate.png": "./static/media/climate.cf0272f9aec0f2aaad0d.png",
+    "static/media/colab-logo.svg": "./static/media/colab-logo.2a0e0ddc8c3355f00e19f970c77099ee.svg",
+    "static/media/ai.png": "./static/media/ai.96ce2406fbc4b3de50d2.png",
+    "static/media/bio.png": "./static/media/bio.759798d03d3803aad21d.png",
+    "index.html": "./index.html",
+    "static/media/shape.svg": "./static/media/shape.8c54cabae2ead2e736c210da9381baf7.svg",
+    "main.5ba3c6ed.css.map": "./static/css/main.5ba3c6ed.css.map",
+    "main.21f9465a.js.map": "./static/js/main.21f9465a.js.map",
+    "787.7c045110.chunk.js.map": "./static/js/787.7c045110.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5ba3c6ed.css",
+    "static/js/main.21f9465a.js"
+  ]
+}
