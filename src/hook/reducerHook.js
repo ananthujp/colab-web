@@ -12,10 +12,14 @@ import { db } from "../firebase";
 const WrapContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({}); //role: "admin"
+  const [user, setUser] = useState(null); //role: "admin"
   const [nav, setNav] = useState({ from: null, to: null });
   const [load, setLoad] = useState(true);
   const [data, setAgenda] = useState();
+  const logout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
   useEffect(() => {
     user && localStorage.setItem("user", JSON.stringify(user));
     !user && setUser(JSON.parse(localStorage.getItem("user")));
@@ -47,6 +51,7 @@ export const AuthProvider = ({ children }) => {
       load,
       setLoad,
       data,
+      logout,
     }),
     [load, user, nav, data]
   );

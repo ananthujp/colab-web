@@ -57,7 +57,7 @@ function MyDropdown({ sel }) {
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-indigo-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200 shadow-lg ring-1 ring-black/5 focus:outline-none">
             <div className="px-1 py-1 ">
               {items.map((item, i) => (
-                <Menu.Item key={`menu.${i}`}>
+                <Menu.Item key={`menu.it.${i}`}>
                   {({ active }) => (
                     <button
                       onClick={() => {
@@ -117,6 +117,7 @@ function Navbar({ sel, dark }) {
       >
         {items.map((item, i) => (
           <motion.div
+            key={`nav.item.${i}`}
             // initial={{ opacity: 0, translateX: -20 }}
             // animate={{
             //   opacity: 1,

@@ -12,14 +12,14 @@ function Hero() {
         " bg-slate-900"
       }
     >
-      <div class="absolute w-full h-screen pointer-events-none pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
+      <div className="absolute w-full h-screen pointer-events-none pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
       <div
-        class="absolute  blur-2xl opacity-40 pointer-events-none"
+        className="absolute  blur-2xl opacity-40 pointer-events-none"
         aria-hidden="true"
       >
         <img
           src={ray}
-          class="max-w-none -hue-rotate-30	"
+          className="max-w-none -hue-rotate-30	"
           width="852"
           height="582"
           alt="Illustration"
@@ -58,7 +58,7 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              class=" shadow-red-600 font-pop font-black bg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
+              className=" shadow-red-600 font-pop font-black bg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
             >
               <span className="text-7xl ">C</span>
               <span className="text-5xl mx-0.5">O</span>
@@ -121,7 +121,14 @@ function Hero() {
               transition: { duration: 0.5 },
             }}
           >
-            <div className="bg-green-400 flex w-24 py-1 cursor-pointer font-pop px-4 md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white">
+            <div
+              onClick={() =>
+                window.open(
+                  "https://docs.google.com/forms/d/e/1FAIpQLSfQp4bK8REhP0ZYBA88kRSSzoCd5jnYBSE8Ui6fUZiMpoa_sQ/viewform"
+                )
+              }
+              className="bg-green-400 flex w-24 py-1 cursor-pointer font-pop px-4 md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white"
+            >
               Register
             </div>
           </motion.div>

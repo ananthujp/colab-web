@@ -1,19 +1,9 @@
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
-
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Card from "../components/AboutCard";
-// import Carousel from "./components/Carousel";
 import ExpandCard from "../components/ThemesCard";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import BlogSlider from "../components/ProgramCard";
-// import BlogSlider from "./components/SwipeCard";
-import shape from "./shape.svg";
-import Imageslider from "../components/Imageslider";
 import Contact from "../components/ContactCard";
 import { useEffect, useState } from "react";
 import useReducer from "../hook/reducerHook";
@@ -21,25 +11,29 @@ import Footer from "../components/Footer";
 import Load from "./Load";
 import FAQCard from "../components/FAQCard";
 import logo from "../logo.png";
-import colab from "../imgs/colab-logo.svg";
 import Agenda from "../components/Agenda";
-import { Button, Checkbox, Form, Input, Modal } from "antd";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
+import { Button, Checkbox, Dropdown, Form, Input, Modal, message } from "antd";
 import WhyCard from "../components/WhyCard";
 import Speakers from "../components/Speakers";
 import QuickLinks from "../components/QuickLinks";
 import Venue from "../components/Venue";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 function Home() {
   const [hidden, setHidden] = useState(false);
-
-  const { load, nav, setNav } = useReducer();
+  const [login_load, setLoad] = useState(false);
+  const { load, setNav, setUser, user, logout } = useReducer();
   const [open, setOpen] = useState(false);
-
+  const auth = getAuth();
   const showModal = () => {
     setOpen(true);
   };
-
+  const items = [
+    {
+      key: "1",
+      label: <div onClick={() => logout()}>Logout</div>,
+    },
+  ];
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (scrollY?.current < scrollY?.prev) {
@@ -49,7 +43,17 @@ function Home() {
     }
   });
   const onFinish = (values) => {
-    console.log("Success:", values);
+    setLoad(true);
+    signInWithEmailAndPassword(auth, values.username, values.password)
+      .then((userCredential) => {
+        message.success(
+          "Logged in successfully! Welcome," + userCredential.user.email
+        );
+        setOpen(false);
+        setUser({ role: "admin", email: userCredential.user.email });
+        setLoad(false);
+      })
+      .catch((err) => err && message.error(err.message));
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -63,7 +67,6 @@ function Home() {
       animate={{ opacity: 1 }}
       // exit={{ opacity: 0, transition: { duration: 2, delay: 1 } }}
       key={`main`}
-      x
       className="flex relative overflow-hidden xbg-opacity-20  xbg-[url('tp238-background-02.png')] min-h-screen  flex-col items-center justify-between "
     >
       <Modal
@@ -137,11 +140,12 @@ function Home() {
             <Button onClick={() => setOpen(false)}>Cancel</Button>
             <Button
               //style={{ backgroundColor: "blue" }}
-              className="ml-4 bg-blue-500"
+              className={`ml-4 bg-blue-500 ${login_load && "bg-slate-400"}`}
               type="primary"
+              disabled={login_load}
               htmlType="submit"
             >
-              Submit
+              Login
             </Button>
           </Form.Item>
         </Form>
@@ -192,7 +196,7 @@ function Home() {
                   <motion.h1 className="text-xs font-pop text-slate-300 xtext-slate-600 font-light">
                     IIT Gandhinagar
                   </motion.h1>
-                  <p class=" font-pop font-bold text-lg -mt-1 text-white">
+                  <p className=" font-pop font-bold text-lg -mt-1 text-white">
                     CoLab 2024
                     {/* <span className="text-xl ">C</span>
                     <span className="text-md mx-0.5">o</span>
@@ -203,22 +207,31 @@ function Home() {
                 </div>
               </div>
               <Navbar key={`nav.bar`} />
-              <div
-                onClick={showModal}
-                className="bg-green-400 cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white"
-              >
-                Login
-              </div>
+
+              {!user ? (
+                <div
+                  onClick={showModal}
+                  className="bg-green-400 cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white"
+                >
+                  Login
+                </div>
+              ) : (
+                <Dropdown menu={{ items }}>
+                  <div className="bg-green-400 capitalize cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white">
+                    {user?.email[0]}
+                  </div>
+                </Dropdown>
+              )}
             </div>
           </motion.div>
         )}
         <Hero />
 
         <div className="flex relative pt-4 justify-center bg-cover bg-no-repeat bg-opacity-20 bg-[url('tp238-background-03.png')] w-full">
-          <div class="absolute z-0 w-full h-full pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
+          <div className="absolute z-0 w-full h-full pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
 
           <div className="flex flex-wrap w-full gap-4 justify-center md:justify-between max-w-5xl">
-            <motion.div className="flex flex-col md:flex-row gap-6">
+            <motion.div className="flex flex-col  md:w-full md:flex-row gap-6">
               <div className="flex flex-col items-center gap-6 w-full md:w-[60%]">
                 <Card />
                 <WhyCard delay={2} />
@@ -229,10 +242,10 @@ function Home() {
             </motion.div>
 
             <ExpandCard />
-            <motion.div className="grid grid-cols-1 justify-items-center md:grid-cols-2 md:gap-6">
+            <div className="grid grid-cols-1 justify-items-center md:w-full md:grid-cols-2 md:gap-6">
               <BlogSlider delay={1} />
               <Speakers />
-            </motion.div>
+            </div>
             <Venue />
             <FAQCard />
             <div className="grid grid-cols-1 justify-items-center md:w-full md:grid-cols-2 md:gap-6">

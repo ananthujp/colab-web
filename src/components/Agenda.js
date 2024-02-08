@@ -323,7 +323,7 @@ function Agenda({ delay }) {
               <CalendarDaysIcon className="w-6" />
               <h1>Agenda</h1>
             </div>
-            {user.role === "admin" && (
+            {user?.role === "admin" && (
               <motion.button
                 //   onClick={() => {
                 //     setNav({ from: "/", to: "program" });
@@ -350,6 +350,7 @@ function Agenda({ delay }) {
           <div className="flex flex-col overflow-scroll gap-6 w-full">
             {data?.map((item, i) => (
               <motion.div
+                key={`agenda.item.${i}`}
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
                   opacity: 1,
@@ -363,7 +364,7 @@ function Agenda({ delay }) {
                 }}
                 className="grid group relative grid-cols-[4em_auto] h-16"
               >
-                {user.role === "admin" && (
+                {user?.role === "admin" && (
                   <div className="absolute z-50 top-1/2 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
                     <TrashIcon
                       onClick={() =>
