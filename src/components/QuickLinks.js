@@ -33,16 +33,31 @@ function QuickLinks({ delay }) {
   };
   const items = [
     {
-      label: "IIT Gandhinagar | Research",
-      link: "https://www.iitgn.ac.in/research",
+      label: "IITGN Main Page",
+      link: "https://iitgn.ac.in/",
+    },
+    {
+      label: "IITGN Research",
+      link: "https://iitgn.ac.in/research",
     },
     {
       label: "Research Facilities",
-      link: "https://www.iitgn.ac.in/research/facilities",
+      link: "https://iitgn.ac.in/research/facilities",
     },
-    { label: "IITGN IIEC", link: "https://iieciitgn.com/" },
     {
-      label: "IR&P Council Repository",
+      label: "Research Park",
+      link: "https://iitgnrp.com/",
+    },
+    {
+      label: "Incubation Center",
+      link: "https://iieciitgn.com/",
+    },
+    {
+      label: "Career Development Services",
+      link: "https://cds.iitgn.ac.in/",
+    },
+    {
+      label: "Industrial Relations & Projects",
       link: "https://students.iitgn.ac.in/irp-council-repository/",
     },
   ];

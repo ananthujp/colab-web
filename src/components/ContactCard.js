@@ -40,7 +40,7 @@ function Contact({ delay }) {
                 translateY: 0,
                 transition: { duration: 0.5, delay: 0.5 * delay + 0.3 },
               }}
-              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-orange-600"
+              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-indigo-600"
             >
               <PhoneArrowDownLeftIcon className="w-5" />
               <h1>Contact</h1>
@@ -95,7 +95,7 @@ function Contact({ delay }) {
                 }}
                 className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <PhoneIcon className="w-5 text-orange-400" />
+                <PhoneIcon className="w-5 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   +91 98 47 45 32 17
                 </h1>
@@ -109,23 +109,28 @@ function Contact({ delay }) {
                 }}
                 className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <EnvelopeIcon className="w-5 text-orange-400" />
+                <EnvelopeIcon className="w-5 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   industryconnect@iitgn.ac.in
                 </h1>
               </motion.div>
               <motion.div
+                onClick={() =>
+                  window.open(
+                    "https://docs.google.com/forms/d/e/1FAIpQLSfQp4bK8REhP0ZYBA88kRSSzoCd5jnYBSE8Ui6fUZiMpoa_sQ/viewform"
+                  )
+                }
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
                   opacity: 1,
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.8 },
                 }}
-                className="flex flex-row gap-2 cursor-pointer items-center bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row gap-2 cursor-pointer items-center bg-gradient-to-br from-indigo-400 to-indigo-500 hover:to-indigo-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
                 <PencilSquareIcon className="w-5 text-white" />
                 <h1 className="text-xs font-normal text-white font-mont">
-                  Openhouse Registration form
+                  CoLab Registration form
                 </h1>
               </motion.div>
             </div>

@@ -47,7 +47,7 @@
 
 .card p {
   font-size: 15px;
-  color: #ffffff;
+  /* color: #ffffff; */
   margin-top: 25px;
   z-index: 1000;
   transition: color 0.3s ease-out;

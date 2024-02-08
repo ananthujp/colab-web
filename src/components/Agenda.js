@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { motion, useInView } from "framer-motion";
 import {
@@ -10,7 +10,7 @@ import {
   TrashIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
-import { Form, Button, Input, Modal, Select } from "antd";
+import { Form, Button, Input, Modal, Select, Progress, Popover } from "antd";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import useReducer from "../hook/reducerHook";
@@ -19,8 +19,27 @@ import { CoffeeOutlined } from "@ant-design/icons";
 function Agenda({ delay }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [progress, setProgress] = useState(0);
+  const [eei, setI] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  useEffect(() => {
+    let timer;
+    if (isHovered) {
+      let counter = 0;
+      timer = setInterval(() => {
+        if (counter < 99) {
+          counter += 5; // increment by 2.5 every 100ms to reach 100 in 4 seconds
+          setProgress(counter);
+        }
+      }, 1);
+    } else {
+      setProgress(0);
+    }
+    return () => clearInterval(timer);
+  }, [isHovered]);
   const [open, setOpen] = useState(false);
   const { data, user } = useReducer();
+  console.log(progress);
   const handleDelete = (id) => {
     deleteDoc(doc(db, "agenda", id));
   };
@@ -39,18 +58,20 @@ function Agenda({ delay }) {
   ];
   const colors = [
     [
-      "border-green-100 bg-green-200",
+      "border-green-100 bg-green-100",
       "text-green-800",
       "text-green-700",
       "bg-green-300 text-green-600",
       "bg-green-400",
+      "rgb(34 197 94)",
     ],
     [
-      "border-blue-100 bg-blue-200",
+      "border-blue-100 bg-blue-100",
       "text-blue-800",
       "text-blue-700",
       "bg-blue-300 text-blue-600",
       "bg-blue-400",
+      "rgb(59 130 246)",
     ],
     [
       "border-fuchsia-50 bg-fuchsia-100",
@@ -58,6 +79,7 @@ function Agenda({ delay }) {
       "text-fuchsia-700",
       "bg-fuchsia-300 text-fuchsia-600",
       "bg-fuchsia-400",
+      "rgb(217 70 239)",
     ],
     [
       "border-yellow-50 bg-yellow-100",
@@ -65,74 +87,9 @@ function Agenda({ delay }) {
       "text-yellow-700",
       "bg-yellow-300 text-yellow-600",
       "bg-yellow-400",
+      "rgb(234 179 8)",
     ],
   ];
-  //   const data = [
-  //     {
-  //       time_f: "9.00AM",
-  //       time_t: "9.30AM",
-  //       title: "Registration",
-  //       desc: "tea/coffee/biscuit",
-  //       ico: icons[0],
-  //       color: colors.green,
-  //     },
-  //     {
-  //       time_f: "9.30AM",
-  //       time_t: "9.45AM",
-  //       title: "Welcome Speech with MC",
-  //       desc: "Pallavi",
-  //       ico: icons[1],
-  //       color: colors.rose,
-  //     },
-  //     {
-  //       time_f: "9.00AM",
-  //       time_t: "9.30AM",
-  //       title: "Registration",
-  //       desc: "tea/coffee/biscuit",
-  //       ico: icons[0],
-  //       color: colors.green,
-  //     },
-  //     {
-  //       time_f: "9.30AM",
-  //       time_t: "9.45AM",
-  //       title: "Welcome Speech with MC",
-  //       desc: "Pallavi",
-  //       ico: icons[1],
-  //       color: colors.rose,
-  //     },
-  //     {
-  //       time_f: "9.00AM",
-  //       time_t: "9.30AM",
-  //       title: "Registration",
-  //       desc: "tea/coffee/biscuit",
-  //       ico: icons[0],
-  //       color: colors.green,
-  //     },
-  //     {
-  //       time_f: "9.30AM",
-  //       time_t: "9.45AM",
-  //       title: "Welcome Speech with MC",
-  //       desc: "Pallavi",
-  //       ico: icons[1],
-  //       color: colors.rose,
-  //     },
-  //     {
-  //       time_f: "9.00AM",
-  //       time_t: "9.30AM",
-  //       title: "Registration",
-  //       desc: "tea/coffee/biscuit",
-  //       ico: icons[0],
-  //       color: colors.green,
-  //     },
-  //     {
-  //       time_f: "9.30AM",
-  //       time_t: "9.45AM",
-  //       title: "Welcome Speech with MC",
-  //       desc: "Pallavi",
-  //       ico: icons[1],
-  //       color: colors.rose,
-  //     },
-  //   ];
   return (
     <motion.div
       layoutId={`pgm.agenda`}
@@ -349,74 +306,111 @@ function Agenda({ delay }) {
           </motion.h1>
           <div className="flex flex-col overflow-scroll gap-6 w-full">
             {data?.map((item, i) => (
-              <motion.div
-                key={`agenda.item.${i}`}
-                initial={{ opacity: 0, translateY: -20 }}
-                animate={{
-                  opacity: 1,
-                  translateY: 0,
-                  transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
-                }}
-                exit={{
-                  opacity: 0,
-                  translateY: 20,
-                  transition: { duration: 0.5 },
-                }}
-                className="grid group relative grid-cols-[4em_auto] h-16"
+              <Popover
+                placement="topRight"
+                content={
+                  <div className="flex flex-col w-48">
+                    <p className="w-full border-b border-slate-200 pb-4">
+                      Long description. Lorem ipsum dolor sit amet, consectetur
+                      adip. lorem ipsum dolor sit amet, consectetur adip. lorem
+                    </p>
+                    <div className="flex flex-row my-2">
+                      <img src="" className="w-6 h-6 rounded-full" alt="" />
+                      <div className="flex flex-col ml-2">
+                        <p className="w-full">Pallavi</p>
+                        <p className="font-thin italic">Short bio</p>
+                      </div>
+                    </div>
+                  </div>
+                }
+                key={`pop.item${5}`}
+                title={item.title}
+                open={progress === 100 && eei === i ? true : false}
+                //onOpenChange={handleClickChange}
               >
-                {user?.role === "admin" && (
-                  <div className="absolute z-50 top-1/2 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
-                    <TrashIcon
-                      onClick={() =>
-                        window.confirm(
-                          `Are you sure you want to delete "${item.title}"?`
-                        )
-                          ? handleDelete(item.id)
-                          : console.log("no")
-                      }
-                      className="w-4"
-                    />
-                  </div>
-                )}
-                <div className="flex text-slate-600 text-xs font-mont flex-col justify-between">
-                  <h1 className="w-4">{item.time_f}</h1>
-                  <h1 className="w-4">{item.time_t}</h1>
-                </div>
-                <div
-                  className={`flex flex-row bg-opacity-60 group hover:bg-opacity-90 justify-between px-4 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
-                    colors[item.color][0]
-                  }`}
+                <motion.div
+                  onHoverStart={() => {
+                    setI(i);
+                    setIsHovered(true);
+                  }}
+                  onHoverEnd={() => setIsHovered(false)}
+                  key={`agenda.item.${i}`}
+                  layout
+                  initial={{ opacity: 0, translateY: -20 }}
+                  animate={{
+                    opacity: 1,
+                    translateY: 0,
+                    transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    translateY: 20,
+                    transition: { duration: 0.5 },
+                  }}
+                  className="grid group relative grid-cols-[4em_auto] h-16"
                 >
-                  <div className="flex flex-col my-2">
-                    <h1
-                      className={`text-xs font-mont ${
-                        colors[item.color][1]
-                      } font-semibold`}
-                    >
-                      {item.title}
-                    </h1>
-                    <h1
-                      className={`text-xs hidden transition-all group-hover:flex font-mont ${
-                        colors[item.color][2]
-                      } font-light`}
-                    >
-                      {item.desc}
-                    </h1>
+                  {user?.role === "admin" && (
+                    <div className="absolute z-50 top-1/2 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
+                      <TrashIcon
+                        onClick={() =>
+                          window.confirm(
+                            `Are you sure you want to delete "${item.title}"?`
+                          )
+                            ? handleDelete(item.id)
+                            : console.log("no")
+                        }
+                        className="w-4"
+                      />
+                    </div>
+                  )}
+                  <div className="flex text-slate-600 text-xs font-mont flex-col justify-between">
+                    <h1 className="w-4 mt-1">{item.time_f}</h1>
+                    {/* <h1 className="w-4">{item.time_t}</h1> */}
                   </div>
-                  <h1
-                    className={`${
-                      colors[item.color][3]
-                    } w-4 group-hover:w-9 p-2 h-4 group-hover:h-9 my-auto transition-all rounded-full`}
-                  >
-                    {icons[item.icon]}
-                  </h1>
-                  <span
-                    className={`absolute rounded-full -ml-2 -bottom-2 w-8 mt-4 h-1 ${
-                      colors[item.color][4]
+                  <div
+                    className={`flex flex-row bg-opacity-90 group hover:bg-opacity-90 justify-between px-6 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
+                      colors[item.color][0]
                     }`}
-                  ></span>
-                </div>
-              </motion.div>
+                  >
+                    <div className="flex flex-col my-2">
+                      <h1
+                        className={`text-xs font-mont ${
+                          colors[item.color][1]
+                        } font-semibold`}
+                      >
+                        {item.title}
+                      </h1>
+                      <h1
+                        className={`text-xs hidden transition-all group-hover:flex font-mont ${
+                          colors[item.color][2]
+                        } font-light`}
+                      >
+                        {item.desc}
+                      </h1>
+                    </div>
+                    <h1
+                      className={`${
+                        colors[item.color][3]
+                      } w-4 group-hover:w-9 p-2 relative h-4 group-hover:h-9 my-auto transition-all rounded-full`}
+                    >
+                      {icons[item.icon]}
+                      <Progress
+                        className="absolute top-0 left-0 transition-all duration-700 opacity-0 group-hover:opacity-100"
+                        type="circle"
+                        size={36}
+                        format={(percent) => ""}
+                        percent={progress}
+                        strokeColor={colors[item.color][5]}
+                      />
+                    </h1>
+                    <span
+                      className={`absolute rounded-full -ml-2 -bottom-2 w-8 mt-4 h-1 ${
+                        colors[item.color][4]
+                      }`}
+                    ></span>
+                  </div>
+                </motion.div>
+              </Popover>
             ))}
           </div>
         </div>

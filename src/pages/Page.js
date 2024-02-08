@@ -14,7 +14,7 @@ function Page({ children, page, no, title }) {
       //   backgroundPosition: "right",
       //   backgroundSize: "auto",
       // }}
-      className="flex justify-center w-full h-full md:h-screen bg-cover bg-no-repeat bg-[url('tp238-background-03.png')] "
+      className="flex justify-center w-full h-full md:h-screen bg-cover bg-no-repeat xbg-[url('tp238-background-03.png')] "
     >
       <div class="absolute w-full h-full pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
 

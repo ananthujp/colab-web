@@ -3,14 +3,11 @@ import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Carousel } from "antd";
 import {
   BuildingOffice2Icon,
-  CalendarDaysIcon,
   LightBulbIcon,
-  LinkIcon,
-  MagnifyingGlassPlusIcon,
   MicrophoneIcon,
 } from "@heroicons/react/24/solid";
 import "./why.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
 const Card = ({
   category,
@@ -18,6 +15,7 @@ const Card = ({
   bgColorLight,
   textColorHover,
   boxShadowColor,
+  textColor,
   icon,
   tag,
 }) => {
@@ -35,7 +33,7 @@ const Card = ({
       <div className="overlay scale-75"></div>
       <div className="circle scale-75">{icon}</div>
       <p
-        className={`font-mont text-white group-hover:text-slate-600 font-semibold`}
+        className={`font-mont ${textColor} group-hover:text-slate-600 font-semibold`}
       >
         {category}
       </p>
@@ -50,17 +48,17 @@ const Card = ({
 const WhyCard = ({ delay }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const navigate = useNavigate();
-  const { nav, setNav } = useReducer();
+  const { nav } = useReducer();
   const items = [
     {
       category: "Innovation",
       icon: (
-        <LightBulbIcon className="w-16 text-white group-hover:text-yellow-600 " />
+        <LightBulbIcon className="w-16 text-white group-hover:text-indigo-600 " />
       ),
-      bgColor: "#ffd861",
-      bgColorLight: "#ffeeba",
+      bgColor: "rgb(165,180,252)",
+      bgColorLight: "rgb(199,210,254)",
       textColorHover: "#4C5656",
+      textColor: "text-indigo-600",
       boxShadowColor: "rgba(255, 215, 97, 0.48)",
       Tag: "Transforming Ideas into Reality",
     },
@@ -72,6 +70,7 @@ const WhyCard = ({ delay }) => {
       bgColor: "#B8F9D3",
       bgColorLight: "#e2fced",
       textColorHover: "#4C5656",
+      textColor: "text-green-600",
       boxShadowColor: "rgba(184, 249, 211, 0.48)",
       Tag: "Pioneering Entrepreneurial Frontiers",
     },
@@ -83,6 +82,7 @@ const WhyCard = ({ delay }) => {
       bgColor: "#CEB2FC",
       bgColorLight: "#F0E7FF",
       textColorHover: "#fff",
+      textColor: "text-purple-600",
       boxShadowColor: "rgba(206, 178, 252, 0.48)",
       Tag: "Crafting Success through Industry Partnerships",
     },
@@ -158,6 +158,7 @@ const WhyCard = ({ delay }) => {
                 tag={item.Tag}
                 category={item.category}
                 bgColor={item.bgColor}
+                textColor={item.textColor}
                 bgColorLight={item.bgColorLight}
                 textColorHover={item.textColorHover}
                 boxShadowColor={item.boxShadowColor}

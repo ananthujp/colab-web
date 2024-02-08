@@ -18,7 +18,7 @@ import Speakers from "../components/Speakers";
 import QuickLinks from "../components/QuickLinks";
 import Venue from "../components/Venue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+import logo2 from "../imgs/iitgn-logo.png";
 function Home() {
   const [hidden, setHidden] = useState(false);
   const [login_load, setLoad] = useState(false);
@@ -175,7 +175,7 @@ function Home() {
         />
       </div> */}
       <div className="z-10 flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
-        {!hidden && (
+        {true && (
           <motion.div
             key={`top.bar`}
             initial={{ opacity: 0 }}
@@ -208,7 +208,8 @@ function Home() {
               </div>
               <Navbar key={`nav.bar`} />
 
-              {!user ? (
+              <img src={logo2} className="w-8 h-8 my-auto" alt="" />
+              {/* {!user ? (
                 <div
                   onClick={showModal}
                   className="bg-green-400 cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white"
@@ -221,16 +222,16 @@ function Home() {
                     {user?.email[0]}
                   </div>
                 </Dropdown>
-              )}
+              )} */}
             </div>
           </motion.div>
         )}
         <Hero />
 
-        <div className="flex relative pt-4 justify-center bg-cover bg-no-repeat bg-opacity-20 bg-[url('tp238-background-03.png')] w-full">
-          <div className="absolute z-0 w-full h-full pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
+        <div className="flex bg-gradient-to-br  relative pt-4 justify-center bg-cover bg-no-repeat bg-opacity-20 xbg-[url('tp238-background-03.png')] w-full">
+          <div className="absolute z-0 top-0 w-full h-full pattern-boxes pattern-gray-200 pattern-size-6 pattern-opacity-20" />
 
-          <div className="flex flex-wrap w-full gap-4 justify-center md:justify-between max-w-5xl">
+          <div className="flex z-50 flex-wrap w-full gap-4 justify-center md:justify-between max-w-5xl">
             <motion.div className="flex flex-col  md:w-full md:flex-row gap-6">
               <div className="flex flex-col items-center gap-6 w-full md:w-[60%]">
                 <Card />
@@ -248,7 +249,7 @@ function Home() {
             </div>
             <Venue />
             <FAQCard />
-            <div className="grid grid-cols-1 justify-items-center md:w-full md:grid-cols-2 md:gap-6">
+            <div className="grid grid-cols-1 w-[90%] justify-items-center md:w-full md:grid-cols-2 md:gap-6">
               <QuickLinks />
               <Contact delay={1} />
             </div>

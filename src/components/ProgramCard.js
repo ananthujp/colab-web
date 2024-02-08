@@ -137,7 +137,7 @@ const BlogSlider = ({ delay }) => {
                     <h1 className="text-xl font-pop font-semibold">
                       {sliderItems[i].title}
                     </h1>
-                    <h1 className="text-sm mt-4 w-[85%] font-pop text-justify font-light">
+                    <h1 className="text-sm mt-4 w-[85%] font-pop text-left font-light">
                       {sliderItems[i].description}
                     </h1>
                   </div>

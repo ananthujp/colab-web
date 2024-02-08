@@ -26,8 +26,8 @@ function FAQCard({ delay = 0 }) {
           a: "You can register for CoLab 2024 through this link or visit the official event website for registration. Registered candidates will receive a confirmatory email",
         },
         {
-          a: "Is there a registration fee for attending CoLab 2024?",
-          q: "No.",
+          q: "Is there a registration fee for attending CoLab 2024?",
+          a: "No.",
         },
       ],
     },

@@ -20,7 +20,7 @@ function About() {
           </h1>
           <div className="flex flex-col md:flex-row gap-4 mt-2">
             <img src={logo} alt="" className="w-32 -mt-2" />
-            <p className="font-mont font-light text-justify text-slate-600">
+            <p className="font-mont font-base text-justify text-slate-600">
               CoLab 2024 is a dynamic convergence of academia and industry at
               the Indian Institute of Technology Gandhinagar. This event aims to
               nurture robust partnerships to create smart solutions for key
@@ -36,7 +36,7 @@ function About() {
           </h1>
           <div className="flex flex-col md:flex-row gap-4 mt-2">
             <img src={lalminar} alt="" className="w-36 h-56 -mt-2" />
-            <p className="font-mont font-light text-justify text-slate-600">
+            <p className="font-mont font-base text-justify text-slate-600">
               Founded in 2008, the Indian Institute of Technology Gandhinagar
               (IITGN) has made significant strides in academics,
               interdisciplinary research, and institutional governance in just

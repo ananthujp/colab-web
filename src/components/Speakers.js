@@ -43,7 +43,7 @@ function Speakers({ delay }) {
                 translateY: 0,
                 transition: { duration: 0.5, delay: 0.5 * delay + 0.3 },
               }}
-              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-fuchsia-600"
+              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-slate-600"
             >
               <MicrophoneIcon className="w-5" />
               <h1>Speakers</h1>
