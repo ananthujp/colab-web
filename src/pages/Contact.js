@@ -40,20 +40,16 @@ function Contact() {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className=" bg-gradient-to-br from-slate-100/50 to-slate-200/50 my-auto hover:border-white flex flex-col justify-between p-4 rounded-lg"
+          className=" bg-gradient-to-br from-slate-100/50 h-full to-slate-200/50 my-auto hover:border-white flex flex-col justify-between p-4 rounded-lg"
         >
-          <motion.div className="flex flex-col md:flex-row gap-12 md:gap-3 justify-between">
-            <motion.img
-              initial={{ opacity: 0, translateY: -20 }}
-              animate={{
-                opacity: 1,
-                translateY: 0,
-                transition: { duration: 0.5, delay: 0.5 + 0.4 },
-              }}
-              src={mapImg}
-              className="h-44 rounded-md origin-bottom-left  object-cover border border-slate-100"
-              alt=""
-            />
+          <motion.div className="flex flex-col xmd:flex-row h-full gap-12 md:gap-3 xjustify-between">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5940.072086805178!2d72.68927158334336!3d23.21245895661326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c2adec1f16d8d%3A0xdc447b8706689bc3!2sIndian%20Institute%20Of%20Technology%20Gandhinagar%20(IIT%20Gandhinagar)!5e0!3m2!1sen!2sin!4v1707280576375!5m2!1sen!2sin"
+              className="border-0 w-full h-full  rounded-md"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
             <div className="flex flex-col items-start gap-2">
               <motion.h1
                 initial={{ opacity: 0, translateY: -20 }}

@@ -49,9 +49,7 @@ const Card = ({
 };
 const WhyCard = ({ delay }) => {
   const ref = useRef(null);
-
   const isInView = useInView(ref, { once: true });
-
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
   const items = [
@@ -110,7 +108,7 @@ const WhyCard = ({ delay }) => {
             }
           : null
       }
-      className="relative  bg-yellow-100 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-full md:w-full flex flex-col justify-between rounded-lg"
+      className="relative w-[90%] bg-slate-200/40 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:border-white md:w-full flex flex-col justify-between rounded-lg"
     >
       {isInView && (
         <>

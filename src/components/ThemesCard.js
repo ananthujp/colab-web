@@ -78,7 +78,7 @@ function ExpandCard() {
             }
           : null
       }
-      className=" flex flex-col-reverse md:flex-row mt-6 md:mt-16 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-gray-100/60"
+      className=" flex flex-col-reverse md:flex-row mt-6 md:mt-8 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-gray-100/60"
     >
       {cardVar.map((item, index) => (
         <motion.div

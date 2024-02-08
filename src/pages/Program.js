@@ -1,23 +1,16 @@
 import React from "react";
-import shape from "./shape.svg";
 import { motion } from "framer-motion";
 import {
   BuildingOffice2Icon,
-  CalendarDaysIcon,
   LightBulbIcon,
   LinkIcon,
   MagnifyingGlassPlusIcon,
   MicrophoneIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/solid";
-import Navbar from "../components/Navbar";
-import useReducer from "../hook/reducerHook";
-import { useNavigate } from "react-router-dom";
+
 import Page from "./Page";
 
 function Program() {
-  const { nav, setNav } = useReducer();
-  const navigate = useNavigate();
   const theme = "w-16 text-white bg-gradient-to-br p-4 rounded-full ";
   const sliderItems = [
     {
@@ -70,7 +63,7 @@ function Program() {
     <Page no={2} page="program" title="Event Highlights">
       <motion.div
         layoutId={`pgm.theme`}
-        className="w-full px-6 md:px-24 mt-4 flex flex-col md:flex-wrap md:h-[90%]"
+        className="w-full overflow-y-auto px-6 md:px-24 mt-4 flex flex-col md:flex-wrap md:h-[90%]"
       >
         {sliderItems.map((item, i) => (
           <div className="h-36 w-full md:w-1/2 m-4">

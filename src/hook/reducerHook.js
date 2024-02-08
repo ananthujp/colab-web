@@ -12,7 +12,7 @@ import { db } from "../firebase";
 const WrapContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ role: "admin" });
+  const [user, setUser] = useState({}); //role: "admin"
   const [nav, setNav] = useState({ from: null, to: null });
   const [load, setLoad] = useState(true);
   const [data, setAgenda] = useState();

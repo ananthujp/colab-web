@@ -1,8 +1,10 @@
 {
+  "homepage": ".",
   "name": "colab",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^5.3.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -11,6 +13,7 @@
     "antd": "^5.13.3",
     "firebase": "^10.8.0",
     "framer-motion": "^11.0.3",
+    "gh-pages": "^6.1.1",
     "google-map-react": "^2.2.1",
     "headlessui": "^0.0.0",
     "heroicons": "^2.1.1",
@@ -26,6 +29,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "bun run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

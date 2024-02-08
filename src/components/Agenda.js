@@ -6,14 +6,17 @@ import {
   MicrophoneIcon,
   PencilIcon,
   PencilSquareIcon,
+  PhotoIcon,
   TrashIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { Form, Button, Input, Modal, Select } from "antd";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import useReducer from "../hook/reducerHook";
+import { CoffeeOutlined } from "@ant-design/icons";
 
-function Agenda({ delay = 0 }) {
+function Agenda({ delay }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const [open, setOpen] = useState(false);
@@ -30,6 +33,9 @@ function Agenda({ delay = 0 }) {
   const icons = [
     <PencilSquareIcon className="" />,
     <MicrophoneIcon className="" />,
+    <CoffeeOutlined className="group-hover:text-lg group-hover:flex hidden" />,
+    <UserGroupIcon />,
+    <PhotoIcon />,
   ];
   const colors = [
     [
@@ -131,23 +137,28 @@ function Agenda({ delay = 0 }) {
     <motion.div
       layoutId={`pgm.agenda`}
       ref={ref}
-      //   initial={nav.from !== "program" && { opacity: 0, translateY: -20 }}
-      //   animate={
-      //     nav.from !== "program" && {
-      //       opacity: 1,
-      //       translateY: 0,
-      //       transition: { duration: 0.5, delay: 0.5 * delay },
-      //     }
-      //   }
-      //   exit={
-      //     nav.to !== "program"
-      //       ? {
-      //           opacity: 0,
-      //           translateY: 20,
-      //           transition: { duration: 0.5 },
-      //         }
-      //       : null
-      //   }
+      initial={
+        // nav.from !== "program" &&
+        { opacity: 0, translateY: -20 }
+      }
+      animate={
+        // nav.from !== "program" &&
+        {
+          opacity: 1,
+          translateY: 0,
+          transition: { duration: 0.5, delay: 0.5 * delay },
+        }
+      }
+      exit={
+        // nav.to !== "program"
+        // ?
+        {
+          opacity: 0,
+          translateY: 20,
+          transition: { duration: 0.5 },
+        }
+        // : null
+      }
       className="bg-yellow-100 h-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
@@ -338,7 +349,20 @@ function Agenda({ delay = 0 }) {
           </motion.h1>
           <div className="flex flex-col overflow-scroll gap-6 w-full">
             {data?.map((item, i) => (
-              <div className="grid group relative grid-cols-[4em_auto] h-16">
+              <motion.div
+                initial={{ opacity: 0, translateY: -20 }}
+                animate={{
+                  opacity: 1,
+                  translateY: 0,
+                  transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
+                }}
+                exit={{
+                  opacity: 0,
+                  translateY: 20,
+                  transition: { duration: 0.5 },
+                }}
+                className="grid group relative grid-cols-[4em_auto] h-16"
+              >
                 {user.role === "admin" && (
                   <div className="absolute z-50 top-1/2 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
                     <TrashIcon
@@ -358,7 +382,7 @@ function Agenda({ delay = 0 }) {
                   <h1 className="w-4">{item.time_t}</h1>
                 </div>
                 <div
-                  className={`flex flex-row justify-between px-4 relative h-12 my-auto rounded-md w-full  border ${
+                  className={`flex flex-row bg-opacity-60 group hover:bg-opacity-90 justify-between px-4 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
                     colors[item.color][0]
                   }`}
                 >
@@ -371,7 +395,7 @@ function Agenda({ delay = 0 }) {
                       {item.title}
                     </h1>
                     <h1
-                      className={`text-xs font-mont ${
+                      className={`text-xs hidden transition-all group-hover:flex font-mont ${
                         colors[item.color][2]
                       } font-light`}
                     >
@@ -381,7 +405,7 @@ function Agenda({ delay = 0 }) {
                   <h1
                     className={`${
                       colors[item.color][3]
-                    } w-9 p-2 h-9 my-auto rounded-full`}
+                    } w-4 group-hover:w-9 p-2 h-4 group-hover:h-9 my-auto transition-all rounded-full`}
                   >
                     {icons[item.icon]}
                   </h1>
@@ -391,7 +415,7 @@ function Agenda({ delay = 0 }) {
                     }`}
                   ></span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

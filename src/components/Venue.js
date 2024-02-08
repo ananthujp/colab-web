@@ -1,4 +1,4 @@
-import { PhoneArrowDownLeftIcon } from "@heroicons/react/24/solid";
+import { MapPinIcon, PhoneArrowDownLeftIcon } from "@heroicons/react/24/solid";
 import {
   EnvelopeIcon,
   MapIcon,
@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import React, { useRef } from "react";
 import GoogleMapReact from "google-map-react";
-import mapImg from "../imgs/map-cont.png";
+import mapImg from "../imgs/venue.avif";
 import { useInView, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
@@ -40,9 +40,9 @@ function Venue({ delay }) {
                 translateY: 0,
                 transition: { duration: 0.5, delay: 0.5 * delay + 0.3 },
               }}
-              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-orange-600"
+              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-salte-600"
             >
-              <PhoneArrowDownLeftIcon className="w-5" />
+              <MapPinIcon className="w-5" />
               <h1>Venue</h1>
             </motion.h1>
             <div>
@@ -61,21 +61,20 @@ function Venue({ delay }) {
               </motion.div>
             </div>
           </div>
-          <div className="grid grid-cols-3">
-            <div></div>
-            <div></div>
-            <motion.div className="flex flex-col md:flex-row justify-between h-full">
-              <motion.img
-                initial={{ opacity: 0, translateY: -20 }}
-                animate={{
-                  opacity: 1,
-                  translateY: 0,
-                  transition: { duration: 0.5, delay: 0.5 * delay + 0.4 },
-                }}
-                src={mapImg}
-                className="h-44 rounded-md origin-bottom-left  object-cover border border-slate-100"
-                alt=""
-              />
+          <div className="grid grid-col-1 md:grid-cols-3 gap-3">
+            <motion.img
+              initial={{ opacity: 0, translateY: -20 }}
+              animate={{
+                opacity: 1,
+                translateY: 0,
+                transition: { duration: 0.5, delay: 0.5 * delay + 0.4 },
+              }}
+              src={mapImg}
+              className="h-full w-full rounded-md origin-bottom-left  object-cover border border-slate-100"
+              alt=""
+            />
+
+            <motion.div className="flex flex-col md:w-[80%] mx-auto md:flex-row justify-between h-full">
               <div className="flex flex-col items-start gap-2">
                 <motion.h1
                   initial={{ opacity: 0, translateY: -20 }}
@@ -108,27 +107,20 @@ function Venue({ delay }) {
                   }}
                   className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
                 >
-                  <EnvelopeIcon className="w-5 text-orange-400" />
+                  <MapIcon className="w-5 text-slate-400" />
                   <h1 className="text-xs font-normal font-mont">
-                    industryconnect@iitgn.ac.in
-                  </h1>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, translateY: -20 }}
-                  animate={{
-                    opacity: 1,
-                    translateY: 0,
-                    transition: { duration: 0.5, delay: 0.5 * delay + 0.8 },
-                  }}
-                  className="flex flex-row gap-2 cursor-pointer items-center bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
-                >
-                  <PencilSquareIcon className="w-5 text-white" />
-                  <h1 className="text-xs font-normal text-white font-mont">
-                    Openhouse Registration form
+                    View in google maps
                   </h1>
                 </motion.div>
               </div>
             </motion.div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5940.072086805178!2d72.68927158334336!3d23.21245895661326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c2adec1f16d8d%3A0xdc447b8706689bc3!2sIndian%20Institute%20Of%20Technology%20Gandhinagar%20(IIT%20Gandhinagar)!5e0!3m2!1sen!2sin!4v1707280576375!5m2!1sen!2sin"
+              className="border-0 w-full h-full rounded-md"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </motion.div>
       )}

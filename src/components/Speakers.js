@@ -33,7 +33,7 @@ function Speakers({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col justify-between p-4 rounded-lg"
+          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/70 to-slate-200/70  border border-gray-200 hover:border-white flex flex-col justify-between p-4 rounded-lg"
         >
           <div className="flex flex-row mb-2 justify-between">
             <motion.h1
@@ -43,7 +43,7 @@ function Speakers({ delay }) {
                 translateY: 0,
                 transition: { duration: 0.5, delay: 0.5 * delay + 0.3 },
               }}
-              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-orange-600"
+              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-fuchsia-600"
             >
               <MicrophoneIcon className="w-5" />
               <h1>Speakers</h1>

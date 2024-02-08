@@ -10,13 +10,44 @@ import mapImg from "../imgs/map-cont.png";
 import { useInView, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
+import { Modal } from "antd";
 function QuickLinks({ delay }) {
   const ref = useRef(null);
+  const { confirm } = Modal;
   const isInView = useInView(ref, { once: true });
   const { nav, setNav } = useReducer();
   const navigate = useNavigate();
+  const showConfirm = ({ url }) => {
+    confirm({
+      title: "External Link",
+      icon: <LinkIcon className="w-5 text-green-400 mr-1" />,
+      content: "You are now leaving CoLab's website to an external link.",
+      okButtonProps: { className: "bg-blue-400 " },
+      onOk() {
+        window.open(url, "_blank");
+      },
+      // onCancel() {
+      //   console.log('Cancel');
+      // },
+    });
+  };
+  const items = [
+    {
+      label: "IIT Gandhinagar | Research",
+      link: "https://www.iitgn.ac.in/research",
+    },
+    {
+      label: "Research Facilities",
+      link: "https://www.iitgn.ac.in/research/facilities",
+    },
+    { label: "IITGN IIEC", link: "https://iieciitgn.com/" },
+    {
+      label: "IR&P Council Repository",
+      link: "https://students.iitgn.ac.in/irp-council-repository/",
+    },
+  ];
   return (
-    <div ref={ref} className="w-[90%] md:w-full md:h-auto">
+    <div ref={ref} className="w-[100%] md:w-full z-50 md:h-auto">
       {isInView && (
         <motion.div
           initial={{ opacity: 0, translateY: -20 }}
@@ -30,7 +61,7 @@ function QuickLinks({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col justify-between p-4 rounded-lg"
+          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col  p-4 rounded-lg"
         >
           <div className="flex flex-row mb-2 justify-between">
             <motion.h1
@@ -45,28 +76,21 @@ function QuickLinks({ delay }) {
               <LinkIcon className="w-5" />
               <h1>Quick Links</h1>
             </motion.h1>
-            <div>
-              <motion.div
-                onClick={() => {
-                  setNav({ from: "/", to: "contact" });
-                  navigate("/" + "contact");
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { duration: 0.5 } }}
-                exit={{ opacity: 0, transition: { duration: 0.5 } }}
-                key={`exp.card.btn`}
-                className="bg-gradient-to-br flex font-mont from-slate-50 to-slate-200 text-slate-600 text-xs px-4 py-1 rounded-full font-medium cursor-pointer hover:to-slate-300"
+            <div></div>
+          </div>
+          <ol className="flex flex-col ml-4 gap-2 text-gray-400 font-mont">
+            {items.map((item) => (
+              <li
+                onClick={() => showConfirm({ url: item.link })}
+                className="flex flex-row gap-2 group cursor-pointer"
               >
-                More
-              </motion.div>
-            </div>
-          </div>
-          <div className="flex flex-col text-gray-400 font-mont">
-            <h1>IITGN Research Page</h1>
-            <h1>IITGNRP</h1>
-            <h1>IIEC</h1>
-            <h1>IR&P</h1>
-          </div>
+                {item.label}
+                <span>
+                  <LinkIcon className="w-4 hidden  group-hover:block" />
+                </span>
+              </li>
+            ))}
+          </ol>
         </motion.div>
       )}
     </div>

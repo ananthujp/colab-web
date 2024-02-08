@@ -16,7 +16,7 @@ function Contact({ delay }) {
   const { nav, setNav } = useReducer();
   const navigate = useNavigate();
   return (
-    <div ref={ref} className="w-[90%] md:w-full md:h-auto">
+    <div ref={ref} className="w-[100%]  z-50 md:w-full md:h-auto">
       {isInView && (
         <motion.div
           initial={{ opacity: 0, translateY: -20 }}
