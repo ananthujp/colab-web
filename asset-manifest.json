@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.7090562f.css",
-    "main.js": "./static/js/main.0cd9ae07.js",
+    "main.css": "./static/css/main.d244e010.css",
+    "main.js": "./static/js/main.738ca484.js",
     "static/js/787.7c045110.chunk.js": "./static/js/787.7c045110.chunk.js",
     "static/media/lalminar.png": "./static/media/lalminar.a5b7f2bcb5421d56fb6f.png",
     "static/media/colab-logo3d.png": "./static/media/colab-logo3d.fe30ac244d4ca4187204.png",
@@ -16,12 +16,12 @@
     "static/media/bio.png": "./static/media/bio.759798d03d3803aad21d.png",
     "index.html": "./index.html",
     "static/media/shape.svg": "./static/media/shape.8c54cabae2ead2e736c210da9381baf7.svg",
-    "main.7090562f.css.map": "./static/css/main.7090562f.css.map",
-    "main.0cd9ae07.js.map": "./static/js/main.0cd9ae07.js.map",
+    "main.d244e010.css.map": "./static/css/main.d244e010.css.map",
+    "main.738ca484.js.map": "./static/js/main.738ca484.js.map",
     "787.7c045110.chunk.js.map": "./static/js/787.7c045110.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7090562f.css",
-    "static/js/main.0cd9ae07.js"
+    "static/css/main.d244e010.css",
+    "static/js/main.738ca484.js"
   ]
 }
