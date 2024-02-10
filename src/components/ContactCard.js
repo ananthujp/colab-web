@@ -16,7 +16,7 @@ function Contact({ delay }) {
   const { nav, setNav } = useReducer();
   const navigate = useNavigate();
   return (
-    <div ref={ref} className="w-[100%]  z-50 md:w-full md:h-auto">
+    <div ref={ref} className="w-[100%] group z-50 md:w-full md:h-auto">
       {isInView && (
         <motion.div
           initial={{ opacity: 0, translateY: -20 }}
@@ -63,7 +63,7 @@ function Contact({ delay }) {
           </div>
 
           <motion.div className="flex flex-col w-full md:flex-row justify-between h-full">
-            <div className="flex flex-col items-start w-full gap-2">
+            <div className="flex flex-col group-hover:flex-row items-start w-full gap-2">
               <motion.h1
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
@@ -71,7 +71,7 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.5 },
                 }}
-                className="text-lg font-semibold font-pop"
+                className="text-lg group-hover:hidden font-semibold font-pop"
               >
                 Indian Institute of Technology Gandhinagar
               </motion.h1>
@@ -82,7 +82,7 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.6 },
                 }}
-                className="text-xs font-light font-mont"
+                className="text-xs group-hover:hidden font-light font-mont"
               >
                 Palaj, Gandhinagar - 382055, Gujarat
               </motion.h1>
@@ -93,9 +93,9 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.7 },
                 }}
-                className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <PhoneIcon className="w-5 text-indigo-400" />
+                <PhoneIcon className="w-5 group-hover:w-16 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   +91 98 47 45 32 17
                 </h1>
@@ -107,9 +107,9 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.7 },
                 }}
-                className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <EnvelopeIcon className="w-5 text-indigo-400" />
+                <EnvelopeIcon className="w-5 group-hover:w-16 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   industryconnect@iitgn.ac.in
                 </h1>
@@ -126,9 +126,9 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.8 },
                 }}
-                className="flex flex-row gap-2 cursor-pointer items-center bg-gradient-to-br from-indigo-400 to-indigo-500 hover:to-indigo-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 cursor-pointer items-center bg-gradient-to-br from-indigo-400 to-indigo-500 hover:to-indigo-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <PencilSquareIcon className="w-5 text-white" />
+                <PencilSquareIcon className="w-5 group-hover:w-16 text-white" />
                 <h1 className="text-xs font-normal text-white font-mont">
                   CoLab 2024 Registration form
                 </h1>

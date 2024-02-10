@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Carousel } from "antd";
 import {
@@ -14,9 +14,9 @@ import { Link, useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
 const BlogSlider = ({ delay }) => {
   const ref = useRef(null);
-
+  const [isHovered, setIsHovered] = useState(false);
   const isInView = useInView(ref, { once: true });
-  const theme = "w-32 text-white bg-gradient-to-br p-4 rounded-full ";
+  const theme = "text-white bg-gradient-to-br p-4 rounded-full ";
   const sliderItems = [
     {
       title: "Research Expo",
@@ -72,6 +72,9 @@ const BlogSlider = ({ delay }) => {
   const { nav, setNav } = useReducer();
   return (
     <motion.div
+      key={`pgm.page.card`}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
       layoutId={`pgm.page`}
       ref={ref}
       initial={nav.from !== "program" && { opacity: 0, translateY: -20 }}
@@ -91,7 +94,7 @@ const BlogSlider = ({ delay }) => {
             }
           : null
       }
-      className="bg-gradient-to-br from-slate-50/70 to-slate-50/70 h-64 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
+      className="bg-gradient-to-br from-slate-50/70 z-50 to-slate-50/70 h-64 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
         <>
@@ -134,24 +137,56 @@ const BlogSlider = ({ delay }) => {
               More
             </motion.button>
           </motion.h1>
-          <Carousel dotPosition={"right"} autoplay>
-            {sliderItems.map((item, i) => (
-              <div className="h-44 md:h-36">
-                <div className="flex flex-row items-start gap-8">
-                  {item.ico && item.ico}
+          {isHovered ? (
+            <div className="grid grid-cols-2 gap-2">
+              {sliderItems.map((item, i) => (
+                <motion.div
+                  key={`pgm.card.element.${i}`}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.5, delay: i * 0.1 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    transition: { duration: 0.5, delay: i * 0.1 },
+                  }}
+                  className="flex flex-row items-center gap-2"
+                >
+                  <h1 className="w-12">{item.ico}</h1>
+                  <h1 className="text-sm font-pop font-semibold">
+                    {item.title}
+                  </h1>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <motion.div
+              key={"pgm.card.element"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.5 } }}
+              exit={{ opacity: 0, transition: { duration: 0.5 } }}
+            >
+              <Carousel dotPosition={"right"} autoplay>
+                {sliderItems.map((item, i) => (
+                  <div className="h-44 md:h-36">
+                    <div className="flex flex-row items-start gap-8">
+                      <h1 className="w-44">{item.ico}</h1>
 
-                  <div className="flex flex-col ">
-                    <h1 className="text-xl font-pop font-semibold">
-                      {sliderItems[i].title}
-                    </h1>
-                    <h1 className="text-sm mt-4 w-[85%] font-pop text-left font-light">
-                      {sliderItems[i].description}
-                    </h1>
+                      <div className="flex flex-col ">
+                        <h1 className="text-xl font-pop font-semibold">
+                          {sliderItems[i].title}
+                        </h1>
+                        <h1 className="text-sm mt-4 w-[85%] font-pop text-left font-light">
+                          {sliderItems[i].description}
+                        </h1>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
-          </Carousel>
+                ))}
+              </Carousel>
+            </motion.div>
+          )}
           <div />
         </>
       )}

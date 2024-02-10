@@ -22,7 +22,7 @@ import logo2 from "../imgs/iitgn-logo.png";
 function Home() {
   const [hidden, setHidden] = useState(false);
   const [login_load, setLoad] = useState(false);
-  const { load, setNav, setUser, user, logout } = useReducer();
+  const { setNav, setUser, user, logout } = useReducer();
   const [open, setOpen] = useState(false);
   const auth = getAuth();
 
@@ -53,7 +53,7 @@ function Home() {
   useEffect(() => {
     setNav({ from: null, to: null });
   }, []);
-  return !load ? (
+  return (
     <motion.main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -258,8 +258,6 @@ function Home() {
       </div>
       <Footer />
     </motion.main>
-  ) : (
-    <Load />
   );
 }
 

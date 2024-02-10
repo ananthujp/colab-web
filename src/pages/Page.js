@@ -32,7 +32,12 @@ function Page({ children, page, no, title, backButton }) {
         />
       </div>
 
-      <motion.div className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.3 } }}
+        exit={{ opacity: 0, transition: { duration: 0.5 } }}
+        className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex"
+      >
         <div className="flex relative flex-col w-[95%] gap-4 bg-gradient-to-br shadow-md border border-white from-white to-slate-200 mt-4 rounded-lg mb-32 md:mb-0 md:h-[85%] ">
           {backButton}
           <XMarkIcon
