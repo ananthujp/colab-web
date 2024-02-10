@@ -76,7 +76,7 @@ function QuickLinks({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-white flex flex-col  p-4 rounded-lg"
+          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-gray-400 flex flex-col  p-4 rounded-lg"
         >
           <div className="flex flex-row mb-2 justify-between">
             <motion.h1

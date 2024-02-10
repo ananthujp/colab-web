@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
+  BeakerIcon,
   BuildingOffice2Icon,
   LightBulbIcon,
   LinkIcon,
@@ -11,29 +12,30 @@ import {
 import Page from "./Page";
 
 function Program() {
-  const theme = "w-16 text-white bg-gradient-to-br p-4 rounded-full ";
+  const theme =
+    "lg:w-16 w-12 md:w-12 text-white bg-gradient-to-br p-4 rounded-full ";
   const sliderItems = [
     {
-      title: "Innovative Showcase",
+      title: "Research Expo",
       description:
-        "Immerse yourself in a showcase of innovative projects and research endeavors led by IITGN students and faculty. Witness firsthand the ground-breaking solutions emerging from the institute.",
-      image: "https://pbs.twimg.com/media/FHHfJKCVgAIt_wp.jpg:large",
+        "A showcase of IITGN’s research prowess, tech innovations, and transformative solutions.",
+
       ico: (
         <LightBulbIcon className={`${theme} from-fuchsia-500 to-purple-600`} />
       ),
     },
     {
-      title: "Networking Opportunities",
+      title: "Networking & Collaboration",
       description:
-        "Connect with industry leaders, professionals, and IITGN's academic community. Build relationships, exchange ideas, and explore potential collaborations in a relaxed and interactive setting.",
-      image: "https://pbs.twimg.com/media/FHHfJKCVgAIt_wp.jpg:large",
+        "Build partnerships, exchange ideas, and explore potential collaborations with industries, start-ups, and researchers.",
+
       ico: <LinkIcon className={`${theme} from-green-400 to-cyan-500`} />,
     },
     {
       title: "Panel Discussions",
       description:
-        "Engage in insightful discussions led by industry experts and academic leaders. Explore current trends, challenges, and opportunities in various fields, gaining valuable perspectives from both sectors.",
-      image: "https://pbs.twimg.com/media/FHHfJKCVgAIt_wp.jpg:large",
+        "Engage in discussions about current trends, challenges, and opportunities in various fields with industry experts and academic leaders.",
+
       ico: (
         <MicrophoneIcon className={`${theme} from-purple-500 to-indigo-500`} />
       ),
@@ -41,8 +43,7 @@ function Program() {
     {
       title: "Recruitment Insights",
       description:
-        "For companies seeking talent, gain insights into the caliber of IITGN students. Discover potential candidates for recruitment or internship programs, fostering a talent pipeline for your organization.",
-      image: "https://pbs.twimg.com/media/FHHfJKCVgAIt_wp.jpg:large",
+        "Leverage IITGN’s talent for your organization’s recruitment or internship programs",
       ico: (
         <MagnifyingGlassPlusIcon
           className={`${theme} from-yellow-400 to-orange-500`}
@@ -50,24 +51,29 @@ function Program() {
       ),
     },
     {
-      title: "Collaboration Possibilities",
+      title: "CSR Avenues",
       description:
-        "Explore avenues for collaboration between industry and academia. Identify common areas of interest and potential projects that align with your organization's goals.",
-      image: "https://pbs.twimg.com/media/FHHfJKCVgAIt_wp.jpg:large",
+        "Potential opportunities to fulfill your organization’s Corporate Social Responsibility through various IIT Gandhinagar initiatives.",
       ico: (
         <BuildingOffice2Icon className={`${theme} from-pink-500 to-rose-500`} />
       ),
+    },
+    {
+      title: "Lab Tours",
+      description:
+        "Get first-hand insights about the diverse research at IITGN by visiting various research laboratories. ",
+      ico: <BeakerIcon className={`${theme} from-pink-500 to-rose-500`} />,
     },
   ];
   return (
     <Page no={2} page="program" title="Event Highlights">
       <motion.div
         layoutId={`pgm.theme`}
-        className="w-full overflow-y-auto px-6 md:px-24 mt-4 flex flex-col md:flex-wrap md:h-[90%]"
+        className="w-full overflow-y-auto px-6 mb-4 gap-2 md:px-24 mt-4 grid grid-cols-1 md:grid-cols-2 md:h-[90%]"
       >
         {sliderItems.map((item, i) => (
-          <div className="h-36 w-full md:w-1/2 m-4">
-            <div className="flex flex-row items-start gap-6">
+          <div className="h-auto flex w-full border p-4 rounded-md border-indigo-100 bg-indigo-50 mx-4">
+            <div className="flex h-16 flex-row items-start gap-4">
               <motion.div
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
@@ -113,7 +119,7 @@ function Program() {
                     translateY: 20,
                     transition: { duration: 0.5, delay: i * 0.1 + 0.1 },
                   }}
-                  className="text-xs mt-2 w-[85%] text-slate-400 font-pop text-justify font-light"
+                  className="text-xs mt-2 w-[85%] text-slate-400 font-pop text-left font-light"
                 >
                   {sliderItems[i].description}
                 </motion.h1>

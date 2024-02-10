@@ -6,8 +6,10 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 import { LinkIcon } from "@heroicons/react/24/solid";
-import confirm from "antd/es/modal/confirm";
+import { Modal } from "antd";
+
 import React from "react";
+const { confirm } = Modal;
 const showConfirm = ({ url }) => {
   confirm({
     title: "External Link",

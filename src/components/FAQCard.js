@@ -102,7 +102,7 @@ function FAQCard({ delay = 0 }) {
   });
   const { nav, setNav } = useReducer();
   return (
-    <div className="bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg">
+    <div className="bg-gradient-to-br from-white/70 to-white/70 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg">
       <motion.h1
         initial={{ opacity: 0, translateY: -20 }}
         animate={{
@@ -119,9 +119,9 @@ function FAQCard({ delay = 0 }) {
       >
         <div className="flex flex-row gap-2 items-center">
           <CalendarDaysIcon className="w-6" />
-          <h1>FAQ</h1>
+          <h1>Frequently Asked Questions</h1>
         </div>
-        <motion.button
+        {/* <motion.button
           //   onClick={() => {
           //     setNav({ from: "/", to: "program" });
           //     navigate("/" + "program");
@@ -140,12 +140,12 @@ function FAQCard({ delay = 0 }) {
           className="rounded-full font-semibold w-24 text-sm px-2 py-1 text-slate-600 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
         >
           More
-        </motion.button>
+        </motion.button> */}
       </motion.h1>
       <Collapse
         items={items}
         className="w-full min-w-full"
-        defaultActiveKey={["1"]}
+        //defaultActiveKey={["1"]}
       />
     </div>
   );

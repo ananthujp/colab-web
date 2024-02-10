@@ -82,7 +82,7 @@ function Contact() {
                 }}
                 className="flex flex-row gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <EnvelopeIcon className="w-5 text-orange-400" />
+                <EnvelopeIcon className="w-5 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   industryconnect@iitgn.ac.in
                 </h1>
@@ -94,11 +94,11 @@ function Contact() {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 + 0.8 },
                 }}
-                className="flex flex-row gap-2 cursor-pointer items-center bg-gradient-to-br from-orange-400 to-orange-500 hover:to-orange-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row gap-2 cursor-pointer items-center bg-gradient-to-br from-indigo-400 to-indigo-500 hover:to-indigo-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
                 <PencilSquareIcon className="w-5 text-white" />
                 <h1 className="text-xs font-normal text-white font-mont">
-                  Openhouse Registration form
+                  CoLab 2024 Registration form
                 </h1>
               </motion.div>
             </div>

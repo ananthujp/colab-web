@@ -25,15 +25,7 @@ function Home() {
   const { load, setNav, setUser, user, logout } = useReducer();
   const [open, setOpen] = useState(false);
   const auth = getAuth();
-  const showModal = () => {
-    setOpen(true);
-  };
-  const items = [
-    {
-      key: "1",
-      label: <div onClick={() => logout()}>Logout</div>,
-    },
-  ];
+
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (scrollY?.current < scrollY?.prev) {
@@ -175,7 +167,7 @@ function Home() {
         />
       </div> */}
       <div className="z-10 flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
-        {true && (
+        {false && (
           <motion.div
             key={`top.bar`}
             initial={{ opacity: 0 }}
@@ -190,7 +182,7 @@ function Home() {
             className="fixed z-[100] py-4 top-0 border-b border-slate-200/40 bg-gradient-to-b w-full from-green-200/20 to-transparent bg-clip-padding xbackdrop-filter backdrop-blur-sm bg-opacity-10"
           >
             <div className="flex w-full mt-2 mx-auto flex-row max-w-5xl justify-between">
-              <div className="flex flex-row">
+              <div className="flex flex-row mx-6 md:mx-0">
                 <img src={logo} className="w-8 h-8 mt-0.5" alt="" />
                 <div className="flex flex-col ml-1.5">
                   <motion.h1 className="text-xs font-pop text-slate-300 xtext-slate-600 font-light">
@@ -208,7 +200,11 @@ function Home() {
               </div>
               <Navbar key={`nav.bar`} />
 
-              <img src={logo2} className="w-8 h-8 my-auto" alt="" />
+              <img
+                src={logo2}
+                className="w-10 h-10 hidden md:block my-auto"
+                alt=""
+              />
               {/* {!user ? (
                 <div
                   onClick={showModal}

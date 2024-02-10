@@ -5,6 +5,7 @@ import {
   BuildingOffice2Icon,
   LightBulbIcon,
   MicrophoneIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import "./why.css";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +22,7 @@ const Card = ({
 }) => {
   return (
     <div
-      className={`card ${category} group cursor-pointer`}
+      className={`card ${category} group cursor-pointer `}
       style={{
         width: "100%",
         "--bg-color": bgColor,
@@ -55,8 +56,8 @@ const WhyCard = ({ delay }) => {
       icon: (
         <LightBulbIcon className="w-16 text-white group-hover:text-indigo-600 " />
       ),
-      bgColor: "rgb(165,180,252)",
-      bgColorLight: "rgb(199,210,254)",
+      bgColor: "rgb(199, 210, 254)",
+      bgColorLight: "rgb(238,242,255)",
       textColorHover: "#4C5656",
       textColor: "text-indigo-600",
       boxShadowColor: "rgba(255, 215, 97, 0.48)",
@@ -77,10 +78,10 @@ const WhyCard = ({ delay }) => {
     {
       category: "Collaboration",
       icon: (
-        <MicrophoneIcon className="w-16 text-white group-hover:text-purple-600" />
+        <UserGroupIcon className="w-16 text-white group-hover:text-purple-600" />
       ),
-      bgColor: "#CEB2FC",
-      bgColorLight: "#F0E7FF",
+      bgColor: "rgb(233,213,255)",
+      bgColorLight: "rgb(243,232,255)",
       textColorHover: "#fff",
       textColor: "text-purple-600",
       boxShadowColor: "rgba(206, 178, 252, 0.48)",
@@ -108,7 +109,7 @@ const WhyCard = ({ delay }) => {
             }
           : null
       }
-      className="relative w-[90%] bg-slate-200/40 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:border-white md:w-full flex flex-col justify-between rounded-lg"
+      className="relative w-[90%] bg-slate-200/40 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:border-gray-400 md:w-full flex flex-col justify-between rounded-lg"
     >
       {isInView && (
         <>

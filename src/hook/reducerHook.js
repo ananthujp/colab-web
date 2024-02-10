@@ -31,12 +31,16 @@ export const AuthProvider = ({ children }) => {
         setAgenda(
           querySnapshot.docs.map((doc) => ({
             id: doc.id,
+            key: doc.data().key,
             time_f: doc.data().time_f,
             time_t: doc.data().time_t,
             title: doc.data().title,
             desc: doc.data().desc,
             icon: doc.data().icon,
             color: doc.data().color,
+            hover: doc.data().hover,
+            longdesc: doc.data().longdesc,
+            users: doc.data().users,
           }))
         );
       }

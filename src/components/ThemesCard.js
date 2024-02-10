@@ -116,7 +116,7 @@ function ExpandCard() {
             <motion.div
               onClick={() => {
                 setNav({ from: "/", to: "themes" });
-                navigate("/" + "themes");
+                navigate("/themes/" + index);
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.5 } }}
@@ -131,7 +131,7 @@ function ExpandCard() {
       ))}
       <div className="flex flex-col items-start justify-start p-2 md:p-0 bg-opacity-75 md:w-8 transition-all rounded-r-lg md:rounded-r-lg bg-gradient-to-br from-indigo-400 to-indigo-400 ">
         <h1 className="whitespace-nowrap font-pop font-medium text-white text-base transform origin-bottom-left md:rotate-90">
-          Theme/Domain
+          Domains in Focus
         </h1>
       </div>
     </motion.div>

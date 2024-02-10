@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Carousel } from "antd";
 import {
+  BeakerIcon,
   BuildingOffice2Icon,
   CalendarDaysIcon,
   LightBulbIcon,
@@ -60,6 +61,12 @@ const BlogSlider = ({ delay }) => {
         <BuildingOffice2Icon className={`${theme} from-pink-500 to-rose-500`} />
       ),
     },
+    {
+      title: "Lab Tours",
+      description:
+        "Get first-hand insights about the diverse research at IITGN by visiting various research laboratories. ",
+      ico: <BeakerIcon className={`${theme} from-pink-500 to-rose-500`} />,
+    },
   ];
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
@@ -84,7 +91,7 @@ const BlogSlider = ({ delay }) => {
             }
           : null
       }
-      className="bg-yellow-100 h-64 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
+      className="bg-gradient-to-br from-slate-50/70 to-slate-50/70 h-64 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
         <>

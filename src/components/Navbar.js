@@ -21,7 +21,7 @@ const items = [
 ];
 
 function MyDropdown({ sel }) {
-  const [selected, setSelected] = React.useState(sel ? sel : 0);
+  // const [sel, setsel] = React.useState(sel ? sel : 0);
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
   return (
@@ -61,8 +61,8 @@ function MyDropdown({ sel }) {
                   {({ active }) => (
                     <button
                       onClick={() => {
-                        setNav({ from: items[selected].link, to: item.link });
-                        setSelected(i);
+                        setNav({ from: items[sel].link, to: item.link });
+                        // setsel(i);
                         navigate("/" + item.link);
                       }}
                       className={`group font-mont font-medium relative flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -92,7 +92,7 @@ function MyDropdown({ sel }) {
 }
 
 function Navbar({ sel, dark }) {
-  const [selected, setSelected] = React.useState(sel ? sel : 0);
+  // const [sel, setsel] = React.useState(sel ? sel : 0);
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
   return (
@@ -130,13 +130,13 @@ function Navbar({ sel, dark }) {
             //   transition: { duration: 0.5, delay: 0.1 * i + 0.1 },
             // }}
             onClick={() => {
-              setNav({ from: items[selected].link, to: item.link });
-              setSelected(i);
+              setNav({ from: items[sel].link, to: item.link });
+              // setsel(i);
               navigate("/" + item.link);
             }}
             className="relative cursor-pointer  py-2 px-4"
           >
-            {i === selected && (
+            {i === sel && (
               <motion.div
                 layoutId="nav_bg"
                 //style={{ borderRadius: 999999 }}
@@ -152,7 +152,7 @@ function Navbar({ sel, dark }) {
             )}
             <span
               className={`z-50 relative xtext-slate-600  ${
-                selected === i ? " text-slate-600" : " text-white"
+                sel === i ? " text-slate-600" : " text-white"
               } `}
             >
               {item.label}

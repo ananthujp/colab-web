@@ -1,13 +1,15 @@
 import React from "react";
 
 import { motion } from "framer-motion";
-import ray from "../imgs/ray.svg";
-import hero from "../imgs/colab-logo3d.png";
+import ray from "../imgs/ray.png";
+import hero from "../imgs/hero.gif";
+import logo from "../imgs/colab-logo.svg";
 function Hero() {
   return (
-    <div
+    <motion.div
+      layoutId="hero.bg.black"
       className={
-        " md:h-[65vh] px-6 relative overflow-hidden pb-8 md:pb-0 md:px-24 w-full justify-center items-center  border-b-4 border-slate-100   xbg-white/40 flex " +
+        " md:h-[60vh] px-6 relative overflow-hidden pb-8 md:pb-0 md:px-24 w-full justify-center items-center  border-b-4 border-slate-100   xbg-white/40 flex " +
         " bg-slate-900"
       }
     >
@@ -25,9 +27,9 @@ function Hero() {
         />
       </div>
       <div className="flex flex-col-reverse mt-24  md:mt-0 md:flex-row w-full md:h-[80%] items-center max-w-5xl justify-between">
-        <div className="flex flex-col w-[90%] md:w-2/3 h-full justify-center">
+        <div className="flex flex-col w-[90%] md:w-1/2 h-full justify-center">
           {/* <div className="h-2" /> */}
-          <div>
+          <div className="w-full ml-auto mr-0">
             <motion.p
               initial={{ opacity: 0, translateY: -20 }}
               animate={{
@@ -40,13 +42,14 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className=" shadow-red-600 font-pop font-black bg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
+              className=" shadow-red-600 mr-0 ml-auto flex flex-row justify-end items-end font-pop font-black bg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
             >
-              <span className="text-7xl ">C</span>
+              {/* <span className="text-7xl ">C</span> */}
+              <img src={logo} className="w-24 h-24 -mr-3 -mb-1 -ml-2" alt="" />
               <span className="text-5xl mx-0.5">O</span>
-              <span className="text-7xl mx-0.5">L</span>
+              <span className="text-7xl mx-0.5 -mb-0.5">L</span>
               <span className="text-5xl mx-0.5">AB</span>
-              <span className="text-7xl mx-4">2024</span>
+              <span className="text-7xl ml-4">2024</span>
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, translateY: -20 }}
@@ -60,7 +63,7 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className="font-mont font-semibold text-lg mt-0.5 text-slate-300 xtext-slate-600 "
+              className="font-mont text-right font-semibold text-lg mt-0.5 text-slate-300 xtext-slate-600 "
             >
               An IIT Gandhinagar Industry Openhouse&nbsp;
             </motion.h1>
@@ -76,14 +79,10 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className=" font-mont mt-4 xtext-slate-500 text-slate-400 text-xs text-justify"
+              className=" font-mont text-right mt-4 xtext-slate-500 text-slate-400 text-xs "
             >
               CoLab 2024 is a dynamic convergence of academia and industry at
-              the Indian Institute of Technology Gandhinagar. This event aims to
-              nurture robust partnerships to create smart solutions for key
-              societal challenges. Join us and become a part of a collaborative
-              research space where industry professionals, academicians, and
-              students pave the way for a better tomorrow.
+              the Indian Institute of Technology Gandhinagar.
             </motion.p>
 
             <motion.div
@@ -98,9 +97,9 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className="flex flex-row gap-2 items-center md:mt-4 md:justify-start md:gap-4 md:items-center"
+              className="flex flex-row gap-2 items-center md:mt-6 md:justify-end md:gap-4 md:items-center"
             >
-              <div className="bg-white font-mont text-slate-800 ml-2 px-4 rounded-full py-1">
+              <div className="bg-white cursor-pointer font-mont text-slate-800 ml-2 px-4 rounded-full py-1">
                 March 2, 2024
               </div>
               <div
@@ -137,7 +136,7 @@ function Hero() {
           />
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -2,26 +2,55 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { motion, useInView } from "framer-motion";
 import {
+  BeakerIcon,
+  BuildingOffice2Icon,
   CalendarDaysIcon,
+  LinkIcon,
   MicrophoneIcon,
   PencilIcon,
   PencilSquareIcon,
   PhotoIcon,
   TrashIcon,
   UserGroupIcon,
+  UsersIcon,
 } from "@heroicons/react/24/solid";
-import { Form, Button, Input, Modal, Select, Progress, Popover } from "antd";
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  Form,
+  Button,
+  Input,
+  Modal,
+  Select,
+  Progress,
+  Popover,
+  InputNumber,
+  Checkbox,
+  Switch,
+  Space,
+} from "antd";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import useReducer from "../hook/reducerHook";
-import { CoffeeOutlined } from "@ant-design/icons";
+import {
+  CoffeeOutlined,
+  MinusCircleOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 
 function Agenda({ delay }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [hover, setHover] = useState(false);
   const [progress, setProgress] = useState(0);
   const [eei, setI] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [edit, setEdit] = useState({ edit: false, data: null });
   useEffect(() => {
     let timer;
     if (isHovered) {
@@ -39,12 +68,30 @@ function Agenda({ delay }) {
   }, [isHovered]);
   const [open, setOpen] = useState(false);
   const { data, user } = useReducer();
-  console.log(progress);
+  const [form] = Form.useForm();
+
+  const handleEdit = (editData) => {
+    form.resetFields();
+    edit.edit && setOpen(true);
+  };
+  useEffect(() => {
+    console.log(edit);
+    edit.edit && setOpen(true);
+    edit.edit && form.setFieldsValue(edit.data);
+    edit.edit && setHover(edit.data.hover);
+  }, [edit]);
   const handleDelete = (id) => {
     deleteDoc(doc(db, "agenda", id));
   };
   const onFinish = (values) => {
-    addDoc(collection(db, "agenda"), values).then(() => setOpen(false));
+    edit?.edit
+      ? setDoc(doc(db, "agenda", edit.data.id), values)
+          .then(() => {
+            setOpen(false);
+            console.log(edit);
+          })
+          .catch((e) => console.log(e))
+      : addDoc(collection(db, "agenda"), values).then(() => setOpen(false));
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -52,9 +99,29 @@ function Agenda({ delay }) {
   const icons = [
     <PencilSquareIcon className="" />,
     <MicrophoneIcon className="" />,
-    <CoffeeOutlined className="group-hover:text-lg group-hover:flex hidden" />,
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      class="humbleicons hi-coffee"
+    >
+      <path
+        xmlns="http://www.w3.org/2000/svg"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M17 12H4v4a4 4 0 004 4h5a4 4 0 004-4v-4zm0 0h2a2 2 0 012 2v1a2 2 0 01-2 2h-2m-4-8s1-1 .5-2l-1-2C12 4 13 3 13 3M8.64 9s1-1 .5-2l-1-2c-.5-1 .5-2 .5-2"
+      />
+    </svg>,
+    // <CoffeeOutlined className="group-hover:text-lg group-hover:block hidden" />,
     <UserGroupIcon />,
     <PhotoIcon />,
+    <BeakerIcon />,
+    <UsersIcon />,
+    <BuildingOffice2Icon />,
+    <LinkIcon />,
   ];
   const colors = [
     [
@@ -89,7 +156,40 @@ function Agenda({ delay }) {
       "bg-yellow-400",
       "rgb(234 179 8)",
     ],
+    [
+      "border-red-50 bg-red-100",
+      "text-red-800",
+      "text-red-700",
+      "bg-red-300 text-red-600",
+      "bg-red-400",
+      "rgb(239 68 68)",
+    ],
+    [
+      "border-indigo-50 bg-indigo-100",
+      "text-indigo-800",
+      "text-indigo-700",
+      "bg-indigo-300 text-indigo-600",
+      "bg-indigo-400",
+      "rgb(99 102 241)",
+    ],
+    [
+      "border-orange-50 bg-orange-100",
+      "text-orange-800",
+      "text-orange-700",
+      "bg-orange-300 text-orange-600",
+      "bg-orange-400",
+      "rgb(249 115 22)",
+    ],
+    [
+      "border-cyan-50 bg-cyan-100",
+      "text-cyan-800",
+      "text-cyan-700",
+      "bg-cyan-300 text-cyan-600",
+      "bg-cyan-400",
+      "rgb(8 145 178)",
+    ],
   ];
+
   return (
     <motion.div
       layoutId={`pgm.agenda`}
@@ -116,7 +216,7 @@ function Agenda({ delay }) {
         }
         // : null
       }
-      className="bg-yellow-100 h-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:border-white w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
+      className="bg-slate-50 h-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-300 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
         <div className="flex flex-col gap-3 h-[31rem] ">
@@ -124,11 +224,15 @@ function Agenda({ delay }) {
             key={`modal.add.item`}
             title="Add an Agenda Item"
             open={open}
-            onCancel={() => setOpen(false)}
+            onCancel={() => {
+              setOpen(false);
+              setEdit({ edit: false, data: null });
+            }}
             okButtonProps={{ hidden: true }}
             cancelButtonProps={{ hidden: true }}
           >
             <Form
+              form={form}
               name="basic"
               labelCol={{
                 span: 8,
@@ -139,9 +243,7 @@ function Agenda({ delay }) {
               style={{
                 maxWidth: 600,
               }}
-              initialValues={{
-                remember: true,
-              }}
+              // initialValues={edit?.edit ? edit.data : null}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
@@ -149,14 +251,18 @@ function Agenda({ delay }) {
               <Form.Item
                 label="Key"
                 name="key"
+                type="number"
                 rules={[
                   {
                     required: true,
-                    message: "Please input a number!",
+                    //message: "Please input a number!",
+                    type: "number",
+                    min: 0,
+                    max: 99,
                   },
                 ]}
               >
-                <Input type="number" />
+                <InputNumber type="number" />
               </Form.Item>
               <Form.Item
                 label="Title"
@@ -209,6 +315,7 @@ function Agenda({ delay }) {
 
               <Form.Item
                 label="Icon"
+                className="group"
                 name="icon"
                 rules={[
                   {
@@ -243,7 +350,85 @@ function Agenda({ delay }) {
                   ))}
                 </Select>
               </Form.Item>
-
+              <Form.Item label="Switch" name="hover" valuePropName="checked">
+                <Switch
+                  checkedChildren="Hover ON"
+                  unCheckedChildren="Hover OFF"
+                  className="text-blue-400 bg-blue-500"
+                  onChange={(e) => setHover(e)}
+                />
+              </Form.Item>
+              {hover && (
+                <>
+                  <Form.Item name="longdesc" label="Long Description">
+                    <Input.TextArea />
+                  </Form.Item>
+                  <Form.List name="users">
+                    {(fields, { add, remove }) => (
+                      <>
+                        {fields.map(({ key, name, ...restField }) => (
+                          <Space
+                            key={key}
+                            style={{
+                              display: "flex",
+                              marginBottom: 8,
+                            }}
+                            align="baseline"
+                          >
+                            <Form.Item
+                              {...restField}
+                              name={[name, "first"]}
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Missing first name",
+                                },
+                              ]}
+                            >
+                              <Input placeholder="First Name" />
+                            </Form.Item>
+                            <Form.Item
+                              {...restField}
+                              name={[name, "bio"]}
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Missing bio",
+                                },
+                              ]}
+                            >
+                              <Input placeholder="Short bio" />
+                            </Form.Item>
+                            <Form.Item
+                              {...restField}
+                              name={[name, "url"]}
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Missing URL",
+                                },
+                              ]}
+                            >
+                              <Input placeholder="Image URL" />
+                            </Form.Item>
+                            <MinusCircleOutlined onClick={() => remove(name)} />
+                          </Space>
+                        ))}
+                        <Form.Item>
+                          <Button
+                            type="dashed"
+                            onClick={() => add()}
+                            block
+                            icon={<PlusOutlined />}
+                          >
+                            Add user
+                          </Button>
+                        </Form.Item>
+                      </>
+                    )}
+                  </Form.List>
+                </>
+              )}
               <Form.Item
                 wrapperCol={{
                   offset: 8,
@@ -311,21 +496,30 @@ function Agenda({ delay }) {
                 content={
                   <div className="flex flex-col w-48">
                     <p className="w-full border-b border-slate-200 pb-4">
-                      Long description. Lorem ipsum dolor sit amet, consectetur
-                      adip. lorem ipsum dolor sit amet, consectetur adip. lorem
+                      {item.hover ? item.longdesc : ""}
                     </p>
-                    <div className="flex flex-row my-2">
-                      <img src="" className="w-6 h-6 rounded-full" alt="" />
-                      <div className="flex flex-col ml-2">
-                        <p className="w-full">Pallavi</p>
-                        <p className="font-thin italic">Short bio</p>
-                      </div>
+                    <div className="flex flex-col">
+                      {item.users?.map((user, i) => (
+                        <div className="flex flex-row my-2">
+                          <img
+                            src={user.url}
+                            className="w-6 h-6 rounded-full"
+                            alt=""
+                          />
+                          <div className="flex flex-col ml-2">
+                            <p className="w-full">{user.first}</p>
+                            <p className="font-thin italic">{user.bio}</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 }
-                key={`pop.item${5}`}
+                key={`pop.item${i}`}
                 title={item.title}
-                open={progress === 100 && eei === i ? true : false}
+                open={
+                  item?.hover && progress === 100 && eei === i ? true : false
+                }
                 //onOpenChange={handleClickChange}
               >
                 <motion.div
@@ -335,7 +529,7 @@ function Agenda({ delay }) {
                   }}
                   onHoverEnd={() => setIsHovered(false)}
                   key={`agenda.item.${i}`}
-                  layout
+                  // layout
                   initial={{ opacity: 0, translateY: -20 }}
                   animate={{
                     opacity: 1,
@@ -347,10 +541,10 @@ function Agenda({ delay }) {
                     translateY: 20,
                     transition: { duration: 0.5 },
                   }}
-                  className="grid group relative grid-cols-[4em_auto] h-16"
+                  className="grid group relative grid-cols-[4em_auto] h-auto"
                 >
                   {user?.role === "admin" && (
-                    <div className="absolute z-50 top-1/2 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
+                    <div className="absolute bg-slate-200 border border-slate-300 rounded-full p-2 z-50 bottom-0 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
                       <TrashIcon
                         onClick={() =>
                           window.confirm(
@@ -359,7 +553,15 @@ function Agenda({ delay }) {
                             ? handleDelete(item.id)
                             : console.log("no")
                         }
-                        className="w-4"
+                        className="w-4 cursor-pointer hover:text-blue-400"
+                      />
+                      <PencilIcon
+                        onClick={
+                          () => setEdit({ edit: true, data: item })
+
+                          // : ""
+                        }
+                        className=" ml-4 w-4 cursor-pointer hover:text-blue-400"
                       />
                     </div>
                   )}
@@ -367,44 +569,61 @@ function Agenda({ delay }) {
                     <h1 className="w-4 mt-1">{item.time_f}</h1>
                     {/* <h1 className="w-4">{item.time_t}</h1> */}
                   </div>
-                  <div
-                    className={`flex flex-row bg-opacity-90 group hover:bg-opacity-90 justify-between px-6 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
-                      colors[item.color][0]
-                    }`}
-                  >
-                    <div className="flex flex-col my-2">
-                      <h1
-                        className={`text-xs font-mont ${
-                          colors[item.color][1]
-                        } font-semibold`}
-                      >
-                        {item.title}
-                      </h1>
-                      <h1
-                        className={`text-xs hidden transition-all group-hover:flex font-mont ${
-                          colors[item.color][2]
-                        } font-light`}
-                      >
-                        {item.desc}
-                      </h1>
-                    </div>
-                    <h1
-                      className={`${
-                        colors[item.color][3]
-                      } w-4 group-hover:w-9 p-2 relative h-4 group-hover:h-9 my-auto transition-all rounded-full`}
+                  <div className="flex flex-col justify-between">
+                    <motion.div
+                      key={`agenda.item.x.${i}`}
+                      // layout
+                      className={`flex flex-row bg-opacity-90 group hover:bg-opacity-90 justify-between px-4 py-1 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
+                        colors[item.color][0]
+                      }`}
                     >
-                      {icons[item.icon]}
-                      <Progress
-                        className="absolute top-0 left-0 transition-all duration-700 opacity-0 group-hover:opacity-100"
-                        type="circle"
-                        size={36}
-                        format={(percent) => ""}
-                        percent={progress}
-                        strokeColor={colors[item.color][5]}
-                      />
-                    </h1>
+                      <div className="flex flex-col my-2 w-[80%]">
+                        <h1
+                          className={`text-xs font-mont ${
+                            colors[item.color][1]
+                          } font-semibold`}
+                        >
+                          {item.title}
+                        </h1>
+                        {isHovered && eei === i && (
+                          <motion.h1
+                            // initial={{ opacity: 0, translateY: -20 }}
+                            // animate={{
+                            //   opacity: 1,
+                            //   translateY: 0,
+                            //   transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
+                            // }}
+                            // exit={{
+                            //   opacity: 0,
+                            //   translateY: 20,
+                            //   transition: { duration: 0.5 },
+                            // }}
+                            className={`text-xs xhidden transition-all xgroup-hover:flex font-mont ${
+                              colors[item.color][2]
+                            } font-light`}
+                          >
+                            {item.desc}
+                          </motion.h1>
+                        )}
+                      </div>
+                      <h1
+                        className={`${
+                          colors[item.color][3]
+                        } w-4 group-hover:w-9 p-2 relative h-4 group-hover:h-9 my-auto transition-all rounded-full`}
+                      >
+                        {icons[item.icon]}
+                        <Progress
+                          className="absolute top-0 left-0 transition-all duration-700 opacity-0 group-hover:opacity-100"
+                          type="circle"
+                          size={isHovered && eei === i ? 36 : 16}
+                          format={(percent) => ""}
+                          percent={progress}
+                          strokeColor={colors[item.color][5]}
+                        />
+                      </h1>
+                    </motion.div>
                     <span
-                      className={`absolute rounded-full -ml-2 -bottom-2 w-8 mt-4 h-1 ${
+                      className={` rounded-full mt-2 w-8  h-1 ${
                         colors[item.color][4]
                       }`}
                     ></span>

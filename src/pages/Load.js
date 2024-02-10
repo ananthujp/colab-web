@@ -2,10 +2,24 @@ import React, { useEffect, useState } from "react";
 import colab from "../imgs/colab-logo.svg";
 import { motion } from "framer-motion";
 import useReducer from "../hook/reducerHook";
+const cacheImages = async (srcArray) => {
+  const promises = await srcArray.map((src) => {
+    return new Promise(function (resolve, reject) {
+      const img = new Image();
+      img.src = src;
+      img.onload = resolve();
+      img.onerror = reject();
+    });
+  });
+  await Promise.all(promises);
+};
 function Load() {
   const [width, setWidth] = useState(0);
   const { setLoad } = useReducer();
+  const imgs = ["../imgs/ray.png", "../imgs/hero.gif"];
+
   useEffect(() => {
+    cacheImages(imgs);
     const timer = setTimeout(() => {
       setWidth(20);
       setTimeout(() => {
