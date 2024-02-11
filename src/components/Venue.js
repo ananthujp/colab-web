@@ -5,6 +5,8 @@ import {
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 import React, { useRef } from "react";
+import YoutubeBackground from "react-youtube-background";
+
 import GoogleMapReact from "google-map-react";
 import mapImg from "../imgs/venue.avif";
 import { useInView, motion } from "framer-motion";
@@ -70,10 +72,13 @@ function Venue({ delay }) {
                 transition: { duration: 0.5, delay: 0.5 * delay + 0.4 },
               }}
               src={mapImg}
-              className="h-full w-full rounded-md origin-bottom-left  object-cover border border-slate-100"
+              className="h-full w-full rounded-md scale-150 origin-bottom-left  object-cover border border-slate-100"
               alt=""
             />
-
+            {/* <YoutubeBackground
+              className="h-full w-full rounded-md scale-150 origin-bottom-left  object-cover border border-slate-100"
+              videoId={"pKehMbvu-zs"}
+            /> */}
             <motion.div className="flex flex-col md:w-[80%] mx-auto md:flex-row justify-between h-full">
               <div className="flex flex-col items-start gap-2">
                 <motion.h1

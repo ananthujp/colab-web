@@ -152,7 +152,7 @@ const WhyCard = ({ delay }) => {
               More
             </motion.button> */}
           </motion.h1>
-          <div className="flex flex-row gap-0 w-full justify-between">
+          <div className="grid grid-cols-3 gap-0 w-full justify-between">
             {items.map((item, index) => (
               <Card
                 icon={item.icon}

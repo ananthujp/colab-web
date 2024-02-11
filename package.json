@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.0",
     "react-scripts": "5.0.1",
+    "react-youtube-background": "^1.0.0",
     "swiper": "^11.0.5",
     "tailwind": "^4.0.0",
     "tailwindcss-bg-patterns": "^0.3.0",

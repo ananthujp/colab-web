@@ -21,7 +21,7 @@ function QuickLinks({ delay }) {
     confirm({
       title: "External Link",
       icon: <LinkIcon className="w-5 text-green-400 mr-1" />,
-      content: "You are now leaving CoLab's website to an external link.",
+      content: `You are now leaving CoLab's website to an external link("${url}").`,
       okButtonProps: { className: "bg-blue-400 " },
       onOk() {
         window.open(url, "_blank");
@@ -62,7 +62,7 @@ function QuickLinks({ delay }) {
     },
   ];
   return (
-    <div ref={ref} className="w-[100%] md:w-full z-50 md:h-auto">
+    <div ref={ref} className="w-[100%] group md:w-full z-50 md:h-auto">
       {isInView && (
         <motion.div
           initial={{ opacity: 0, translateY: -20 }}
@@ -97,7 +97,7 @@ function QuickLinks({ delay }) {
             {items.map((item) => (
               <li
                 onClick={() => showConfirm({ url: item.link })}
-                className="flex flex-row gap-2 group cursor-pointer"
+                className="flex flex-row hover:font-semibold hover:text-indigo-600 gap-2 cursor-pointer"
               >
                 {item.label}
                 <span>

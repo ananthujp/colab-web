@@ -19,21 +19,13 @@ import QuickLinks from "../components/QuickLinks";
 import Venue from "../components/Venue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import logo2 from "../imgs/iitgn-logo.png";
-function Home() {
+function Home({ open, setOpen }) {
   const [hidden, setHidden] = useState(false);
   const [login_load, setLoad] = useState(false);
   const { setNav, setUser, user, logout } = useReducer();
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const auth = getAuth();
 
-  const { scrollY } = useScroll();
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (scrollY?.current < scrollY?.prev) {
-      setHidden(false);
-    } else if (scrollY?.current > 100 && scrollY?.current > scrollY?.prev) {
-      setHidden(true);
-    }
-  });
   const onFinish = (values) => {
     setLoad(true);
     signInWithEmailAndPassword(auth, values.username, values.password)
@@ -45,10 +37,14 @@ function Home() {
         setUser({ role: "admin", email: userCredential.user.email });
         setLoad(false);
       })
-      .catch((err) => err && message.error(err.message));
+      .catch((err) => {
+        err && message.error(err.message);
+        setLoad(false);
+      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+    setLoad(false);
   };
   useEffect(() => {
     setNav({ from: null, to: null });

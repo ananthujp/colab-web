@@ -93,11 +93,11 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.7 },
                 }}
-                className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row hover:bg-indigo-100 transition-all group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
                 <PhoneIcon className="w-5 group-hover:w-16 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
-                  +91 98 47 45 32 17
+                  +91 7923952136
                 </h1>
               </motion.div>
               <motion.div
@@ -107,7 +107,7 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.7 },
                 }}
-                className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row hover:bg-indigo-100 transition-all group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
                 <EnvelopeIcon className="w-5 group-hover:w-16 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
@@ -126,10 +126,10 @@ function Contact({ delay }) {
                   translateY: 0,
                   transition: { duration: 0.5, delay: 0.5 * delay + 0.8 },
                 }}
-                className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 cursor-pointer items-center bg-gradient-to-br from-indigo-400 to-indigo-500 hover:to-indigo-600 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
+                className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 cursor-pointer items-center bg-gradient-to-br from-indigo-400 to-indigo-500 transition-all hover:from-indigo-300 hover:to-indigo-400 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
                 <PencilSquareIcon className="w-5 group-hover:w-16 text-white" />
-                <h1 className="text-xs font-normal text-white font-mont">
+                <h1 className="text-xs font-normal  group-hover:text-center text-white font-mont">
                   CoLab 2024 Registration form
                 </h1>
               </motion.div>

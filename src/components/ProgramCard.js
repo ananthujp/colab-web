@@ -141,6 +141,7 @@ const BlogSlider = ({ delay }) => {
             <div className="grid grid-cols-2 gap-2">
               {sliderItems.map((item, i) => (
                 <motion.div
+                  onClick={() => navigate("program")}
                   key={`pgm.card.element.${i}`}
                   initial={{ opacity: 0 }}
                   animate={{
@@ -151,7 +152,7 @@ const BlogSlider = ({ delay }) => {
                     opacity: 0,
                     transition: { duration: 0.5, delay: i * 0.1 },
                   }}
-                  className="flex flex-row items-center gap-2"
+                  className="flex cursor-pointer flex-row items-center gap-2"
                 >
                   <h1 className="w-12">{item.ico}</h1>
                   <h1 className="text-sm font-pop font-semibold">

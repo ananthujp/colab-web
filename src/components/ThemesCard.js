@@ -94,7 +94,7 @@ function ExpandCard() {
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
           key={`exp.card.${index}`}
           className={`relative ${
-            index === 0 && "rounded-t-lg md:rounded-l-lg"
+            index === 0 && "rounded-l-lg md:rounded-l-lg"
           } group bg-gradient-to-br group gap-3 hover:bg-opacity-20 from-slate-100 to-slate-300 group flex flex-row md:flex-col md:justify-around text-xs md:text-sm ${
             item.bg
           } text-center font-mont w-full h-24 md:h-auto hover:p-6 transition-all duration-250 text-white flex justify-between items-center`}

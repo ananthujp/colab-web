@@ -10,14 +10,38 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
+import {
+  CalendarDaysIcon,
+  HandRaisedIcon,
+  HomeIcon,
+  MicrophoneIcon,
+  PhoneArrowDownLeftIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
 
 const items = [
-  { label: "Home", link: "" },
-  { label: "About", link: "about" },
-  { label: "Program", link: "program" },
-  { label: "Themes", link: "themes" },
-  { label: "Speakers", link: "speakers" },
-  { label: "Contact", link: "contact" },
+  { label: "Home", link: "", icon: <HomeIcon className="w-6 h-6" /> },
+  { label: "About", link: "about", icon: <UserIcon className="w-6 h-6" /> },
+  {
+    label: "Program",
+    link: "program",
+    icon: <CalendarDaysIcon className="w-6 h-6" />,
+  },
+  {
+    label: "Themes",
+    link: "themes",
+    icon: <HandRaisedIcon className="w-6 h-6" />,
+  },
+  {
+    label: "Speakers",
+    link: "speakers",
+    icon: <MicrophoneIcon className="w-6 h-6" />,
+  },
+  {
+    label: "Contact",
+    link: "contact",
+    icon: <PhoneArrowDownLeftIcon className="w-6 h-6" />,
+  },
 ];
 
 function MyDropdown({ sel }) {
@@ -62,7 +86,6 @@ function MyDropdown({ sel }) {
                     <button
                       onClick={() => {
                         setNav({ from: items[sel].link, to: item.link });
-                        // setsel(i);
                         navigate("/" + item.link);
                       }}
                       className={`group font-mont font-medium relative flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -91,7 +114,7 @@ function MyDropdown({ sel }) {
   );
 }
 
-function Navbar({ sel, dark }) {
+function Navbar({ sel, vert }) {
   // const [sel, setsel] = React.useState(sel ? sel : 0);
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
@@ -108,27 +131,17 @@ function Navbar({ sel, dark }) {
           opacity: 0,
           transition: { duration: 0.5 },
         }}
-        className={
-          "  md:flex hidden mx-2  font-medium flex-row transition-all rounded-full font-mont " +
-          (!dark
-            ? "bg-yellow-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:bg-slate-100/20"
-            : " bg-gray-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200 hover:bg-slate-100/20")
-        }
+        className={`  ${
+          vert
+            ? "md:flex flex-col bg-slate-400 bg-opacity-40 rounded-l-md bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:bg-slate-400/50"
+            : "md:flex bg-yellow-100 bg-opacity-10 rounded-full bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:bg-slate-100/20"
+        } ${
+          sel !== 0 ? "flex scale-75 md:scale-100" : "hidden"
+        } mx-2  font-medium flex-row transition-all  font-mont `}
       >
         {items.map((item, i) => (
           <motion.div
             key={`nav.item.${i}`}
-            // initial={{ opacity: 0, translateX: -20 }}
-            // animate={{
-            //   opacity: 1,
-            //   translateX: 0,
-            //   transition: { duration: 0.5, delay: 0.1 * i + 0.1 },
-            // }}
-            // exit={{
-            //   opacity: 0,
-            //   translateX: -20,
-            //   transition: { duration: 0.5, delay: 0.1 * i + 0.1 },
-            // }}
             onClick={() => {
               setNav({ from: items[sel].link, to: item.link });
               // setsel(i);
@@ -140,14 +153,9 @@ function Navbar({ sel, dark }) {
               <motion.div
                 layoutId="nav_bg"
                 //style={{ borderRadius: 999999 }}
-                className={
-                  `absolute ${i === 0 && "rounded-l-full"} ${
-                    i === items.length - 1 && "rounded-r-full"
-                  } inset-0 ` +
-                  (!dark
-                    ? " bg-gradient-to-br border border-slate-300 from-slate-50 to-slate-200"
-                    : " bg-gradient-to-br border border-slate-400 from-slate-50 to-slate-200")
-                }
+                className={`absolute ${i === 0 && "rounded-l-full"} ${
+                  i === items.length - 1 && "rounded-r-full"
+                } inset-0  bg-gradient-to-br border border-slate-300 from-slate-50 to-slate-200`}
               />
             )}
             <span
@@ -155,13 +163,24 @@ function Navbar({ sel, dark }) {
                 sel === i ? " text-slate-600" : " text-white"
               } `}
             >
-              {item.label}
+              {vert ? (
+                <div className=" flex group flex-row group">
+                  <h1 className="absolute group-hover:flex right-12 text-indigo-400/60 text-sm hidden">
+                    {item.label}
+                  </h1>
+                  {item.icon}
+                </div>
+              ) : (
+                item.label
+              )}
             </span>
           </motion.div>
         ))}
       </motion.div>
-      <div className="md:hidden flex gap-4 flex-row">
-        <MyDropdown />
+      <div
+        className={`md:hidden ${sel === 0 ? "flex" : "hidden"}  gap-4 flex-row`}
+      >
+        <MyDropdown sel={sel} />
       </div>
     </AnimatePresence>
   );

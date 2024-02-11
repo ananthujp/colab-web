@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Navbar from "../components/Navbar";
-import { LinkIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import {
+  FacebookOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  MailOutlined,
+  TwitterOutlined,
+} from "@ant-design/icons";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import {
+  LinkIcon,
+  PencilIcon,
+  TrashIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
 import logo from "../imgs/colab-logo.svg";
 import Page from "./Page";
 import lalminar from "../imgs/lalminar.png";
 import gitlogo from "../imgs/github-mark.png";
-import { Modal } from "antd";
+import { Input, Modal, Form, InputNumber, Button } from "antd";
 const confirm = Modal.confirm;
 const showConfirm = ({ url }) => {
   confirm({
@@ -24,11 +44,171 @@ const showConfirm = ({ url }) => {
     },
   });
 };
+function removeUndefinedFields(obj) {
+  // if (typeof obj !== "object" || obj === null) {
+  //   return obj;
+  // }
+
+  for (const key in obj) {
+    if (obj[key] === undefined) {
+      delete obj[key];
+    }
+  }
+
+  return obj;
+}
 function About() {
-  const { nav, setNav } = useReducer();
+  const { nav, setNav, about_data, user } = useReducer();
   const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState({ edit: false, data: null });
+  useEffect(() => {
+    edit.edit && setOpen(true);
+    edit.edit && form.setFieldsValue(edit.data);
+  }, [edit]);
+  const handleDelete = (id) => {
+    deleteDoc(doc(db, "about", id));
+  };
+  const onFinish = (values) => {
+    edit?.edit
+      ? setDoc(doc(db, "about", edit.data.id), removeUndefinedFields(values))
+          .then(() => {
+            setOpen(false);
+          })
+          .catch((e) => console.log(e))
+      : addDoc(collection(db, "about"), values).then(() => setOpen(false));
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   return (
     <Page no={1} page="about" title="About">
+      <Modal
+        key={`modal.add.item`}
+        title="Add an About Item"
+        open={open}
+        onCancel={() => {
+          setOpen(false);
+          setEdit({ edit: false, data: null });
+        }}
+        okButtonProps={{ hidden: true }}
+        cancelButtonProps={{ hidden: true }}
+      >
+        <Form
+          form={form}
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          style={{
+            maxWidth: 600,
+          }}
+          // initialValues={edit?.edit ? edit.data : null}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Key"
+            name="key"
+            type="number"
+            rules={[
+              {
+                required: true,
+                //message: "Please input a number!",
+                type: "number",
+                min: 0,
+                max: 99,
+              },
+            ]}
+          >
+            <InputNumber type="number" />
+          </Form.Item>
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[
+              {
+                required: true,
+                message: "Please input a name!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Role"
+            name="role"
+            rules={[
+              {
+                required: true,
+                message: "Please input a role!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Bio/Designation"
+            name="bio"
+            rules={[
+              {
+                required: true,
+                message: "Please input a bio!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Image URL"
+            name="img"
+            rules={[
+              {
+                required: true,
+                message: "Please input an img url!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item label="Email(Optional)" name="email">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Facebook(Optional)" name="facebook">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Instagram(Optional)" name="instagram">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Twitter(Optional)" name="twitter">
+            <Input />
+          </Form.Item>
+          <Form.Item label="LinkedIn(Optional)" name="linkedin">
+            <Input />
+          </Form.Item>
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button onClick={() => setOpen(false)}>Cancel</Button>
+            <Button
+              //style={{ backgroundColor: "blue" }}
+              className="ml-4 bg-blue-500"
+              type="primary"
+              htmlType="submit"
+            >
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
       <motion.div className="w-full overflow-auto px-12 mt-4 gap-6 flex flex-col h-screen md:h-[90%]">
         <div className="flex flex-col rounded-md border border-indigo-100 bg-indigo-50 p-6">
           <h1 className="font-mont text-lg font-medium text-slate-800">
@@ -65,6 +245,108 @@ function About() {
               diverse interdisciplinary domains.
             </p>
           </div>
+        </div>
+        <div className="flex flex-col p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
+          <h1 className="font-mont flex flex-row text-lg font-semibold text-slate-800 w-full justify-between">
+            Core Team
+            {user?.role === "admin" && (
+              <div
+                onClick={() => setOpen(true)}
+                className="cursor-pointer bg-slate-400 px-2 py-0.5 text-white text-sm rounded-full my-auto"
+              >
+                Add
+              </div>
+            )}
+          </h1>
+          {about_data?.map((item, i) => (
+            <div
+              key={`core.about.${i}`}
+              className="flex relative h-44 w-36 py-2  group flex-col items-center"
+            >
+              {user?.role === "admin" && (
+                <div className="absolute flex flex-row top-0 right-0 ml-4">
+                  <PencilIcon
+                    onClick={() => setEdit({ edit: true, data: item })}
+                    className=" w-4 text-red-400 cursor-pointer hover:text-blue-400"
+                  />
+                  <TrashIcon
+                    onClick={() =>
+                      window.confirm(
+                        `Are you sure you want to delete "${item.name}"?`
+                      )
+                        ? handleDelete(item.id)
+                        : console.log("no")
+                    }
+                    className="w-4 text-red-400 cursor-pointer hover:text-blue-400"
+                  />
+                </div>
+              )}
+              <div className="flex w-24 h-24 mb-2 justify-center items-center border-4 rounded-full border-white shadow-md">
+                <img
+                  className=" rounded-full saturate-0 group-hover:saturate-100 transition-all duration-300 ease-in-out"
+                  src={item.img}
+                  alt=""
+                />
+              </div>
+              <h1 className="font-mont font-medium">{item.name}</h1>
+              <h1 className="font-mont font-base text-slate-800">
+                {item.role}
+              </h1>
+              <h1 className="font-mont font-base text-center text-xs text-slate-600">
+                {item.bio}
+              </h1>
+              <div className="group-hover:flex hidden flex-row gap-2 mt-2">
+                {item.facebook && (
+                  <FacebookOutlined
+                    onClick={() =>
+                      showConfirm({
+                        url: item.facebook,
+                      })
+                    }
+                    className="text-xl text-slate-600"
+                  />
+                )}
+                {item.instagram && (
+                  <InstagramOutlined
+                    onClick={() =>
+                      showConfirm({
+                        url: item.instagram,
+                      })
+                    }
+                    className="text-xl text-slate-600"
+                  />
+                )}
+                {item.twitter && (
+                  <TwitterOutlined
+                    onClick={() =>
+                      showConfirm({
+                        url: item.twitter,
+                      })
+                    }
+                    className="text-xl text-slate-600"
+                  />
+                )}
+                {item.linkedin && (
+                  <LinkedinOutlined
+                    onClick={() =>
+                      showConfirm({
+                        url: item.linkedin,
+                      })
+                    }
+                    className="text-xl text-slate-600"
+                  />
+                )}
+                {item.email && (
+                  <MailOutlined
+                    onClick={() =>
+                      (window.location.href = `mailto:${item.email}`)
+                    }
+                    className=" w-12 text-slate-600"
+                  />
+                )}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="flex flex-col p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
           <h1 className="font-mont text-lg font-semibold text-slate-800">

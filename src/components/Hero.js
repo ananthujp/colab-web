@@ -97,7 +97,7 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className="flex flex-row gap-2 items-center md:mt-6 md:justify-end md:gap-4 md:items-center"
+              className="flex flex-row gap-2 items-center mt-10 md:mt-6 justify-center md:justify-end md:gap-4 md:items-center"
             >
               <div className="bg-white cursor-pointer font-mont text-slate-800 ml-2 px-4 rounded-full py-1">
                 March 2, 2024

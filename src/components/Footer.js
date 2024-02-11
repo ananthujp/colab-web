@@ -1,5 +1,4 @@
 import {
-  FacebookFilled,
   FacebookOutlined,
   InstagramOutlined,
   LinkedinOutlined,
@@ -61,7 +60,7 @@ function Footer() {
           />
         </div>
         <div className="font-mont text-slate-600 font-xs">
-          &#169; Indian Institute of Gandhinagar
+          &#169; Indian Institute of Technology Gandhinagar
         </div>
       </div>
     </div>
