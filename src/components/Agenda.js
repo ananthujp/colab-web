@@ -268,6 +268,18 @@ function Agenda({ delay }) {
                   <Form.Item name="longdesc" label="Long Description">
                     <Input.TextArea />
                   </Form.Item>
+                  <Form.Item
+                    label="Venue"
+                    name="venue"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input a venue!",
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
                   <Form.List name="users">
                     {(fields, { add, remove }) => (
                       <>
@@ -433,6 +445,10 @@ function Agenda({ delay }) {
                 placement="topRight"
                 content={
                   <div className="flex flex-col w-48">
+                    <h1 className="flex my-2 flex-row font-mont text-xs font-semibold">
+                      Venue :&nbsp;
+                      <span className="font-light">{item?.venue}</span>
+                    </h1>
                     <p className="w-full border-b border-slate-200 pb-4">
                       {item.hover ? item.longdesc : ""}
                     </p>

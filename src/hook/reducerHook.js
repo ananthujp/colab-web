@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
             color: doc.data().color,
             hover: doc.data().hover,
             longdesc: doc.data().longdesc,
+            venue: doc.data().venue,
             users: doc.data().users,
           }))
         );
