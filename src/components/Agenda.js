@@ -484,111 +484,114 @@ function Agenda({ delay }) {
                 }
                 //onOpenChange={handleClickChange}
               >
-                <Link to={`/agenda/${i}`} className="w-full">
-                  <motion.div
-                    onHoverStart={() => {
-                      setI(i);
-                      setIsHovered(true);
-                    }}
-                    onHoverEnd={() => setIsHovered(false)}
-                    key={`agenda.item.${i}`}
-                    // layout
-                    initial={{ opacity: 0, translateY: -20 }}
-                    animate={{
-                      opacity: 1,
-                      translateY: 0,
-                      transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      translateY: 20,
-                      transition: { duration: 0.5 },
-                    }}
-                    className="grid group relative grid-cols-[4em_auto] h-auto"
-                  >
-                    {user?.role === "admin" && (
-                      <div className="absolute bg-slate-200 border border-slate-300 rounded-full p-2 z-50 bottom-0 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
-                        <TrashIcon
-                          onClick={() =>
-                            window.confirm(
-                              `Are you sure you want to delete "${item.title}"?`
-                            )
-                              ? handleDelete(item.id)
-                              : console.log("no")
-                          }
-                          className="w-4 cursor-pointer hover:text-blue-400"
-                        />
-                        <PencilIcon
-                          onClick={() => setEdit({ edit: true, data: item })}
-                          className=" ml-4 w-4 cursor-pointer hover:text-blue-400"
-                        />
-                      </div>
-                    )}
-                    <div className="flex text-slate-600 text-xs font-mont flex-col justify-between">
-                      <h1 className="w-4 mt-1">{item.time_f}</h1>
-                      {/* <h1 className="w-4">{item.time_t}</h1> */}
+                <motion.div
+                  onClick={() => navigate(`/agenda/${i}`)}
+                  onHoverStart={() => {
+                    setI(i);
+                    setIsHovered(true);
+                  }}
+                  onHoverEnd={() => setIsHovered(false)}
+                  key={`agenda.item.${i}`}
+                  // layout
+                  initial={{ opacity: 0, translateY: -20 }}
+                  animate={{
+                    opacity: 1,
+                    translateY: 0,
+                    transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    translateY: 20,
+                    transition: { duration: 0.5 },
+                  }}
+                  className="grid group relative grid-cols-[4em_auto] h-auto"
+                >
+                  {user?.role === "admin" && (
+                    <div className="absolute z-50 bg-slate-200 border border-slate-300 rounded-full p-2 bottom-0 text-red-400 hidden right-1/3 group-hover:flex flex-row gap-2">
+                      <TrashIcon
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.confirm(
+                            `Are you sure you want to delete "${item.title}"?`
+                          )
+                            ? handleDelete(item.id)
+                            : console.log("no");
+                        }}
+                        className="w-4 cursor-pointer hover:text-blue-400"
+                      />
+                      <PencilIcon
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEdit({ edit: true, data: item });
+                        }}
+                        className=" ml-4 w-4 cursor-pointer hover:text-blue-400"
+                      />
                     </div>
-                    <div className="flex flex-col justify-between">
-                      <motion.div
-                        key={`agenda.item.x.${i}`}
-                        // layout
-                        className={`flex flex-row bg-opacity-90 group hover:bg-opacity-90 justify-between px-4 py-1 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
-                          colors[item.color][0]
-                        }`}
-                      >
-                        <div className="flex flex-col my-2 w-[80%]">
-                          <h1
-                            className={`text-xs font-mont ${
-                              colors[item.color][1]
-                            } font-semibold`}
-                          >
-                            {item.title}
-                          </h1>
-                          {isHovered && eei === i && (
-                            <motion.h1
-                              // initial={{ opacity: 0, translateY: -20 }}
-                              // animate={{
-                              //   opacity: 1,
-                              //   translateY: 0,
-                              //   transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
-                              // }}
-                              // exit={{
-                              //   opacity: 0,
-                              //   translateY: 20,
-                              //   transition: { duration: 0.5 },
-                              // }}
-                              className={`text-xs xhidden transition-all xgroup-hover:flex font-mont ${
-                                colors[item.color][2]
-                              } font-light`}
-                            >
-                              {item.desc}
-                            </motion.h1>
-                          )}
-                        </div>
+                  )}
+                  <div className="flex text-slate-600 text-xs font-mont flex-col justify-between">
+                    <h1 className="w-4 mt-1">{item.time_f}</h1>
+                    {/* <h1 className="w-4">{item.time_t}</h1> */}
+                  </div>
+                  <div className="flex flex-col justify-between">
+                    <motion.div
+                      key={`agenda.item.x.${i}`}
+                      // layout
+                      className={`flex flex-row bg-opacity-90 group hover:bg-opacity-90 justify-between px-4 py-1 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
+                        colors[item.color][0]
+                      }`}
+                    >
+                      <div className="flex flex-col my-2 w-[80%]">
                         <h1
-                          className={`${
-                            colors[item.color][3]
-                          } w-4 group-hover:w-9 p-2 relative h-4 group-hover:h-9 my-auto transition-all rounded-full`}
+                          className={`text-xs font-mont ${
+                            colors[item.color][1]
+                          } font-semibold`}
                         >
-                          {icons[item.icon]}
-                          <Progress
-                            className="absolute top-0 left-0 transition-all duration-700 opacity-0 group-hover:opacity-100"
-                            type="circle"
-                            size={isHovered && eei === i ? 36 : 16}
-                            format={(percent) => ""}
-                            percent={progress}
-                            strokeColor={colors[item.color][5]}
-                          />
+                          {item.title}
                         </h1>
-                      </motion.div>
-                      <span
-                        className={` rounded-full mt-2 w-8  h-1 ${
-                          colors[item.color][4]
-                        }`}
-                      ></span>
-                    </div>
-                  </motion.div>
-                </Link>
+                        {isHovered && eei === i && (
+                          <motion.h1
+                            // initial={{ opacity: 0, translateY: -20 }}
+                            // animate={{
+                            //   opacity: 1,
+                            //   translateY: 0,
+                            //   transition: { duration: 0.5, delay: 0.5 + i * 0.3 },
+                            // }}
+                            // exit={{
+                            //   opacity: 0,
+                            //   translateY: 20,
+                            //   transition: { duration: 0.5 },
+                            // }}
+                            className={`text-xs xhidden transition-all xgroup-hover:flex font-mont ${
+                              colors[item.color][2]
+                            } font-light`}
+                          >
+                            {item.desc}
+                          </motion.h1>
+                        )}
+                      </div>
+                      <h1
+                        className={`${
+                          colors[item.color][3]
+                        } w-4 group-hover:w-9 p-2 relative h-4 group-hover:h-9 my-auto transition-all rounded-full`}
+                      >
+                        {icons[item.icon]}
+                        <Progress
+                          className="absolute top-0 left-0 transition-all duration-700 opacity-0 group-hover:opacity-100"
+                          type="circle"
+                          size={isHovered && eei === i ? 36 : 16}
+                          format={(percent) => ""}
+                          percent={progress}
+                          strokeColor={colors[item.color][5]}
+                        />
+                      </h1>
+                    </motion.div>
+                    <span
+                      className={` rounded-full mt-2 w-8  h-1 ${
+                        colors[item.color][4]
+                      }`}
+                    ></span>
+                  </div>
+                </motion.div>
               </Popover>
             ))}
           </div>

@@ -42,7 +42,7 @@ function Load() {
           COLAB 2024
         </h1>
         <h1 className="text-xs font-pop font-light -mt-1 text-slate-500">
-          Industrial Openhouse
+          Industrial Open House
         </h1>
         <div className="relative w-24 h-3 mt-4 rounded-full bg-slate-300">
           <motion.div

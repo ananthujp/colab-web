@@ -65,7 +65,7 @@ function Hero() {
               }}
               className="font-mont text-right font-semibold text-lg mt-0.5 text-slate-300 xtext-slate-600 "
             >
-              An IIT Gandhinagar Industry Openhouse&nbsp;
+              An IIT Gandhinagar Industry Open House&nbsp;
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, translateY: -20 }}
