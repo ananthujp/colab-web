@@ -7,6 +7,7 @@ import {
   RouterProvider,
   createHashRouter,
   Form,
+  Link,
 } from "react-router-dom";
 import {
   AnimatePresence,
@@ -29,6 +30,7 @@ import useReducer from "./hook/reducerHook";
 import Load from "./pages/Load";
 import Agenda from "./pages/Agenda";
 import { useState } from "react";
+import Dash from "./pages/Dashboard";
 
 function App() {
   const location = useLocation();
@@ -59,11 +61,14 @@ function App() {
       Login
     </div>
   ) : (
-    <Dropdown menu={{ items }}>
-      <div className="bg-green-400 cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white">
-        {user?.email}
-      </div>
-    </Dropdown>
+    <>
+      <Link to="admin">Admin Dashboard</Link>
+      <Dropdown menu={{ items }}>
+        <div className="bg-green-400 cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white">
+          {user?.email}
+        </div>
+      </Dropdown>
+    </>
   );
 
   const loc = (val) => {
@@ -161,6 +166,7 @@ function App() {
             </Route>
             <Route path="contact" element={<Contact />} />
             <Route path="speakers" element={<Speakers />} />
+            <Route path="admin" element={<Dash />} />
             <Route path="agenda" element={<Agenda />}>
               <Route path=":postId" element={<Theme />} />
             </Route>
