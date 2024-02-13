@@ -8,6 +8,7 @@ import { LinkIcon } from "@heroicons/react/24/solid";
 import { Modal } from "antd";
 
 import React from "react";
+import { Link } from "react-router-dom";
 const { confirm } = Modal;
 const showConfirm = ({ url }) => {
   confirm({
@@ -60,7 +61,8 @@ function Footer() {
           />
         </div>
         <div className="font-mont text-slate-600 font-xs">
-          &#169; Indian Institute of Technology Gandhinagar
+          <Link to="privacy">Privacy</Link>&nbsp;|&nbsp;&#169; Indian Institute
+          of Technology Gandhinagar
         </div>
       </div>
     </div>

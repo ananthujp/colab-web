@@ -31,6 +31,7 @@ import Page from "./Page";
 import lalminar from "../imgs/lalminar.png";
 import gitlogo from "../imgs/github-mark.png";
 import { Input, Modal, Form, InputNumber, Button } from "antd";
+import Agenda from "../components/Agenda";
 
 function Dash() {
   const { nav, setNav, about_data, user } = useReducer();
@@ -84,6 +85,16 @@ function Dash() {
               </div>
             )}
           </div>
+        </div>
+        <div className="flex flex-col p-6 rounded-md border border-indigo-100 bg-indigo-50">
+          <h1 className="font-mont flex flex-row items-end gap-4 text-lg font-medium text-slate-800">
+            {/* <UserPlusIcon className="w-8 h-8 text-slate-400" /> */}
+            Edit Agenda
+          </h1>
+          {/* <div className="flex flex-col w-full xmd:flex-row gap-4 mt-2">
+          
+          </div> */}
+          <Agenda />
         </div>
       </motion.div>
     </Page>

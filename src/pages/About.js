@@ -57,6 +57,7 @@ function removeUndefinedFields(obj) {
 
   return obj;
 }
+
 function About() {
   const { nav, setNav, about_data, user } = useReducer();
   const navigate = useNavigate();
@@ -77,7 +78,9 @@ function About() {
             setOpen(false);
           })
           .catch((e) => console.log(e))
-      : addDoc(collection(db, "about"), values).then(() => setOpen(false));
+      : addDoc(collection(db, "about"), removeUndefinedFields(values)).then(
+          () => setOpen(false)
+        );
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -283,7 +286,7 @@ function About() {
               )}
               <div className="flex w-24 h-24 mb-2 justify-center items-center border-4 rounded-full border-white shadow-md">
                 <img
-                  className=" rounded-full saturate-0 group-hover:saturate-100 transition-all duration-300 ease-in-out"
+                  className="h-full w-full object-cover rounded-full saturate-0 group-hover:saturate-100 transition-all duration-300 ease-in-out"
                   src={item.img}
                   alt=""
                 />

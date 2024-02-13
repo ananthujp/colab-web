@@ -51,8 +51,8 @@ function Speakers({ delay }) {
             <div>
               <motion.div
                 onClick={() => {
-                  setNav({ from: "/", to: "contact" });
-                  navigate("/" + "contact");
+                  setNav({ from: "/", to: "speakers" });
+                  navigate("/" + "speakers");
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: { duration: 0.5 } }}

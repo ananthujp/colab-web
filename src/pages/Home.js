@@ -201,20 +201,6 @@ function Home({ open, setOpen }) {
                 className="w-10 h-10 hidden md:block my-auto"
                 alt=""
               />
-              {/* {!user ? (
-                <div
-                  onClick={showModal}
-                  className="bg-green-400 cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white"
-                >
-                  Login
-                </div>
-              ) : (
-                <Dropdown menu={{ items }}>
-                  <div className="bg-green-400 capitalize cursor-pointer font-pop px-4 hidden md:flex items-center hover:bg-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-green-300 rounded-full  text-white">
-                    {user?.email[0]}
-                  </div>
-                </Dropdown>
-              )} */}
             </div>
           </motion.div>
         )}
@@ -224,6 +210,7 @@ function Home({ open, setOpen }) {
           <div className="absolute z-0 top-0 w-full h-full pattern-boxes pattern-gray-200 pattern-size-6 pattern-opacity-20" />
 
           <div className="flex z-50 flex-wrap w-full gap-4 justify-center md:justify-between max-w-5xl">
+            <ExpandCard />
             <motion.div className="flex flex-col  md:w-full md:flex-row gap-6">
               <div className="flex flex-col items-center gap-6 w-full md:w-[60%]">
                 <Card />
@@ -234,7 +221,6 @@ function Home({ open, setOpen }) {
               </div>
             </motion.div>
 
-            <ExpandCard />
             <div className="grid grid-cols-1 justify-items-center md:w-full md:grid-cols-2 md:gap-6">
               <BlogSlider delay={1} />
               <Speakers />

@@ -6,12 +6,28 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Page from "./Page";
 import {
   ArrowLeftIcon,
+  LinkIcon,
   UserIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/solid";
 import { Button, Input, Modal, Form, message } from "antd";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
+const { confirm } = Modal;
+const showConfirm = ({ url }) => {
+  confirm({
+    title: "External Link",
+    icon: <LinkIcon className="w-5 text-gray-400 mr-1" />,
+    content: `You are now leaving CoLab's website to an external link"${url}".`,
+    okButtonProps: { className: "bg-blue-400 " },
+    onOk() {
+      window.open(url, "_blank");
+    },
+    // onCancel() {
+    //   console.log('Cancel');
+    // },
+  });
+};
 function Theme() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState({ fac: "", visible: false });
@@ -174,6 +190,7 @@ function Theme() {
             <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-2 mt-4">
               {cardVar[params.postId].prof.map((item, i) => (
                 <motion.div
+                  onClick={() => item?.link && showConfirm({ url: item?.link })}
                   initial={{ opacity: 0, translateY: -20 }}
                   animate={{
                     opacity: 1,
@@ -185,7 +202,7 @@ function Theme() {
                     translateY: 20,
                     transition: { duration: 0.5, delay: i * 0.05 },
                   }}
-                  className="grid grid-cols-[5em_auto_3em] w-full text-slate-600 p-3 rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 gap-4  font-pop "
+                  className="grid cursor-pointer  grid-cols-[5em_auto_3em] w-full text-slate-600 p-3 rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 gap-4  font-pop "
                 >
                   {item.img ? (
                     <img

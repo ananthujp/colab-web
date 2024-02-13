@@ -31,6 +31,9 @@ import Load from "./pages/Load";
 import Agenda from "./pages/Agenda";
 import { useState } from "react";
 import Dash from "./pages/Dashboard";
+import Privacy from "./pages/Privacy";
+import Virtual from "./pages/Virtual";
+import Create from "./pages/Create";
 
 function App() {
   const location = useLocation();
@@ -99,7 +102,7 @@ function App() {
         <div>
           <motion.div
             key={`top.bar`}
-            layoutId="top.bar.id"
+            //layoutId="top.bar.id"
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
@@ -167,6 +170,13 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="speakers" element={<Speakers />} />
             <Route path="admin" element={<Dash />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="virtual">
+              <Route path="create" element={<Create />}>
+                <Route path=":createId" element={<Create />} />
+              </Route>
+              <Route path=":virtualId" element={<Virtual />} />
+            </Route>
             <Route path="agenda" element={<Agenda />}>
               <Route path=":postId" element={<Theme />} />
             </Route>

@@ -82,6 +82,10 @@ function ExpandCard() {
     >
       {cardVar.map((item, index) => (
         <motion.div
+          onClick={() => {
+            setNav({ from: "/", to: "themes" });
+            navigate("/themes/" + index);
+          }}
           initial={{ opacity: 0 }}
           animate={
             isInView
@@ -93,7 +97,7 @@ function ExpandCard() {
           }
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
           key={`exp.card.${index}`}
-          className={`relative ${
+          className={`relative cursor-pointer ${
             index === 0 && "rounded-l-lg md:rounded-l-lg"
           } group bg-gradient-to-br group gap-3 hover:bg-opacity-20 from-slate-100 to-slate-300 group flex flex-row md:flex-col md:justify-around text-xs md:text-sm ${
             item.bg
@@ -105,7 +109,7 @@ function ExpandCard() {
                 key={`img.exp.${index}`}
                 src={item.img}
                 alt=""
-                className="w-12 md:w-24 ml-8 md:ml-0 filter saturate-0 transition-all group-hover:saturate-100 sgroup-hover:w-32 md:-mt-10"
+                className="w-12 md:w-24 ml-8 md:ml-0 filter xsaturate-0 transition-all xgroup-hover:saturate-100 sgroup-hover:w-32 md:-mt-10"
               />
             )}
           </div>
