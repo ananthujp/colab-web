@@ -172,10 +172,15 @@ function App() {
             <Route path="admin" element={<Dash />} />
             <Route path="privacy" element={<Privacy />} />
             <Route path="virtual">
-              <Route path="create" element={<Create />}>
-                <Route path=":createId" element={<Create />} />
+              <Route path="" element={<Virtual />} />
+              {/* <Route path="create" element={<CreateLab />}/>
+               */}
+              <Route path=":virtualId">
+                <Route path="" element={<Virtual />} />
+                <Route path="create" element={<Create />}>
+                  <Route path=":createId" element={<Create />} />
+                </Route>
               </Route>
-              <Route path=":virtualId" element={<Virtual />} />
             </Route>
             <Route path="agenda" element={<Agenda />}>
               <Route path=":postId" element={<Theme />} />

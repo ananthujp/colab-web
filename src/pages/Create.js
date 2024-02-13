@@ -175,7 +175,7 @@ function Create() {
     });
   };
   return (
-    <Page page="themes" title="Create Lab">
+    <Page page="themes" title="Create Lab Item">
       <div className="flex flex-col font-mont items-center h-full overflow-scroll w-full">
         {params.createId ? (
           previewmode ? (
