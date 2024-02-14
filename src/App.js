@@ -34,6 +34,8 @@ import Dash from "./pages/Dashboard";
 import Privacy from "./pages/Privacy";
 import Virtual from "./pages/Virtual";
 import Create from "./pages/Create";
+import CreateLab from "./pages/CreateLab";
+import VirtualPost from "./pages/VirtualPost";
 
 function App() {
   const location = useLocation();
@@ -173,13 +175,14 @@ function App() {
             <Route path="privacy" element={<Privacy />} />
             <Route path="virtual">
               <Route path="" element={<Virtual />} />
-              {/* <Route path="create" element={<CreateLab />}/>
-               */}
+              <Route path="create" element={<CreateLab />} />
+
               <Route path=":virtualId">
                 <Route path="" element={<Virtual />} />
                 <Route path="create" element={<Create />}>
                   <Route path=":createId" element={<Create />} />
                 </Route>
+                <Route path=":createId" element={<VirtualPost />} />
               </Route>
             </Route>
             <Route path="agenda" element={<Agenda />}>

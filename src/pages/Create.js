@@ -79,9 +79,10 @@ function Create() {
   };
   const [pageLoad, setPageLoad] = useState(false);
   useEffect(() => {
+    console.log("virtual", params.virtualId, "posts", params.createId);
     params.createId && setPageLoad(true);
     params.createId &&
-      getDoc(doc(db, "Posts", params.createId))
+      getDoc(doc(db, "virtual", params.virtualId, "posts", params.createId))
         .then((dc) => {
           setTitle(dc.data().title);
           setFileList(dc.data().photos);
