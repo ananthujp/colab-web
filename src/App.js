@@ -136,11 +136,11 @@ function App() {
                   } md:mx-0`}
                 >
                   <img src={logo} className="w-8 h-8 mt-0.5" alt="" />
-                  <div className="flex flex-col ml-1.5">
+                  <div className="flex flex-col mt-auto mb-1 ml-1.5">
                     <motion.h1 className="text-xs font-pop text-slate-300 xtext-slate-600 font-light">
                       IIT Gandhinagar
                     </motion.h1>
-                    <p className=" font-pop font-bold text-lg -mt-1 text-white">
+                    <p className=" font-pop font-bold text-xs md:text-lg -mt-1 text-white">
                       CoLab 2024
                     </p>
                   </div>

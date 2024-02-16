@@ -445,10 +445,6 @@ function Agenda({ delay }) {
                 placement="topRight"
                 content={
                   <div className="flex flex-col w-48">
-                    <h1 className="flex my-2 flex-row font-mont text-xs font-semibold">
-                      Venue :&nbsp;
-                      <span className="font-light">{item?.venue}</span>
-                    </h1>
                     <p className="w-full border-b border-slate-200 pb-4">
                       {item.hover ? item.longdesc : ""}
                     </p>
@@ -475,6 +471,10 @@ function Agenda({ delay }) {
                         </div>
                       ))}
                     </div>
+                    <h1 className="flex border-t border-slate-200 pt-2 my-2 flex-row font-mont text-xs font-semibold">
+                      Venue :&nbsp;
+                      <span className="font-light">{item?.venue}</span>
+                    </h1>
                   </div>
                 }
                 key={`pop.item${i}`}
@@ -535,7 +535,7 @@ function Agenda({ delay }) {
                   <div className="flex flex-col justify-between">
                     <motion.div
                       key={`agenda.item.x.${i}`}
-                      // layout
+                      layout
                       className={`flex flex-row bg-opacity-90 group hover:bg-opacity-90 justify-between px-4 py-1 relative cursor-pointer h-auto  my-auto rounded-md w-full  border ${
                         colors[item.color][0]
                       }`}
@@ -578,7 +578,7 @@ function Agenda({ delay }) {
                         <Progress
                           className="absolute top-0 left-0 transition-all duration-700 opacity-0 group-hover:opacity-100"
                           type="circle"
-                          size={isHovered && eei === i ? 36 : 16}
+                          size={isHovered && eei === i ? 36 : 0}
                           format={(percent) => ""}
                           percent={progress}
                           strokeColor={colors[item.color][5]}

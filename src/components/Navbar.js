@@ -49,7 +49,7 @@ function MyDropdown({ sel }) {
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
   return (
-    <div className=" top-16 w-56 text-right">
+    <div className=" top-16 md:w-56 text-right">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-white hover:bg-indigo-400/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
@@ -78,7 +78,7 @@ function MyDropdown({ sel }) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-indigo-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200 shadow-lg ring-1 ring-black/5 focus:outline-none">
+          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-indigo-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-100 border border-gray-200 shadow-lg ring-1 ring-black/5 focus:outline-none">
             <div className="px-1 py-1 ">
               {items.map((item, i) => (
                 <Menu.Item key={`menu.it.${i}`}>
@@ -136,18 +136,18 @@ function Navbar({ sel, vert }) {
             ? "md:flex flex-col bg-slate-400 bg-opacity-40 rounded-l-md bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:bg-slate-400/50"
             : "md:flex bg-yellow-100 bg-opacity-10 rounded-full bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:bg-slate-100/20"
         } ${
-          sel !== 0 ? "flex scale-75 md:scale-100" : "hidden"
+          sel !== 0 ? "flex scale-90 md:scale-100" : "hidden"
         } mx-2  font-medium flex-row transition-all  font-mont `}
       >
         {items.map((item, i) => (
           <motion.div
-            key={`nav.item.${i}`}
+            key={`nav.item.bar.${i}`}
             onClick={() => {
               setNav({ from: items[sel].link, to: item.link });
               // setsel(i);
               navigate("/" + item.link);
             }}
-            className="relative cursor-pointer  py-2 px-4"
+            className="relative cursor-pointer  py-2 px-2 md:px-4"
           >
             {i === sel && (
               <motion.div
@@ -159,7 +159,7 @@ function Navbar({ sel, vert }) {
               />
             )}
             <span
-              className={`z-50 relative xtext-slate-600  ${
+              className={`z-50 text-xs md:text-sm relative xtext-slate-600  ${
                 sel === i ? " text-slate-600" : " text-white"
               } `}
             >

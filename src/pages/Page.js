@@ -1,14 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import Navbar from "../components/Navbar";
 import useReducer from "../hook/reducerHook";
 import ray from "../imgs/ray.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Breadcrumb } from "antd";
 function Page({ children, page, no, title, backButton }) {
   const { setNav } = useReducer();
   const navigate = useNavigate();
-
+  const currentRoute = useLocation().pathname;
   return (
     <motion.div
       // style={{
@@ -33,21 +34,45 @@ function Page({ children, page, no, title, backButton }) {
       </div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.3 } }}
-        exit={{ opacity: 0, transition: { duration: 0.5 } }}
+        // initial={{ opacity: 0 }}
+        // animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.3 } }}
+        // exit={{ opacity: 0, transition: { duration: 0.5 } }}
         className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex"
       >
         <div className="flex relative flex-col w-[95%] gap-4 bg-gradient-to-br shadow-md border border-white from-white to-slate-200 mt-4 rounded-lg mb-32 md:mb-0 md:h-[85%] ">
-          {backButton}
-          <XMarkIcon
-            onClick={() => {
-              setNav({ from: page, to: "/" });
-              navigate("/");
-            }}
-            className="absolute cursor-pointer hover:text-slate-400 text-slate-600 right-4 w-8 h-8 m-4"
-          />
-          <div className="mt-4">
+          <div className="absolute flex flex-row z-10 items-center w-full justify-between p-2 ml-1">
+            <div className="md:hidden block" />
+            <Breadcrumb separator=">" className="hidden md:block">
+              {currentRoute?.split("/").map((item, index, arr) => (
+                <Breadcrumb.Item
+                  onClick={() =>
+                    navigate(`/${arr.slice(0, index + 1).join("")}`)
+                  }
+                  className={` ${
+                    index !== 0 && "px-2 py-1 border border-slate-300"
+                  } z-50 bg-gradient-to-br  cursor-pointer rounded-md  ${
+                    index === arr.length - 1
+                      ? "text-white border-indigo-100   from-indigo-400 to-indigo-600"
+                      : "text-slate-600   from-slate-100 to-slate-300"
+                  }`}
+                >
+                  {item === "" ? (
+                    <HomeIcon className="w-7 h-7 -mt-1 border border-slate-300 my-auto bg-gradient-to-br p-1 rounded-md" />
+                  ) : (
+                    item
+                  )}
+                </Breadcrumb.Item>
+              ))}
+            </Breadcrumb>
+            <XMarkIcon
+              onClick={() => {
+                setNav({ from: page, to: "/" });
+                navigate("/");
+              }}
+              className="cursor-pointer hover:text-slate-400 text-slate-600 right-4 w-8 h-8 m-4"
+            />
+          </div>
+          <div className="mt-2 relative">
             <motion.h1
               initial={{ opacity: 0, translateY: -20 }}
               animate={{

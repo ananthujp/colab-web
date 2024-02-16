@@ -140,8 +140,9 @@ function Theme() {
       <motion.div
         layoutId={`pgm.themes`}
         className={
-          "w-full overflow-auto px-16 h-[75vh] md:h-[90%] " +
-          (!params.postId && " grid grid-cols-1 relative md:grid-cols-2 gap-4")
+          "w-full overflow-auto px-6 md:px-16 h-[75vh] md:h-[90%] " +
+          (!params.postId &&
+            " grid grid-cols-1 relative md:grid-cols-2 md:gap-4")
         }
       >
         {params.postId && params.postId < cardVar.length ? (
@@ -160,7 +161,7 @@ function Theme() {
                     translateY: 20,
                     transition: { duration: 0.5 },
                   }}
-                  className="text-2xl font-pop font-semibold"
+                  className="text-2xl text-center md:text-left font-pop font-semibold"
                 >
                   {cardVar[params.postId].label}
                 </motion.h1>
@@ -202,7 +203,7 @@ function Theme() {
                     translateY: 20,
                     transition: { duration: 0.5, delay: i * 0.05 },
                   }}
-                  className="grid cursor-pointer  grid-cols-[5em_auto_3em] w-full text-slate-600 p-3 rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 gap-4  font-pop "
+                  className="grid cursor-pointer  md:grid-cols-[5em_auto_3em] w-full text-slate-600 p-3 rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 gap-4  font-pop "
                 >
                   {item.img ? (
                     <img
@@ -210,26 +211,29 @@ function Theme() {
                       alt={
                         <UserIcon className="w-16 h-16 p-2 bg-indigo-600 rounded-full text-white mr-2" />
                       }
-                      className="w-16 h-16 object-cover bg-indigo-500 rounded-full"
+                      className="w-16 h-16 mx-auto object-cover bg-indigo-500 rounded-full"
                     />
                   ) : (
-                    <UserIcon className="w-16 h-16 p-2 bg-indigo-600 rounded-full text-white mr-2" />
+                    <div className=" mx-auto">
+                      <UserIcon className="w-16 h-16 p-2 bg-indigo-600 rounded-full text-white mr-2" />
+                    </div>
                   )}
-                  <div className="flex flex-col">
+                  <div className="flex flex-col items-center md:items-start">
                     <h1 className="font-semibold">{item.name}</h1>
                     <h1 className="font-medium">{item.designation}</h1>
                     <h1 className="font-light">{item.dept}</h1>
                     <h1 className="font-light italic">{"e : " + item.email}</h1>
                   </div>
                   <div
-                    onClick={() =>
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setIsModalOpen({
                         fac: item.name,
                         facEmail: item.email,
                         visible: true,
-                      })
-                    }
-                    className="bg-gradient-to-br border border-slate-300 hover:shadow-md hover:border-indigo-100 text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group flex-col items-center justify-around  w-20 -ml-10 rounded-lg bg-indigo-400"
+                      });
+                    }}
+                    className="bg-gradient-to-br  py-2 border border-slate-300 hover:shadow-md hover:border-indigo-100 text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group md:flex-col items-center justify-around  md:w-20 md:-ml-10 rounded-lg bg-indigo-400"
                   >
                     <UserPlusIcon className="w-8 text-slate-600 group-hover:text-white" />
                     Meet
@@ -240,8 +244,11 @@ function Theme() {
           </div>
         ) : (
           cardVar.map((item, i) => (
-            <div className="w-full xmd:w-1/2 mx-4 my-2 p-2 rounded-md bg-indigo-100 border border-indigo-200">
-              <div className="flex flex-row items-start gap-4">
+            <div
+              onClick={() => navigate(`${i}`)}
+              className="w-full cursor-pointer xmd:w-1/2 mx-4 my-2 p-2 rounded-md transition-all bg-indigo-100 border hover:shadow-lg border-indigo-200 hover:border-indigo-300 hover:bg-indigo-200"
+            >
+              <div className="flex flex-row items-center text-slate-700 gap-4">
                 <motion.div
                   initial={{ opacity: 0, translateY: -20 }}
                   animate={{
@@ -294,11 +301,11 @@ function Theme() {
                     }}
                     className="text-xs mt-2 w-[85%] font-pop text-justify font-light"
                   >
-                    <Link to={`${i}`}>
+                    {/* <Link to={`${i}`}>
                       <div className="bg-gradient-to-br from-indigo-400 to-indigo-600 text-white rounded-full flex px-2 py-1 w-12">
                         More
                       </div>
-                    </Link>
+                    </Link> */}
                   </motion.h1>
                 </div>
               </div>

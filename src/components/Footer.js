@@ -26,7 +26,7 @@ const showConfirm = ({ url }) => {
 };
 function Footer() {
   return (
-    <div className="mt-12 flex w-full bg-white/60  h-16 border border-slate-400/30">
+    <div className="mt-12 flex w-full bg-white/60 h-28 md:h-16 border border-slate-400/30">
       <div className="flex flex-col md:flex-row justify-between my-auto items-center w-full max-w-5xl mx-auto">
         <div className="text-gray-300 italic gap-3 flex flex-row">
           <FacebookOutlined
@@ -60,7 +60,7 @@ function Footer() {
             className="text-2xl text-slate-600"
           />
         </div>
-        <div className="font-mont text-slate-600 font-xs">
+        <div className="font-mont text-slate-600 mt-3 md:mt-0 text-xs md:text-md">
           <Link to="privacy">Privacy</Link>&nbsp;|&nbsp;&#169; Indian Institute
           of Technology Gandhinagar
         </div>

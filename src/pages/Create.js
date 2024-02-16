@@ -129,9 +129,11 @@ function Create() {
   const [Glink, setGLink] = useState();
   useEffect(() => {
     if (size !== "url") {
-      setLink(
-        Glink?.replace(/\/file\/d\/(.+)\/(.+)/, "/uc?export=download&id=$1")
-      );
+      const fileId = Glink.match(/\/d\/([^/]+)/)[1];
+
+      // Constructing the desired URL
+
+      setLink(`https://lh3.googleusercontent.com/d/${fileId}`);
     }
   }, [Glink]);
 
@@ -163,7 +165,7 @@ function Create() {
 
   const handleSave = () => {
     setSaveLoad(true);
-    setDoc(doc(db, "Posts", params.createId), {
+    setDoc(doc(db, "virtual", params.virtualId, "posts", params.createId), {
       //   user: user?.uid,
       title: title,
       content: value,
@@ -172,7 +174,7 @@ function Create() {
       role: user?.role === "student" ? "Student" : "Faculty",
     }).then(() => {
       setSaveLoad(false);
-      navigate(`/virtual/create/${params.createId}`);
+      navigate(`/virtual/${params.virtualId}/${params.createId}`);
     });
   };
   return (

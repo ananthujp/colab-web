@@ -14,25 +14,31 @@ import { db } from "../firebase";
 import { Input, Modal, Radio } from "antd";
 import { LinkIcon } from "@heroicons/react/24/solid";
 import useReducer from "../hook/reducerHook";
-const Card = ({ url, navigate }) => (
+const Card = ({ url, navigate, data }) => (
   <div
     onClick={() => navigate(url)}
-    className="flex cursor-pointer flex-col w-56 h-80 overflow-hidden rounded-lg shadow-lg "
+    className="flex cursor-pointer border border-slate-300 flex-col w-56 h-80 overflow-hidden rounded-lg shadow-lg "
   >
     <img
       className="h-36 w-full bg-gray-200 object-cover"
-      src="https://shooliniuniversity.com/blog/wp-content/uploads/2022/05/BTech-in-Food-Tech.jpg"
+      src={
+        data.photos?.[0]
+          ? data.photos[0].url
+          : "https://shooliniuniversity.com/blog/wp-content/uploads/2022/05/BTech-in-Food-Tech.jpg"
+      }
       alt=""
     />
     <div className="w-full gap-6 p-4 font-mont bg-gradient-to-br from-blue-400 to-blue-600 flex flex-col h-full ">
       <div className="flex flex-col gap-0">
-        <h1 className="text-2xl text-white font-semibold">Title</h1>
-        <h1 className="text-sm text-white font-base">Description</h1>
+        <h1 className="text-2xl text-white font-semibold">{data.title}</h1>
+        <p className="text-xs text-white font-base">
+          {data.content.split("<p>")[1].slice(0, 73) + ".."}
+        </p>
       </div>
     </div>
   </div>
 );
-const StallCard = ({ id }) => {
+const StallCard = ({ id, data }) => {
   const navigate = useNavigate();
   return (
     <div
@@ -41,23 +47,33 @@ const StallCard = ({ id }) => {
     >
       <img
         className="w-36 h-full bg-gray-200 object-cover"
-        src="https://shooliniuniversity.com/blog/wp-content/uploads/2022/05/BTech-in-Food-Tech.jpg"
+        src={
+          data.cover
+            ? data.cover
+            : "https://shooliniuniversity.com/blog/wp-content/uploads/2022/05/BTech-in-Food-Tech.jpg"
+        }
         alt=""
       />
-      <div className="w-full gap-6 p-4 font-mont bg-gradient-to-br from-green-600 to-green-400 flex flex-col h-full ">
+      <div className="w-full gap-6 p-4 font-mont bg-gradient-to-br from-indigo-400 to-indigo-600 flex flex-col h-full ">
         <div className="flex flex-row justify-start gap-4 bg-white p-2 rounded-full">
           <img
-            src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+            src={
+              data.cover
+                ? data.cover
+                : "https://shooliniuniversity.com/blog/wp-content/uploads/2022/05/BTech-in-Food-Tech.jpg"
+            }
             className="w-8 h-8 rounded-full"
             alt=""
           />
           <div className="flex flex-col">
-            <h1 className="text-sm text-gray-800 font-semibold">Author</h1>
-            <h1 className="text-xs text-gray-600 font-semibold">Role</h1>
+            <h1 className="text-sm text-gray-800 font-semibold">
+              {data.author}
+            </h1>
+            <h1 className="text-xs text-gray-600"> {data.email}</h1>
           </div>
         </div>
         <div className="flex flex-col">
-          <h1 className="text-2xl text-white font-semibold">Title</h1>
+          <h1 className="text-2xl text-white font-semibold">{data.name}</h1>
           <h1 className="text-sm text-white font-semibold">Description</h1>
         </div>
       </div>
@@ -209,10 +225,10 @@ function Virtual() {
             </div>
             <div className="flex flex-row flex-wrap gap-4 m-8">
               {stallPosts?.map((post) => (
-                <Card navigate={navigate} url={post.id} />
+                <Card navigate={navigate} url={post.id} data={post.data} />
               ))}
 
-              {stallData.email === user.email && (
+              {stallData.email === user?.email && (
                 <div
                   onClick={() => CreatePost()}
                   className="flex cursor-pointer text-lg text-white font-mont items-center justify-center h-80 rounded-md w-56 bg-gradient-to-br from-green-400 to-green-600 "
@@ -226,7 +242,7 @@ function Virtual() {
       ) : (
         <div className="w-full h-full m-8 flex flex-row gap-4 flex-wrap justify-center">
           {stalls?.map((item) => (
-            <StallCard id={item.id} />
+            <StallCard id={item.id} data={item.data} />
           ))}
         </div>
       )}

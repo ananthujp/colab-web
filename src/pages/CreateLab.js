@@ -62,6 +62,8 @@ function CreateLab() {
     addDoc(collection(db, "virtual"), {
       ...values,
       email: user.email,
+      author: user.name,
+      img: user.img,
       time: serverTimestamp(),
     }).then((docRef) => {
       message.success("Your virtual lab has been sent successfully!");

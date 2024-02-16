@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [nav, setNav] = useState({ from: null, to: null });
   const [load, setLoad] = useState(true);
   const [data, setAgenda] = useState();
+  const [speakers, setSpeakers] = useState();
   const [about_data, setAbout] = useState();
   const logout = () => {
     localStorage.removeItem("user");
@@ -26,6 +27,11 @@ export const AuthProvider = ({ children }) => {
     !user && setUser(JSON.parse(localStorage.getItem("user")));
   }, [user]);
   useEffect(() => {
+    getDocs(collection(db, "speakers")).then((querySnapshot) => {
+      setSpeakers(
+        querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
+    });
     onSnapshot(
       query(collection(db, "agenda"), orderBy("key", "asc")),
       (querySnapshot) => {
@@ -47,23 +53,26 @@ export const AuthProvider = ({ children }) => {
         );
       }
     );
-    onSnapshot(collection(db, "about"), (querySnapshot) => {
-      setAbout(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          key: doc.data().key,
-          name: doc.data().name,
-          role: doc.data().role,
-          bio: doc.data().bio,
-          img: doc.data().img,
-          facebook: doc.data().facebook,
-          instagram: doc.data().instagram,
-          linkedin: doc.data().linkedin,
-          twitter: doc.data().twitter,
-          email: doc.data().email,
-        }))
-      );
-    });
+    onSnapshot(
+      query(collection(db, "about"), orderBy("key", "asc")),
+      (querySnapshot) => {
+        setAbout(
+          querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            key: doc.data().key,
+            name: doc.data().name,
+            role: doc.data().role,
+            bio: doc.data().bio,
+            img: doc.data().img,
+            facebook: doc.data().facebook,
+            instagram: doc.data().instagram,
+            linkedin: doc.data().linkedin,
+            twitter: doc.data().twitter,
+            email: doc.data().email,
+          }))
+        );
+      }
+    );
   }, []);
   const memoedValue = useMemo(
     () => ({
@@ -76,8 +85,10 @@ export const AuthProvider = ({ children }) => {
       data,
       logout,
       about_data,
+      speakers,
+      setSpeakers,
     }),
-    [load, user, nav, data, about_data]
+    [load, user, speakers, nav, data, about_data]
   );
   return (
     <WrapContext.Provider value={memoedValue}>{children}</WrapContext.Provider>

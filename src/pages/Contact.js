@@ -26,7 +26,7 @@ function Contact() {
     <Page no={5} page="contact" title="Contact">
       <motion.div
         layoutId={`pgm.contact`}
-        className="w-full px-24 mt-4 flex flex-col h-[90vh] md:flex-wrap md:h-[90%]"
+        className="w-full px-6 md:px-24 mt-4 flex flex-col h-[90vh] md:flex-wrap md:h-[90%]"
       >
         <motion.div
           initial={{ opacity: 0, translateY: -20 }}

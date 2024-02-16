@@ -39,7 +39,7 @@ const Card = ({
         {category}
       </p>
       <h1
-        className={`font-pop hidden group-hover:flex z-50 text-center text-slate-400`}
+        className={`font-pop text-xs md:text-sm hidden group-hover:flex z-50 text-center text-slate-400`}
       >
         {tag}
       </h1>
@@ -131,28 +131,8 @@ const WhyCard = ({ delay }) => {
               <LightBulbIcon className="w-6" />
               <h1>Why IITGN</h1>
             </div>
-            {/* <motion.button
-              onClick={() => {
-                setNav({ from: "/", to: "program" });
-                navigate("/" + "program");
-              }}
-              initial={{ opacity: 0, translateY: -20 }}
-              animate={{
-                opacity: 1,
-                translateY: 0,
-                transition: { duration: 0.5, delay: 0.4 },
-              }}
-              exit={{
-                opacity: 0,
-                translateY: 20,
-                transition: { duration: 0.5 },
-              }}
-              className="rounded-full font-semibold w-24 text-sm px-2 py-1 text-slate-600 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
-            >
-              More
-            </motion.button> */}
           </motion.h1>
-          <div className="grid grid-cols-3 gap-0 w-full justify-between">
+          <div className="grid grid-cols-3 transform gap-0 w-full justify-between">
             {items.map((item, index) => (
               <Card
                 icon={item.icon}

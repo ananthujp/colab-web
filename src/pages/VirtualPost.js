@@ -3,24 +3,29 @@ import Page from "./Page";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import StallPreview from "./StallPreview";
 
 function VirtualPost() {
   const params = useParams();
   const [postData, setPostData] = useState({});
+  const [stallData, setStallData] = useState({});
   useEffect(() => {
     if (params.virtualId && params.createId) {
-      getDoc(
-        doc(db, "virtual", params.virtualId, "posts", params.createId)
-      ).then((doc) => {
-        setPostData(doc.data());
+      getDoc(doc(db, "virtual", params.virtualId)).then((doc) => {
+        if (doc.exists()) {
+          setStallData(doc.data());
+        } else {
+          console.log("No such document!");
+        }
       });
     }
   }, []);
   return (
-    <Page
-      page="themes"
-      title={postData ? postData.title : "Virtual Stalls"}
-    ></Page>
+    <Page page="themes" title={stallData ? stallData.name : "Virtual Stalls"}>
+      <div className="flex flex-col font-mont items-center h-full overflow-scroll w-full">
+        <StallPreview id="asd" />
+      </div>
+    </Page>
   );
 }
 

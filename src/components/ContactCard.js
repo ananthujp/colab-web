@@ -37,12 +37,12 @@ function Contact({ delay }) {
   const Data = transformData(cardVar);
   const onFinish = (values) => {
     console.log("Success:", values);
-    // addDoc(collection(db, "requests"), {
-    //   ...values,
-    // }).then(() => {
-    //   message.success("Your request has been sent successfully!");
-    //   setIsModalOpen({ ...isModalOpen, visible: false });
-    // });
+    addDoc(collection(db, "requests"), {
+      ...values,
+    }).then(() => {
+      message.success("Your request has been sent successfully!");
+      setIsModalOpen({ ...isModalOpen, visible: false });
+    });
   };
   const isInView = useInView(ref, { once: true });
   const { nav, setNav } = useReducer();
@@ -205,7 +205,7 @@ function Contact({ delay }) {
           </div>
 
           <motion.div className="flex flex-col w-full md:flex-row justify-between h-full">
-            <div className="flex flex-col group-hover:flex-row items-start w-full gap-2">
+            <div className="flex flex-col md:group-hover:flex-row items-start w-full gap-2">
               <motion.h1
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
@@ -240,7 +240,7 @@ function Contact({ delay }) {
                 }}
                 className="flex flex-row hover:bg-indigo-100 transition-all group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <UsersIcon className="w-5 group-hover:w-16 text-indigo-400" />
+                <UsersIcon className="w-5 md:group-hover:w-16 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   One-to-One meeting with faculty
                 </h1>
@@ -255,7 +255,7 @@ function Contact({ delay }) {
                 onClick={() => window.open("tel:+917923952136")}
                 className="flex flex-row hover:bg-indigo-100 transition-all group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <PhoneIcon className="w-5 group-hover:w-16 text-indigo-400" />
+                <PhoneIcon className="w-5 md:group-hover:w-16 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   +91 7923952136
                 </h1>
@@ -272,7 +272,7 @@ function Contact({ delay }) {
                 }}
                 className="flex flex-row hover:bg-indigo-100 transition-all group-hover:h-full  group-hover:justify-center group-hover:flex-col gap-2 items-center bg-white cursor-pointer hover:shadow-lg border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <EnvelopeIcon className="w-5 group-hover:w-16 text-indigo-400" />
+                <EnvelopeIcon className="w-5 md:group-hover:w-16 text-indigo-400" />
                 <h1 className="text-xs font-normal font-mont">
                   industryconnect @iitgn.ac.in
                 </h1>
@@ -291,7 +291,7 @@ function Contact({ delay }) {
                 }}
                 className="flex flex-row group-hover:h-full group-hover:justify-center group-hover:flex-col gap-2 cursor-pointer items-center bg-gradient-to-br from-indigo-400 to-indigo-500 transition-all hover:from-indigo-300 hover:to-indigo-400 border border-slate-300 p-2 rounded-lg shadow-sm w-full"
               >
-                <PencilSquareIcon className="w-5 group-hover:w-16 text-white" />
+                <PencilSquareIcon className="w-5 md:group-hover:w-16 text-white" />
                 <h1 className="text-xs font-normal  group-hover:text-center text-white font-mont">
                   CoLab 2024 Registration form
                 </h1>

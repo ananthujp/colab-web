@@ -280,20 +280,13 @@ function Privacy() {
               monitor the usage of our Service.
             </p>
           </li>
+
           <li>
             <p>
               <strong>To manage Your Account:</strong> to manage Your
               registration as a user of the Service. The Personal Data You
               provide can give You access to different functionalities of the
               Service that are available to You as a registered user.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>For the performance of a contract:</strong> the
-              development, compliance and undertaking of the purchase contract
-              for the products, items or services You have purchased or of any
-              other contract with Us through the Service.
             </p>
           </li>
           <li>
@@ -309,13 +302,14 @@ function Privacy() {
           </li>
           <li>
             <p>
-              <strong>To provide You</strong> with news, special offers and
+              <strong>To provide You:</strong> with news, special offers and
               general information about other goods, services and events which
               we offer that are similar to those that you have already purchased
               or enquired about unless You have opted not to receive such
               information.
             </p>
           </li>
+
           <li>
             <p>
               <strong>To manage Your requests:</strong> To attend and manage
@@ -333,15 +327,6 @@ function Privacy() {
               the assets transferred.
             </p>
           </li>
-          <li>
-            <p>
-              <strong>For other purposes</strong>: We may use Your information
-              for other purposes, such as data analysis, identifying usage
-              trends, determining the effectiveness of our promotional campaigns
-              and to evaluate and improve our Service, products, services,
-              marketing and your experience.
-            </p>
-          </li>
         </ul>
         <p>
           We may share Your personal information in the following situations:
@@ -352,29 +337,19 @@ function Privacy() {
             information with Service Providers to monitor and analyze the use of
             our Service, to contact You.
           </li>
+
           <li>
-            <strong>For business transfers:</strong> We may share or transfer
+            <strong>For business transfers</strong>: We may share or transfer
             Your personal information in connection with, or during negotiations
             of, any merger, sale of Company assets, financing, or acquisition of
             all or a portion of Our business to another company.
           </li>
           <li>
-            <strong>With Affiliates:</strong> We may share Your information with
+            <strong>With Affiliates</strong>: We may share Your information with
             Our affiliates, in which case we will require those affiliates to
             honor this Privacy Policy. Affiliates include Our parent company and
             any other subsidiaries, joint venture partners or other companies
             that We control or that are under common control with Us.
-          </li>
-          <li>
-            <strong>With business partners:</strong> We may share Your
-            information with Our business partners to offer You certain
-            products, services or promotions.
-          </li>
-          <li>
-            <strong>With other users:</strong> when You share personal
-            information or otherwise interact in the public areas with other
-            users, such information may be viewed by all users and may be
-            publicly distributed outside.
           </li>
           <li>
             <strong>With Your consent</strong>: We may disclose Your personal
@@ -399,6 +374,7 @@ function Privacy() {
           improve the functionality of Our Service, or We are legally obligated
           to retain this data for longer time periods.
         </p>
+
         <h3 className="text-base -mb-2 font-semibold">
           Transfer of Your Personal Data
         </h3>
@@ -409,18 +385,14 @@ function Privacy() {
           may be transferred to — and maintained on — computers located outside
           of Your state, province, country or other governmental jurisdiction
           where the data protection laws may differ than those from Your
-          jurisdiction.
-        </p>
-        <p>
-          Your consent to this Privacy Policy followed by Your submission of
-          such information represents Your agreement to that transfer.
-        </p>
-        <p>
-          The Company will take all steps reasonably necessary to ensure that
-          Your data is treated securely and in accordance with this Privacy
-          Policy and no transfer of Your Personal Data will take place to an
-          organization or a country unless there are adequate controls in place
-          including the security of Your data and other personal information.
+          jurisdiction. Your consent to this Privacy Policy followed by Your
+          submission of such information represents Your agreement to that
+          transfer. The Company will take all steps reasonably necessary to
+          ensure that Your data is treated securely and in accordance with this
+          Privacy Policy and no transfer of Your Personal Data will take place
+          to an organization or a country unless there are adequate controls in
+          place including the security of Your data and other personal
+          information.
         </p>
         <h3 className="text-base -mb-2 font-semibold">
           Delete Your Personal Data

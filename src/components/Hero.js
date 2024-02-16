@@ -42,14 +42,18 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className=" shadow-red-600 mr-0 ml-auto flex flex-row justify-end items-end font-pop font-black bg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
+              className=" shadow-red-600 mr-0 ml-auto flex flex-row md:justify-end items-end font-pop font-black bg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
             >
               {/* <span className="text-7xl ">C</span> */}
-              <img src={logo} className="w-24 h-24 -mr-3 -mb-1 -ml-2" alt="" />
-              <span className="text-5xl mx-0.5">O</span>
-              <span className="text-7xl mx-0.5 -mb-0.5">L</span>
-              <span className="text-5xl mx-0.5">AB</span>
-              <span className="text-7xl ml-4">2024</span>
+              <img
+                src={logo}
+                className="w-16 md:w-24 h-16 md:h-24 -mr-3 -mb-1 -ml-2"
+                alt=""
+              />
+              <span className="text-3xl md:text-5xl mx-0.5">O</span>
+              <span className="text-5xl md:text-7xl mx-0.5 -mb-0.5">L</span>
+              <span className="text-3xl md:text-5xl mx-0.5">AB</span>
+              <span className="text-5xl md:text-7xl ml-4">2024</span>
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, translateY: -20 }}
@@ -63,7 +67,7 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className="font-mont text-right font-semibold text-lg mt-0.5 text-slate-300 xtext-slate-600 "
+              className="font-mont md:text-right text-center font-semibold text-base md:text-lg mt-0.5 text-slate-300 xtext-slate-600 "
             >
               An IIT Gandhinagar Industry Open House&nbsp;
             </motion.h1>
@@ -79,7 +83,7 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className=" font-mont text-right mt-4 xtext-slate-500 text-slate-400 text-xs "
+              className=" font-mont text-center md:text-right mt-4 xtext-slate-500 text-slate-400 text-xs "
             >
               CoLab 2024 is a dynamic convergence of academia and industry at
               the Indian Institute of Technology Gandhinagar.

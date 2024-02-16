@@ -26,7 +26,9 @@ function StallPreview({ id, setPreviewMode, InitialValue }) {
       setFileList(InitialValue.photos);
     }
     id &&
-      getDoc(doc(db, "Posts", id)).then((dc) => {
+      getDoc(
+        doc(db, "virtual", params.virtualId, "posts", params.createId)
+      ).then((dc) => {
         setTitle(dc.data().title);
 
         setFileList(dc.data().photos);

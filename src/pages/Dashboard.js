@@ -73,7 +73,9 @@ function Dash() {
                     <h1>{i + 1}</h1>
                     <h1>{item.data.email}</h1>
                     <h1>{item.data.number}</h1>
-                    <h1>{item.data.prof}</h1>
+                    <h1>
+                      {item.data.prof ? item.data.prof : item.data.faculty[1]}
+                    </h1>
                     <h1>{item.data.facEmail}</h1>
                   </>
                 ))}

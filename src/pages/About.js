@@ -28,8 +28,17 @@ import logo from "../imgs/colab-logo.svg";
 import Page from "./Page";
 import lalminar from "../imgs/lalminar.png";
 import gitlogo from "../imgs/github-mark.png";
-import { Input, Modal, Form, InputNumber, Button } from "antd";
+import {
+  Input,
+  Modal,
+  Form,
+  InputNumber,
+  Button,
+  Checkbox,
+  Popover,
+} from "antd";
 const confirm = Modal.confirm;
+
 const showConfirm = ({ url }) => {
   confirm({
     title: "External Link",
@@ -57,11 +66,36 @@ function removeUndefinedFields(obj) {
 
   return obj;
 }
-
+const Glinkgen = (form) => {
+  const [linkval, setLinkval] = useState("");
+  return (
+    <div className="flex flex-col p-1 gap-2">
+      <Input
+        placeholder="Google drive link"
+        onChange={(event) => setLinkval(event.target.value)}
+      />
+      <Button
+        onClick={() => {
+          form.setFieldValue(
+            "img",
+            `https://lh3.googleusercontent.com/d/${
+              linkval.match(/\/d\/([^/]+)/)[1]
+            }`
+          );
+        }}
+        className="bg-blue-500"
+        type="primary"
+      >
+        Ok
+      </Button>
+    </div>
+  );
+};
 function About() {
   const { nav, setNav, about_data, user } = useReducer();
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [Glink, setGlink] = useState(false);
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState({ edit: false, data: null });
   useEffect(() => {
@@ -71,6 +105,7 @@ function About() {
   const handleDelete = (id) => {
     deleteDoc(doc(db, "about", id));
   };
+
   const onFinish = (values) => {
     edit?.edit
       ? setDoc(doc(db, "about", edit.data.id), removeUndefinedFields(values))
@@ -167,6 +202,7 @@ function About() {
           >
             <Input />
           </Form.Item>
+
           <Form.Item
             label="Image URL"
             name="img"
@@ -179,6 +215,13 @@ function About() {
           >
             <Input />
           </Form.Item>
+          <div className="w-full flex flex-row justify-end -mt-4 mb-2 items-end">
+            <Popover content={Glinkgen(form)} title="Google drive link">
+              <Button className=" bg-blue-500" type="primary">
+                Google Drive
+              </Button>
+            </Popover>
+          </div>
           <Form.Item label="Email(Optional)" name="email">
             <Input />
           </Form.Item>
@@ -212,12 +255,12 @@ function About() {
           </Form.Item>
         </Form>
       </Modal>
-      <motion.div className="w-full overflow-auto px-12 mt-4 gap-6 flex flex-col h-screen md:h-[90%]">
-        <div className="flex flex-col rounded-md border border-indigo-100 bg-indigo-50 p-6">
-          <h1 className="font-mont text-lg font-medium text-slate-800">
+      <motion.div className="w-full overflow-auto px-6 md:px-12 mt-4 gap-6 flex flex-col h-screen md:h-[90%]">
+        <div className="flex flex-col items-center md:items-start rounded-md border border-indigo-100 bg-indigo-50 p-6">
+          <h1 className="font-mont  mb-2 pb-2 border-b border-slate-300  text-lg font-medium text-slate-800">
             About CoLab 2024
           </h1>
-          <div className="flex flex-col md:flex-row gap-4 mt-2">
+          <div className="flex flex-col  md:flex-row gap-4 mt-2">
             <img src={logo} alt="" className="w-32 -mt-2" />
             <p className="font-mont font-base text-justify text-slate-600">
               CoLab 2024 is a dynamic convergence of academia and industry at
@@ -229,8 +272,8 @@ function About() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col p-6 rounded-md border border-indigo-100 bg-indigo-50">
-          <h1 className="font-mont text-lg font-medium text-slate-800">
+        <div className="flex flex-col items-center md:items-start p-6 rounded-md border border-indigo-100 bg-indigo-50">
+          <h1 className="font-mont  mb-2 pb-2 border-b border-slate-300  text-lg font-medium text-slate-800">
             About IIT Gandhinagar
           </h1>
           <div className="flex flex-col md:flex-row gap-4 mt-2">
@@ -249,8 +292,8 @@ function About() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
-          <h1 className="font-mont flex flex-row text-lg font-semibold text-slate-800 w-full justify-between">
+        <div className="flex gap-8 items-center justify-center flex-row flex-wrap p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
+          <h1 className="font-mont mb-2 pb-2 border-b border-slate-300  flex flex-row text-lg font-semibold text-slate-800 w-full justify-between">
             Core Team
             {user?.role === "admin" && (
               <div
@@ -264,7 +307,7 @@ function About() {
           {about_data?.map((item, i) => (
             <div
               key={`core.about.${i}`}
-              className="flex relative h-44 w-36 py-2  group flex-col items-center"
+              className="flex flex-col relative h-44 w-36 py-2  group items-center"
             >
               {user?.role === "admin" && (
                 <div className="absolute flex flex-row top-0 right-0 ml-4">
@@ -284,15 +327,17 @@ function About() {
                   />
                 </div>
               )}
-              <div className="flex w-24 h-24 mb-2 justify-center items-center border-4 rounded-full border-white shadow-md">
+              <div className="flex w-28 h-28 mb-2 justify-center items-center border-4 rounded-full border-white shadow-md">
                 <img
-                  className="h-full w-full object-cover rounded-full saturate-0 group-hover:saturate-100 transition-all duration-300 ease-in-out"
+                  className="w-24 h-24 object-cover rounded-full saturate-0 group-hover:saturate-100 transition-all duration-300 ease-in-out"
                   src={item.img}
                   alt=""
                 />
               </div>
-              <h1 className="font-mont font-medium">{item.name}</h1>
-              <h1 className="font-mont font-base text-slate-800">
+              <h1 className=" font-mont text-center font-medium">
+                {item.name}
+              </h1>
+              <h1 className="font-mont text-center text-xs text-slate-800">
                 {item.role}
               </h1>
               <h1 className="font-mont font-base text-center text-xs text-slate-600">
@@ -351,12 +396,12 @@ function About() {
             </div>
           ))}
         </div>
-        <div className="flex flex-col p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
-          <h1 className="font-mont text-lg font-semibold text-slate-800">
+        <div className="flex flex-col items-center md:items-start gap-3 p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
+          <h1 className="font-mont mb-2 pb-2  border-b border-slate-300 text-lg font-semibold text-slate-800">
             About Website
           </h1>
           <div className="flex flex-row gap-2">
-            <h1 className="font-mont font-medium">Developer :</h1>
+            <h1 className="font-mont font-bold">Developer :</h1>
             <h1
               onClick={() =>
                 showConfirm({ url: "https://github.com/ananthujp" })
@@ -370,9 +415,9 @@ function About() {
             </h1>
           </div>
           <div className="flex flex-row gap-2">
-            <h1 className="font-mont font-medium">Tech stack :</h1>
-            <h1 className="flex flex-row font-mont font-base text-slate-600">
-              React (
+            <h1 className="font-mont">
+              <b>Tech stack :</b>
+              &nbsp;React
               <svg
                 onClick={() => showConfirm({ url: "https://react.dev/" })}
                 xmlns="http://www.w3.org/2000/svg"
@@ -384,7 +429,7 @@ function About() {
                   fill: "#00000",
                   strokeMiterlimit: 2,
                 }}
-                className="w-6 h-6 cursor-pointer"
+                className="w-6 h-6 inline-block cursor-pointer"
                 viewBox="0 0 64 64"
               >
                 <path
@@ -420,11 +465,11 @@ function About() {
                   }}
                 />
               </svg>
-              ), TailwindCSS (
+              , TailwindCSS
               <svg
                 onClick={() => showConfirm({ url: "https://tailwindcss.com/" })}
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6 cursor-pointer"
+                class="w-6 h-6 cursor-pointer inline-block"
                 viewBox="0 0 32 32"
               >
                 <title>{"file_type_tailwind"}</title>
@@ -435,13 +480,13 @@ function About() {
                   }}
                 />
               </svg>
-              ), Framer Motion (
+              , Framer Motion
               <svg
                 onClick={() => showConfirm({ url: "http://framer.com/motion" })}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 32 32"
-                className="w-6 h-6 cursor-pointer"
+                className="w-6 inline-block h-6 cursor-pointer"
               >
                 <path
                   fill="#fff"
@@ -458,12 +503,12 @@ function About() {
                 <path fill="#0AF" d="M16 13.666H9v6.667h14l-7-6.666Z" />
                 <path fill="#8DF" d="m9 7 7 6.667h7V7H9Z" />{" "}
               </svg>
-              ), Firebase (
+              , Firebase
               <svg
                 onClick={() => showConfirm({ url: "https://firebase.com/" })}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                className="w-6 h-6 cursor-pointer"
+                className="w-6 h-6 inline-block cursor-pointer"
               >
                 <title>{"file_type_firebase"}</title>
                 <path
@@ -515,13 +560,12 @@ function About() {
                   }}
                 />
               </svg>
-              )
             </h1>
           </div>
           <div className="flex flex-row gap-3 mb-4">
-            <h1 className="font-mont font-medium">Vectors courtesy :</h1>
-            <h1 className="font-mont font-base text-slate-500">
-              macrovector, pikisuperstar, upklyak, brgfx, freepik, vectorpocket
+            <h1 className="font-mont ">
+              <strong>Vectors courtesy :</strong>&nbsp; macrovector,
+              pikisuperstar, upklyak, brgfx, freepik, vectorpocket
             </h1>
           </div>
         </div>

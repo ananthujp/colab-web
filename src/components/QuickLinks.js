@@ -94,8 +94,9 @@ function QuickLinks({ delay }) {
             <div></div>
           </div>
           <ol className="flex flex-col ml-4 gap-2 text-gray-400 font-mont">
-            {items.map((item) => (
+            {items.map((item, i) => (
               <li
+                key={`quick.link.card.${i}`}
                 onClick={() => showConfirm({ url: item.link })}
                 className="flex flex-row hover:font-semibold hover:text-indigo-600 gap-2 cursor-pointer"
               >

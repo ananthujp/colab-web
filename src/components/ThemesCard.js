@@ -78,8 +78,13 @@ function ExpandCard() {
             }
           : null
       }
-      className=" flex flex-col-reverse md:flex-row mt-6 md:mt-8 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-gray-100/60"
+      className=" flex flex-col md:flex-row mt-6 md:mt-8 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-gray-100/60"
     >
+      <div className="flex flex-col items-start justify-end p-2 md:p-0 bg-opacity-75 md:w-8 transition-all md:rounded-l-lg bg-gradient-to-br from-indigo-400 to-indigo-400 ">
+        <h1 className="whitespace-nowrap font-pop font-semibold text-white ml-1 text-base transform origin-top-left md:-rotate-90">
+          Domains in Focus
+        </h1>
+      </div>
       {cardVar.map((item, index) => (
         <motion.div
           onClick={() => {
@@ -98,7 +103,7 @@ function ExpandCard() {
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
           key={`exp.card.${index}`}
           className={`relative cursor-pointer ${
-            index === 0 && "rounded-l-lg md:rounded-l-lg"
+            index === cardVar.length - 1 && " md:rounded-r-lg"
           } group bg-gradient-to-br group gap-3 hover:bg-opacity-20 from-slate-100 to-slate-300 group flex flex-row md:flex-col md:justify-around text-xs md:text-sm ${
             item.bg
           } text-center font-mont w-full h-24 md:h-auto hover:p-6 transition-all duration-250 text-white flex justify-between items-center`}
@@ -117,7 +122,7 @@ function ExpandCard() {
             {item.label}
           </h1>
           <div>
-            <motion.div
+            {/* <motion.div
               onClick={() => {
                 setNav({ from: "/", to: "themes" });
                 navigate("/themes/" + index);
@@ -129,15 +134,10 @@ function ExpandCard() {
               className="bg-gradient-to-br group-hover:flex hidden font-mont from-slate-50 to-slate-200 text-slate-600 text-xs px-4 py-1 rounded-full font-medium cursor-pointer hover:to-slate-300"
             >
               Learn More
-            </motion.div>
+            </motion.div> */}
           </div>
         </motion.div>
       ))}
-      <div className="flex flex-col items-start justify-start p-2 md:p-0 bg-opacity-75 md:w-8 transition-all rounded-r-lg md:rounded-r-lg bg-gradient-to-br from-indigo-400 to-indigo-400 ">
-        <h1 className="whitespace-nowrap font-pop font-medium text-white text-base transform origin-bottom-left md:rotate-90">
-          Domains in Focus
-        </h1>
-      </div>
     </motion.div>
   );
 }

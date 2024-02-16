@@ -72,8 +72,8 @@ function Program() {
         className="w-full overflow-y-auto px-6 mb-4 gap-2 md:px-24 mt-4 grid grid-cols-1 md:grid-cols-2 md:h-[90%]"
       >
         {sliderItems.map((item, i) => (
-          <div className="h-auto flex w-full border p-4 rounded-md border-indigo-100 bg-indigo-50 mx-4">
-            <div className="flex h-16 flex-row items-start gap-4">
+          <div className="h-auto flex w-full border p-4 rounded-md border-indigo-100 bg-indigo-50 md:mx-4">
+            <div className="flex h-auto md:h-16 flex-row items-start gap-4">
               <motion.div
                 initial={{ opacity: 0, translateY: -20 }}
                 animate={{
