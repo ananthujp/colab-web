@@ -30,19 +30,7 @@ function Agenda() {
     return () => clearInterval(timer);
   }, [isHovered]);
   return (
-    <Page
-      no={4}
-      page="speakers"
-      title="Agenda"
-      backButton={
-        params.postId && (
-          <ArrowLeftIcon
-            className="w-7 absolute left-4 top-4 text-slate-600 cursor-pointer"
-            onClick={() => navigate(-1)}
-          />
-        )
-      }
-    >
+    <Page no={4} page="speakers" title="Agenda">
       <motion.div className="w-full overflow-y-auto px-6 md:px-24 mt-4 flex flex-col md:flex-wrap h-screen md:h-[90%]">
         {params.postId && params.postId < data.length ? (
           <div className="flex md:mb-0 flex-col w-full">

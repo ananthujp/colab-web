@@ -177,15 +177,16 @@ export const AddSpeaker = ({
 };
 function Speakers({ delay }) {
   const ref = useRef(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const [isHovered, setIsHovered] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const isInView = useInView(ref, { once: true });
-  const { nav, setNav, speakers } = useReducer();
+  const { nav, setNav, speakers, user } = useReducer();
   const chunkSize = 6;
-  const chunks = Array(Math.ceil(speakers.length / chunkSize))
+  const chunks = Array(Math.ceil(speakers?.length / chunkSize))
     .fill()
     .map((_, index) => index * chunkSize)
-    .map((begin) => speakers.slice(begin, begin + chunkSize));
+    .map((begin) => speakers?.slice(begin, begin + chunkSize));
   console.log(chunks);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -207,9 +208,9 @@ function Speakers({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/70 to-slate-200/70  border border-gray-200 hover:border-gray-400 flex flex-col xjustify-between p-4 rounded-lg"
+          className={`mt-8 md:mt-0 relative md:h-full bg-gradient-to-br from-slate-100/70 to-slate-200/70  border border-gray-200 hover:border-gray-400 flex flex-col xjustify-between p-4 rounded-lg`}
         >
-          <div className="flex flex-row mb-2 justify-between">
+          <div className="absolute z-50 w-[90%] top-4 flex flex-row  justify-between">
             <motion.h1
               initial={{ opacity: 0, translateY: -20 }}
               animate={{
@@ -223,16 +224,18 @@ function Speakers({ delay }) {
               <h1>Speakers</h1>
             </motion.h1>
             <div className="flex flex-row gap-1">
-              <motion.div
-                onClick={() => setIsModalOpen(true)}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { duration: 0.5 } }}
-                exit={{ opacity: 0, transition: { duration: 0.5 } }}
-                key={`exp.card.btn`}
-                className="bg-gradient-to-br flex font-mont from-slate-50 to-slate-200 text-slate-600 text-xs px-4 py-1 rounded-full font-medium cursor-pointer hover:to-slate-300"
-              >
-                Add
-              </motion.div>
+              {user?.role === "admin" && (
+                <motion.div
+                  onClick={() => setIsModalOpen(true)}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { duration: 0.5 } }}
+                  exit={{ opacity: 0, transition: { duration: 0.5 } }}
+                  key={`exp.card.btn`}
+                  className="bg-gradient-to-br flex font-mont from-slate-50 to-slate-200 text-slate-600 text-xs px-4 py-1 rounded-full font-medium cursor-pointer hover:to-slate-300"
+                >
+                  Add
+                </motion.div>
+              )}
               <motion.div
                 onClick={() => {
                   setNav({ from: "/", to: "speakers" });
@@ -261,33 +264,44 @@ function Speakers({ delay }) {
                 translateY: 10,
                 transition: { duration: 0.5 },
               }}
+              className=" h-56 pt-12 overflow-scroll"
             >
-              <Carousel dotPosition={"right"} autoplay>
-                {chunks.map((chunk, i) => (
-                  <div
-                    key={i}
-                    className=" h-44 items-center justify-center gap-4 md:flex-wrap"
-                  >
-                    <motion.div className="grid grid-cols-3 gap-6">
-                      {chunk.map((item, j) => (
-                        <motion.div
-                          key={`chunk.item.${j}`}
-                          className="flex flex-col items-center"
-                        >
-                          <img
-                            src={item.img}
-                            className="w-12 h-12 rounded-full object-cover"
-                            alt="speaker"
-                          />
-                          <h1 className="text-xs font-mont text-center mt-1 xborder-tx xborder-slate-600 pb-1 ">
-                            {item?.name}
-                          </h1>
-                        </motion.div>
-                      ))}
+              {/* <Carousel dotPosition={"right"} autoplay> */}
+              {
+                // chunks.map((chunk, i) => (
+                //   <div
+                //     key={i}
+                //     className="items-center justify-center gap-4 md:flex-wrap"
+                //   >
+                <motion.div className="grid grid-cols-3 gap-6 group">
+                  {speakers?.map((item, j) => (
+                    <motion.div
+                      onClick={() => navigate(`/speakers/${j}`)}
+                      key={`chunk.item.${j}`}
+                      layout
+                      className={`flex cursor-pointer scale-100 transition-all flex-col items-center ${
+                        hoveredIndex !== null && hoveredIndex !== j
+                          ? "opacity-50 saturate-50"
+                          : "opacity-100 saturate-100"
+                      } hover:scale-[1.1]`}
+                      onMouseEnter={() => setHoveredIndex(j)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                    >
+                      <img
+                        src={item.img}
+                        className="w-16 border-2 shadow-md border-white h-16 rounded-full object-cover"
+                        alt="speaker"
+                      />
+                      <h1 className="text-xs font-mont text-center mt-1 xborder-tx xborder-slate-600 pb-1 ">
+                        {item?.name}
+                      </h1>
                     </motion.div>
-                  </div>
-                ))}
-              </Carousel>
+                  ))}
+                </motion.div>
+                // </div>
+                // ))
+              }
+              {/* </Carousel> */}
             </motion.div>
           ) : (
             <motion.div
@@ -302,7 +316,7 @@ function Speakers({ delay }) {
                 translateY: 10,
                 transition: { duration: 0.5 },
               }}
-              className="mt-4"
+              className="mt-4 pt-10"
             >
               <Carousel dotPosition={"right"} autoplay>
                 {speakers?.map((item, i) => (
@@ -314,10 +328,12 @@ function Speakers({ delay }) {
                         alt="speaker"
                       />
                       <div className="flex flex-col items-start gap-1">
-                        <h1 className="text-lg font-semibold  border-b border-slate-600 pb-1 ">
+                        <h1 className="text-base md:text-lg font-semibold  border-b border-slate-600 pb-1 ">
                           {item?.name}
                         </h1>
-                        <p className="text-xs font-mont ">{item?.bio}</p>
+                        <p className="text-xs font-mont md:block hidden">
+                          {item?.bio}
+                        </p>
                         <p className="text-xs w-20 scale-90 text-center bg-opacity-75 border border-indigo-300 text-indigo-600 bg-white rounded-full px-2 py-0.5">
                           {items[item?.type]}
                         </p>

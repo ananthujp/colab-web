@@ -93,6 +93,9 @@ function App() {
       case "speakers":
         return 4;
         break;
+      case "agenda":
+        return 1;
+        break;
       default:
         return 0;
     }
@@ -170,7 +173,9 @@ function App() {
               <Route path=":postId" element={<Theme />} />
             </Route>
             <Route path="contact" element={<Contact />} />
-            <Route path="speakers" element={<Speakers />} />
+            <Route path="speakers" element={<Speakers />}>
+              <Route path=":speakerId" element={<Speakers />} />
+            </Route>
             <Route path="admin" element={<Dash />} />
             <Route path="privacy" element={<Privacy />} />
             <Route path="virtual">

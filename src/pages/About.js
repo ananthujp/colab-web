@@ -256,7 +256,12 @@ function About() {
         </Form>
       </Modal>
       <motion.div className="w-full overflow-auto px-6 md:px-12 mt-4 gap-6 flex flex-col h-screen md:h-[90%]">
-        <div className="flex flex-col items-center md:items-start rounded-md border border-indigo-100 bg-indigo-50 p-6">
+        <motion.div
+          initial={{ opacity: 0, translateY: -20 }}
+          animate={{ opacity: 1, translateY: 0, transition: { duration: 0.5 } }}
+          exit={{ opacity: 0, translateY: -20, transition: { duration: 0.5 } }}
+          className="flex flex-col items-center md:items-start rounded-md border border-indigo-100 bg-indigo-50 p-6"
+        >
           <h1 className="font-mont  mb-2 pb-2 border-b border-slate-300  text-lg font-medium text-slate-800">
             About CoLab 2024
           </h1>
@@ -271,8 +276,17 @@ function About() {
               students pave the way for a better tomorrow.
             </p>
           </div>
-        </div>
-        <div className="flex flex-col items-center md:items-start p-6 rounded-md border border-indigo-100 bg-indigo-50">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, translateY: -20 }}
+          animate={{
+            opacity: 1,
+            translateY: 0,
+            transition: { duration: 0.5, delay: 0.2 },
+          }}
+          exit={{ opacity: 0, translateY: -20, transition: { duration: 0.5 } }}
+          className="flex flex-col items-center md:items-start p-6 rounded-md border border-indigo-100 bg-indigo-50"
+        >
           <h1 className="font-mont  mb-2 pb-2 border-b border-slate-300  text-lg font-medium text-slate-800">
             About IIT Gandhinagar
           </h1>
@@ -291,8 +305,17 @@ function About() {
               diverse interdisciplinary domains.
             </p>
           </div>
-        </div>
-        <div className="flex gap-8 items-center justify-center flex-row flex-wrap p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, translateY: -20 }}
+          animate={{
+            opacity: 1,
+            translateY: 0,
+            transition: { duration: 0.5, delay: 0.4 },
+          }}
+          exit={{ opacity: 0, translateY: -20, transition: { duration: 0.5 } }}
+          className="flex gap-8 items-center justify-center flex-row flex-wrap p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50"
+        >
           <h1 className="font-mont mb-2 pb-2 border-b border-slate-300  flex flex-row text-lg font-semibold text-slate-800 w-full justify-between">
             Core Team
             {user?.role === "admin" && (
@@ -395,8 +418,17 @@ function About() {
               </div>
             </div>
           ))}
-        </div>
-        <div className="flex flex-col items-center md:items-start gap-3 p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, translateY: -20 }}
+          animate={{
+            opacity: 1,
+            translateY: 0,
+            transition: { duration: 0.5, delay: 0.2 },
+          }}
+          exit={{ opacity: 0, translateY: -20, transition: { duration: 0.5 } }}
+          className="flex flex-col items-center md:items-start gap-3 p-6 mb-5 rounded-md border border-indigo-100 bg-indigo-50"
+        >
           <h1 className="font-mont mb-2 pb-2  border-b border-slate-300 text-lg font-semibold text-slate-800">
             About Website
           </h1>
@@ -568,7 +600,7 @@ function About() {
               pikisuperstar, upklyak, brgfx, freepik, vectorpocket
             </h1>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </Page>
   );

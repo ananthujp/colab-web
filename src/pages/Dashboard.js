@@ -96,7 +96,7 @@ function Dash() {
           {/* <div className="flex flex-col w-full xmd:flex-row gap-4 mt-2">
           
           </div> */}
-          <Agenda />
+          {/* <Agenda /> */}
         </div>
       </motion.div>
     </Page>
