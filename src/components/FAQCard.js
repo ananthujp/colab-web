@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarDaysIcon } from "@heroicons/react/24/solid";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
@@ -117,8 +117,8 @@ function FAQCard({ delay = 0 }) {
         }}
         className="text-lg mb-4 md:mb-2 flex items-start gap-2 justify-between  flex-row font-pop font-semibold text-slate-800"
       >
-        <div className="flex flex-row gap-2 items-center">
-          <CalendarDaysIcon className="w-6" />
+        <div className="flex border-b pb-2 mb-2 border-slate-300 flex-row gap-2 items-center">
+          <ChatBubbleLeftRightIcon className="w-6" />
           <h1>Frequently Asked Questions</h1>
         </div>
         {/* <motion.button

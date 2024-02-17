@@ -106,7 +106,7 @@ const WhyCard = ({ delay }) => {
             }
           : null
       }
-      className="relative w-[90%] bg-slate-200/40 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:border-gray-400 md:w-full flex flex-col justify-between rounded-lg"
+      className="relative w-[90%] bg-slate-100/40 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-300 hover:border-gray-400 md:w-full flex flex-col justify-between rounded-lg"
     >
       {isInView && (
         <>
@@ -124,7 +124,7 @@ const WhyCard = ({ delay }) => {
             }}
             className=" px-4 pt-4 pb-2 w-full z-50 text-lg  flex items-start   flex-row font-pop font-semibold text-slate-800"
           >
-            <div className="flex flex-row gap-2 items-center">
+            <div className="flex flex-row gap-2 border-b pb-2 border-slate-300 items-center">
               <LightBulbIcon className="w-6" />
               <h1>Why IITGN</h1>
             </div>
@@ -139,8 +139,8 @@ const WhyCard = ({ delay }) => {
                 <motion.h1
                   onHoverStart={() => setActive(index)}
                   onHoverEnd={() => setActive(null)}
-                  className={`text-slate-600 z-50 ${
-                    active === index && item.textColor
+                  className={` z-50 ${
+                    active === index ? item.textColor : "text-slate-600"
                   } w-full flex transition-all flex-col`}
                 >
                   {item.icon}
@@ -157,16 +157,16 @@ const WhyCard = ({ delay }) => {
                   {active === index && (
                     <motion.span
                       layoutId="why.card.hover"
-                      className={`absolute inset-0 border w-[90%] ${item.hoverColor} mx-auto my-auto  scale-110 rounded-md`}
+                      className={`absolute inset-0 border w-[90%] ${item.hoverColor} mx-auto my-auto h-16 rounded-md`}
                     />
                   )}
                   <h1
                     className={`relative flex flex-col items-center ${
-                      active === index && "text-slate-800 "
+                      active === index && "text-slate-600 "
                     }  z-10`}
                   >
                     <h1>{item.category}</h1>
-                    <h1 className="text-center text-xs w-[80%] h-8 font-mont font-thin">
+                    <h1 className="text-center text-slate-400 text-xs w-[80%] h-8 font-mont font-normal">
                       {item.Tag}
                     </h1>
                   </h1>

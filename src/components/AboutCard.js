@@ -1,15 +1,25 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
 function Card() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
+
+  const [spotlightPosition, setSpotlightPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setSpotlightPosition({
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    });
+  };
   return (
     <motion.div
+      onMouseMove={handleMouseMove}
       ref={ref}
       layoutId={`pgm.about`}
       initial={nav.from !== "about" && { opacity: 0, translateY: -20 }}
@@ -29,8 +39,28 @@ function Card() {
             }
           : null
       }
-      className=" flex flex-col justify-between font-mont transition-all gap-2 p-4 w-[90%] md:w-full  hover:border-orange-100  md:h-64 border border-indigo-400 bg-gradient-to-br from-purple-400 to-indigo-500 hover:to-indigo-600 rounded-lg shadow-md "
+      className=" flex flex-col group relative justify-between font-mont transition-all gap-2 p-4 w-[90%] md:w-full  hover:border-orange-100  md:h-64 border border-indigo-400 bg-gradient-to-br from-purple-400 to-indigo-500 hover:to-indigo-600 rounded-lg shadow-md "
     >
+      <div
+        onMouseMove={handleMouseMove}
+        className="absolute hidden group-hover:block rounded-lg top-0 left-0 w-full h-full overflow-hidden"
+      >
+        <div
+          className="pattern-dots pattern-white pattern-size-2 pattern-opacity-80 "
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            // backgroundImage: `url('https://www.iitgn.ac.in/openhouse/assets/images/index-meta.jpeg')`, // replace 'your-image-url' with your image URL
+            backgroundSize: "cover",
+            maskImage: `radial-gradient(circle at ${spotlightPosition.x}px ${spotlightPosition.y}px, black 0%, transparent 20%)`,
+            WebkitMaskImage: `radial-gradient(circle at ${spotlightPosition.x}px ${spotlightPosition.y}px, black 0%, transparent 20%)`,
+          }}
+        />
+        {/* Rest of your component */}
+      </div>
       {isInView && (
         <div className="flex flex-row relative">
           <div className="flex flex-col gap-2 p-4">
@@ -110,22 +140,6 @@ function Card() {
               More
             </motion.button>
           </div>
-          {/* <motion.img
-            initial={{ opacity: 0, translateY: -20 }}
-            animate={{
-              opacity: 1,
-              translateY: 0,
-              transition: { duration: 0.5, delay: 0.5 },
-            }}
-            exit={{
-              opacity: 0,
-              translateY: 20,
-              transition: { duration: 0.5 },
-            }}
-            src={lalm}
-            className="w-32 -mt-12"
-            alt=""
-          /> */}
         </div>
       )}
     </motion.div>

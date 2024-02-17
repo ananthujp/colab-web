@@ -10,6 +10,7 @@ import pharma from "../imgs/pharma.png";
 import climate from "../imgs/climate.png";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
+import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
 const cardVar = [
   {
     label: "Bioengineering, Healthcare, Pharma",
@@ -78,10 +79,11 @@ function ExpandCard() {
             }
           : null
       }
-      className=" flex flex-col md:flex-row mt-6 md:mt-8 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-gray-100/60"
+      className=" flex flex-col md:flex-row mt-6 md:mt-8 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-indigo-200 hover:border-indigo-300"
     >
-      <div className="flex flex-col items-start justify-end p-2 md:p-0 bg-opacity-75 md:w-8 transition-all md:rounded-l-lg bg-gradient-to-br from-indigo-400 to-indigo-400 ">
-        <h1 className="whitespace-nowrap font-pop font-semibold text-white ml-1 text-base transform origin-top-left md:-rotate-90">
+      <div className="flex flex-col items-start justify-end p-2 md:p-0 bg-opacity-75 md:w-12 transition-all md:rounded-l-md bg-gradient-to-br from-indigo-400 to-indigo-400 ">
+        <h1 className="whitespace-nowrap font-pop font-semibold text-white ml-2 border-b pr-1 border-white text-base transform origin-top-left md:-rotate-90">
+          <BuildingOffice2Icon className="w-5 inline-block -mt-1 mr-2" />
           Domains in Focus
         </h1>
       </div>
@@ -103,7 +105,7 @@ function ExpandCard() {
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
           key={`exp.card.${index}`}
           className={`relative cursor-pointer ${
-            index === cardVar.length - 1 && " md:rounded-r-lg"
+            index === cardVar.length - 1 && " md:rounded-r-md"
           } group bg-gradient-to-br group gap-3 hover:bg-opacity-20 from-slate-100 to-slate-300 group flex flex-row md:flex-col md:justify-around text-xs md:text-sm ${
             item.bg
           } text-center font-mont w-full h-24 md:h-auto hover:p-6 transition-all duration-250 text-white flex justify-between items-center`}

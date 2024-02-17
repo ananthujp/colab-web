@@ -192,7 +192,7 @@ function Speakers({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className={`mt-8 md:mt-0 relative md:h-full bg-gradient-to-br from-slate-100/70 to-slate-200/70  border border-gray-200 hover:border-gray-400 flex flex-col xjustify-between p-4 rounded-lg`}
+          className={`mt-8 md:mt-0 relative md:h-full  bg-slate-100/70  border border-gray-300 hover:border-gray-400 flex flex-col xjustify-between p-4 rounded-lg`}
         >
           <div className="absolute z-50 w-[90%] top-4 flex flex-row  justify-between">
             <motion.h1
@@ -204,8 +204,10 @@ function Speakers({ delay }) {
               }}
               className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-slate-600"
             >
-              <MicrophoneIcon className="w-5" />
-              <h1>Speakers</h1>
+              <div className="flex flex-row gap-2 border-b pb-2 border-slate-300 items-center">
+                <MicrophoneIcon className="w-5" />
+                <h1>Speakers</h1>
+              </div>
             </motion.h1>
             <div className="flex flex-row gap-1">
               {user?.role === "admin" && (
@@ -215,7 +217,7 @@ function Speakers({ delay }) {
                   animate={{ opacity: 1, transition: { duration: 0.5 } }}
                   exit={{ opacity: 0, transition: { duration: 0.5 } }}
                   key={`exp.card.btn`}
-                  className="bg-gradient-to-br flex font-mont from-slate-50 to-slate-200 text-slate-600 text-xs px-4 py-1 rounded-full font-medium cursor-pointer hover:to-slate-300"
+                  className="rounded-full border font-semibold w-24 text-sm px-2 py-1 text-slate-600 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
                 >
                   Add
                 </motion.div>
@@ -229,7 +231,7 @@ function Speakers({ delay }) {
                 animate={{ opacity: 1, transition: { duration: 0.5 } }}
                 exit={{ opacity: 0, transition: { duration: 0.5 } }}
                 key={`exp.card.btn`}
-                className="bg-gradient-to-br flex font-mont from-slate-50 to-slate-200 text-slate-600 text-xs px-4 py-1 rounded-full font-medium cursor-pointer hover:to-slate-300"
+                className="rounded-full cursor-pointer h-8 font-pop text-center border font-semibold w-24 text-sm px-2 py-1 text-slate-800 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
               >
                 More
               </motion.div>
@@ -248,10 +250,12 @@ function Speakers({ delay }) {
               //   translateY: 10,
               //   transition: { duration: 0.5 },
               // }}
-              className=" h-56 pt-12 overflow-y-scroll"
+              className="flex h-56 pt-12 relative "
             >
-              {
-                <motion.div className="grid grid-cols-3 gap-6 group">
+              <div className="bg-gradient-to-b from-slate-100 to-transparent z-10 h-16 absolute top-0 w-full " />
+
+              <div className=" absolute top-0 overflow-y-auto h-full">
+                <motion.div className="grid pt-10 grid-cols-3 gap-6 group">
                   {speakers?.map((item, j) => (
                     <motion.div
                       initial={{ opacity: 0, translateY: -10 }}
@@ -294,7 +298,7 @@ function Speakers({ delay }) {
                     </motion.div>
                   ))}
                 </motion.div>
-              }
+              </div>
             </motion.div>
           ) : (
             <motion.div

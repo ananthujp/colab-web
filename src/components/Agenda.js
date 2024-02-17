@@ -371,7 +371,7 @@ function Agenda({ delay }) {
             }}
             className="text-lg mb-4 md:mb-2 flex items-start gap-2 justify-between  flex-row font-pop font-semibold text-slate-800"
           >
-            <div className="flex flex-row gap-2 items-center">
+            <div className="flex flex-row border-b pb-2 border-slate-300 gap-2 items-center">
               <CalendarDaysIcon className="w-6" />
               <h1>Agenda</h1>
             </div>

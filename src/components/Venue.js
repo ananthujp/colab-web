@@ -35,7 +35,7 @@ function Venue({ delay }) {
                 translateY: 0,
                 transition: { duration: 0.5, delay: 0.5 * delay + 0.3 },
               }}
-              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-salte-600"
+              className="text-lg border-b pb-2 mb-2 border-slate-300 flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-salte-600"
             >
               <MapPinIcon className="w-5" />
               <h1>Venue</h1>
@@ -50,7 +50,7 @@ function Venue({ delay }) {
                 animate={{ opacity: 1, transition: { duration: 0.5 } }}
                 exit={{ opacity: 0, transition: { duration: 0.5 } }}
                 key={`exp.card.btn`}
-                className="bg-gradient-to-br flex font-mont from-slate-50 to-slate-200 text-slate-600 text-xs px-4 py-1 rounded-full font-medium cursor-pointer hover:to-slate-300"
+                className="rounded-full h-8 font-pop text-center border font-semibold w-24 text-sm px-2 py-1 text-slate-800 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
               >
                 More
               </motion.div>

@@ -153,7 +153,7 @@ function Home({ open, setOpen }) {
                 <WhyCard delay={1} />
                 <Card delay={2} />
               </div>
-              <div className="w-full flex justify-center md:w-[35%]">
+              <div className="w-full flex justify-center md:w-[40%]">
                 <Agenda delay={3} />
               </div>
             </motion.div>

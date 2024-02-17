@@ -77,7 +77,7 @@ function QuickLinks({ delay }) {
                 translateY: 0,
                 transition: { duration: 0.5, delay: 0.5 * delay + 0.3 },
               }}
-              className="text-lg flex items-center gap-2 ml-2  flex-row font-pop font-semibold text-slate-600"
+              className="text-lg flex border-b pb-2 border-slate-300 mb-2 items-center gap-2 ml-2  flex-row font-pop font-semibold text-slate-600"
             >
               <LinkIcon className="w-5" />
               <h1>Quick Links</h1>
