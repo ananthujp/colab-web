@@ -5,7 +5,7 @@ import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import BlogSlider from "../components/ProgramCard";
 import Contact from "../components/ContactCard";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import useReducer from "../hook/reducerHook";
 import Footer from "../components/Footer";
 import Load from "./Load";
@@ -19,6 +19,7 @@ import QuickLinks from "../components/QuickLinks";
 import Venue from "../components/Venue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import logo2 from "../imgs/iitgn-logo.png";
+
 function Home({ open, setOpen }) {
   const [hidden, setHidden] = useState(false);
   const [login_load, setLoad] = useState(false);
@@ -138,72 +139,8 @@ function Home({ open, setOpen }) {
           </Form.Item>
         </Form>
       </Modal>
-      {/* <div
-        class="absolute top-0 left-0 rotate-180 -translate-x-3/4 -scale-x-100 blur-3xl opacity-70 pointer-events-none"
-        aria-hidden="true"
-      >
-        <img
-          src={shape}
-          class="max-w-none -hue-rotate-30	"
-          width="852"
-          height="582"
-          alt="Illustration"
-        />
-      </div>
-      <div
-        class="absolute top-1/3 right-1/2 -translate-y-1/2 translate-x-1/4 blur-3xl opacity-30 pointer-events-none"
-        aria-hidden="true"
-      >
-        <img
-          src={shape}
-          class="max-w-none"
-          width="852"
-          height="582"
-          alt="Illustration"
-        />
-      </div> */}
-      <div className="z-10 flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
-        {false && (
-          <motion.div
-            key={`top.bar`}
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 0.5 },
-            }}
-            exit={{
-              opacity: 0,
-              transition: { duration: 0.5, delay: 0.1 },
-            }}
-            className="fixed z-[100] py-4 top-0 border-b border-slate-200/40 bg-gradient-to-b w-full from-green-200/20 to-transparent bg-clip-padding xbackdrop-filter backdrop-blur-sm bg-opacity-10"
-          >
-            <div className="flex w-full mt-2 mx-auto flex-row max-w-5xl justify-between">
-              <div className="flex flex-row mx-6 md:mx-0">
-                <img src={logo} className="w-8 h-8 mt-0.5" alt="" />
-                <div className="flex flex-col ml-1.5">
-                  <motion.h1 className="text-xs font-pop text-slate-300 xtext-slate-600 font-light">
-                    IIT Gandhinagar
-                  </motion.h1>
-                  <p className=" font-pop font-bold text-lg -mt-1 text-white">
-                    CoLab 2024
-                    {/* <span className="text-xl ">C</span>
-                    <span className="text-md mx-0.5">o</span>
-                    <span className="text-xl mx-0.5">L</span>
-                    <span className="text-md mx-0.5">ab</span>
-                    <span className="text-xl mx-4">2024</span> */}
-                  </p>
-                </div>
-              </div>
-              <Navbar key={`nav.bar`} />
 
-              <img
-                src={logo2}
-                className="w-10 h-10 hidden md:block my-auto"
-                alt=""
-              />
-            </div>
-          </motion.div>
-        )}
+      <div className="z-10 flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
         <Hero />
 
         <div className="flex bg-gradient-to-br  relative pt-4 justify-center bg-cover bg-no-repeat bg-opacity-20 xbg-[url('tp238-background-03.png')] w-full">
@@ -213,8 +150,8 @@ function Home({ open, setOpen }) {
             <ExpandCard />
             <motion.div className="flex flex-col  md:w-full md:flex-row gap-6">
               <div className="flex flex-col items-center gap-6 w-full md:w-[60%]">
-                <Card />
-                <WhyCard delay={2} />
+                <WhyCard delay={1} />
+                <Card delay={2} />
               </div>
               <div className="w-full flex justify-center md:w-[35%]">
                 <Agenda delay={3} />

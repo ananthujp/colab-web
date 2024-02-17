@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowLeftIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import Navbar from "../components/Navbar";
+import { HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
+
 import useReducer from "../hook/reducerHook";
 import ray from "../imgs/ray.png";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Breadcrumb } from "antd";
 function Page({ children, page, no, title, backButton }) {
   const { setNav } = useReducer();
@@ -12,10 +12,6 @@ function Page({ children, page, no, title, backButton }) {
   const currentRoute = useLocation().pathname;
   return (
     <motion.div
-      // style={{
-      //   backgroundPosition: "right",
-      //   backgroundSize: "auto",
-      // }}
       layoutId="hero.bg.black"
       className="flex justify-center w-full h-full md:h-screen bg-gradient-to-br from-slate-900 to-slate-700 bg-no-repeat xbg-[url('tp238-background-03.png')] "
     >
@@ -33,12 +29,7 @@ function Page({ children, page, no, title, backButton }) {
         />
       </div>
 
-      <motion.div
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.3 } }}
-        // exit={{ opacity: 0, transition: { duration: 0.5 } }}
-        className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex"
-      >
+      <motion.div className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="flex relative flex-col w-[95%] gap-4 bg-gradient-to-br shadow-md border border-white from-white to-slate-200 mt-4 rounded-lg mb-32 md:mb-0 md:h-[85%] ">
           <div className="absolute flex flex-row z-10 items-center w-full justify-between p-2 ml-1">
             <div className="md:hidden block" />
@@ -109,11 +100,6 @@ function Page({ children, page, no, title, backButton }) {
           {children}
         </div>
       </motion.div>
-      {/* <div className="fixed md:absolute h-24 -mb-2 bottom-0 border border-slate-200/40 bg-gradient-to-t w-full from-slate-500/70 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 z-50 pointer-events-auto">
-        <div className=" flex mt-6 w-auto items-end justify-center scale-90">
-          <Navbar sel={no} dark />
-        </div>
-      </div> */}
     </motion.div>
   );
 }

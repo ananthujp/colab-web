@@ -7,7 +7,6 @@ import StallPreview from "./StallPreview";
 
 function VirtualPost() {
   const params = useParams();
-  const [postData, setPostData] = useState({});
   const [stallData, setStallData] = useState({});
   useEffect(() => {
     if (params.virtualId && params.createId) {

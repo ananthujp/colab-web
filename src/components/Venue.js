@@ -1,13 +1,6 @@
-import { MapPinIcon, PhoneArrowDownLeftIcon } from "@heroicons/react/24/solid";
-import {
-  EnvelopeIcon,
-  MapIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+import { MapPinIcon } from "@heroicons/react/24/solid";
+import { MapIcon } from "@heroicons/react/24/outline";
 import React, { useRef } from "react";
-import YoutubeBackground from "react-youtube-background";
-
-import GoogleMapReact from "google-map-react";
 import mapImg from "../imgs/venue.avif";
 import { useInView, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +8,7 @@ import useReducer from "../hook/reducerHook";
 function Venue({ delay }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const { nav, setNav } = useReducer();
+  const { setNav } = useReducer();
   const navigate = useNavigate();
   return (
     <div ref={ref} className="w-[90%] md:w-full md:h-auto">

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { Carousel } from "antd";
 import {
   BeakerIcon,
@@ -10,7 +10,7 @@ import {
   MagnifyingGlassPlusIcon,
   MicrophoneIcon,
 } from "@heroicons/react/24/solid";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
 const BlogSlider = ({ delay }) => {
   const ref = useRef(null);
@@ -170,7 +170,7 @@ const BlogSlider = ({ delay }) => {
             >
               <Carousel dotPosition={"right"} autoplay>
                 {sliderItems.map((item, i) => (
-                  <div className="h-44 md:h-36">
+                  <div kay={`car.card.item.x${i}`} className="h-44 md:h-36">
                     <div className="flex flex-row items-start gap-8">
                       <h1 className="w-44">{item.ico}</h1>
 

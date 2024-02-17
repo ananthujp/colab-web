@@ -1,14 +1,4 @@
-import {
-  Route,
-  BrowserRouter,
-  Routes,
-  useLocation,
-  HashRouter,
-  RouterProvider,
-  createHashRouter,
-  Form,
-  Link,
-} from "react-router-dom";
+import { Route, Routes, useLocation, Link } from "react-router-dom";
 import {
   AnimatePresence,
   motion,
@@ -37,9 +27,9 @@ import Create from "./pages/Create";
 import CreateLab from "./pages/CreateLab";
 import VirtualPost from "./pages/VirtualPost";
 import ReactGA from "react-ga4";
-ReactGA.initialize("G-5JCED7TBZT");
 
 function App() {
+  ReactGA.initialize("G-5JCED7TBZT");
   const location = useLocation();
   const { load, user, logout } = useReducer();
   const { scrollY } = useScroll();
@@ -50,8 +40,6 @@ function App() {
       page: location.pathname,
       title: location.pathname,
     });
-
-    console.log(location.pathname + location.search);
   }, [location]);
   const [hidden, setHidden] = useState(false);
 
@@ -188,7 +176,7 @@ function App() {
             </Route>
             <Route path="admin" element={<Dash />} />
             <Route path="privacy" element={<Privacy />} />
-            <Route path="virtual">
+            {/* <Route path="virtual">
               <Route path="" element={<Virtual />} />
               <Route path="create" element={<CreateLab />} />
 
@@ -199,7 +187,7 @@ function App() {
                 </Route>
                 <Route path=":createId" element={<VirtualPost />} />
               </Route>
-            </Route>
+            </Route> */}
             <Route path="agenda" element={<Agenda />}>
               <Route path=":postId" element={<Theme />} />
             </Route>

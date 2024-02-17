@@ -4,13 +4,10 @@ import { motion } from "framer-motion";
 import useReducer from "../hook/reducerHook";
 import { colors, icons } from "./Colors";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { Popover, Progress } from "antd";
 function Agenda() {
-  const { data, user } = useReducer();
+  const { data } = useReducer();
   const params = useParams();
-  const navigate = useNavigate();
-  const [hover, setHover] = useState(false);
   const [progress, setProgress] = useState(0);
   const [eei, setI] = useState(0);
   const [isHovered, setIsHovered] = useState(false);

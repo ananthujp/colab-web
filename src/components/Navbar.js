@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Transition } from "@headlessui/react";
 
 import { Fragment } from "react";
@@ -45,9 +40,8 @@ const items = [
 ];
 
 function MyDropdown({ sel }) {
-  // const [sel, setsel] = React.useState(sel ? sel : 0);
   const navigate = useNavigate();
-  const { nav, setNav } = useReducer();
+  const { setNav } = useReducer();
   return (
     <div className=" top-16 md:w-56 text-right">
       <Menu as="div" className="relative inline-block text-left">
@@ -81,7 +75,7 @@ function MyDropdown({ sel }) {
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-indigo-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-100 border border-gray-200 shadow-lg ring-1 ring-black/5 focus:outline-none">
             <div className="px-1 py-1 ">
               {items.map((item, i) => (
-                <Menu.Item key={`menu.it.${i}`}>
+                <Menu.Item key={`menu.it.mini.${i}`}>
                   {({ active }) => (
                     <button
                       onClick={() => {
@@ -141,7 +135,7 @@ function Navbar({ sel, vert }) {
       >
         {items.map((item, i) => (
           <motion.div
-            key={`nav.item.bar.${i}`}
+            key={`nav.${vert ? "vert" : "virt"}.item.bar.${i}`}
             onClick={() => {
               setNav({ from: items[sel].link, to: item.link });
               // setsel(i);

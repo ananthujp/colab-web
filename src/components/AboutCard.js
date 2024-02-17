@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import lalm from "../imgs/lalminar.png";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
 function Card() {
@@ -81,7 +80,7 @@ function Card() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className="text-xs text-justify font-light text-white"
+              className="text-xs text-justify font-base text-white"
             >
               CoLab 2024 is a dynamic convergence of academia and industry at
               the Indian Institute of Technology Gandhinagar. This event aims to

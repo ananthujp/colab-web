@@ -592,7 +592,7 @@ export const cardVar = [
         email: "pdayal@iitgn.ac.in",
       },
       {
-        name: "Vinod Narayan",
+        name: "Vinod Narayanan",
         link: "",
         img: "",
         designation: "Associate Professor",

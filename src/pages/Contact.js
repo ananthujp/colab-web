@@ -1,27 +1,9 @@
 import React from "react";
-import shape from "./shape.svg";
 import { motion } from "framer-motion";
-import {
-  BuildingOffice2Icon,
-  CalendarDaysIcon,
-  EnvelopeIcon,
-  LightBulbIcon,
-  LinkIcon,
-  MagnifyingGlassPlusIcon,
-  MicrophoneIcon,
-  PencilSquareIcon,
-  PhoneArrowDownLeftIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
-import Navbar from "../components/Navbar";
-import useReducer from "../hook/reducerHook";
-import { useNavigate } from "react-router-dom";
-import mapImg from "../imgs/map-cont.png";
+import { EnvelopeIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
+
 import Page from "./Page";
 function Contact() {
-  const { nav, setNav } = useReducer();
-  const navigate = useNavigate();
-
   return (
     <Page no={5} page="contact" title="Contact">
       <motion.div

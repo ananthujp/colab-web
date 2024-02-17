@@ -1,25 +1,19 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Avatar, FloatButton, Image } from "antd";
-import { PencilIcon } from "@heroicons/react/24/outline";
 import { DocumentIcon } from "@heroicons/react/24/solid";
 import "./Read.css";
 import "react-quill/dist/quill.snow.css";
 
 function StallPreview({ id, setPreviewMode, InitialValue }) {
-  const [pageLoad, setPageLoad] = useState(false);
-  // const [author, setAuthor] = useState({});
-  // const { user } = useReducer();
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [fileList, setFileList] = useState([]);
   const params = useParams();
-  const nav = useNavigate();
   const author = null;
   useEffect(() => {
-    setPageLoad(true);
     if (!id) {
       setValue(InitialValue.value);
       setTitle(InitialValue.title);

@@ -7,36 +7,16 @@ import {
   MailOutlined,
   TwitterOutlined,
 } from "@ant-design/icons";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import {
-  LinkIcon,
-  PencilIcon,
-  TrashIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
+import { LinkIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
 import logo from "../imgs/colab-logo.svg";
 import Page from "./Page";
 import lalminar from "../imgs/lalminar.png";
 import gitlogo from "../imgs/github-mark.png";
-import {
-  Input,
-  Modal,
-  Form,
-  InputNumber,
-  Button,
-  Checkbox,
-  Popover,
-} from "antd";
+import { Input, Modal, Form, InputNumber, Button, Popover } from "antd";
 const confirm = Modal.confirm;
 
 const showConfirm = ({ url }) => {
@@ -54,10 +34,6 @@ const showConfirm = ({ url }) => {
   });
 };
 function removeUndefinedFields(obj) {
-  // if (typeof obj !== "object" || obj === null) {
-  //   return obj;
-  // }
-
   for (const key in obj) {
     if (obj[key] === undefined) {
       delete obj[key];

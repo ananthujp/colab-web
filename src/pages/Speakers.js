@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Page from "./Page";
 import { motion } from "framer-motion";
-import {
-  PencilIcon,
-  PlusIcon,
-  TrashIcon,
-  UserIcon,
-} from "@heroicons/react/24/solid";
+import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { GlobalOutlined, MailOutlined } from "@ant-design/icons";
 import useReducer from "../hook/reducerHook";
 import { AddSpeaker } from "../components/Speakers";

@@ -1,15 +1,5 @@
-import {
-  MicrophoneIcon,
-  PhoneArrowDownLeftIcon,
-} from "@heroicons/react/24/solid";
-import {
-  EnvelopeIcon,
-  MapIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+import { MicrophoneIcon } from "@heroicons/react/24/solid";
 import React, { useEffect, useRef, useState } from "react";
-import GoogleMapReact from "google-map-react";
-import mapImg from "../imgs/map-cont.png";
 import { useInView, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
@@ -247,31 +237,45 @@ function Speakers({ delay }) {
           </div>
           {isHovered ? (
             <motion.div
-              initial={{ opacity: 0, translateY: -10 }}
-              animate={{
-                opacity: 1,
-                translateY: 0,
-                transition: { duration: 0.5 },
-              }}
-              exit={{
-                opacity: 0,
-                translateY: 10,
-                transition: { duration: 0.5 },
-              }}
+              // initial={{ opacity: 0, translateY: -10 }}
+              // animate={{
+              //   opacity: 1,
+              //   translateY: 0,
+              //   transition: { duration: 0.5 },
+              // }}
+              // exit={{
+              //   opacity: 0,
+              //   translateY: 10,
+              //   transition: { duration: 0.5 },
+              // }}
               className=" h-56 pt-12 overflow-y-scroll"
             >
               {
                 <motion.div className="grid grid-cols-3 gap-6 group">
                   {speakers?.map((item, j) => (
                     <motion.div
+                      initial={{ opacity: 0, translateY: -10 }}
+                      animate={{
+                        opacity: 1,
+                        translateY: 0,
+                        transition: {
+                          duration: 0.5,
+                          delay: 0.2 + 0.1 * j,
+                        },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        translateY: 10,
+                        transition: { duration: 0.5 },
+                      }}
                       onClick={() => navigate(`/speakers/${j}`)}
                       key={`chunk.item.${j}`}
                       layout
-                      className={`flex cursor-pointer rounded-md pt-2 hover:border hover:border-indigo-200 hover:bg-indigo-100 scale-100 transition-all flex-col items-center ${
+                      className={`flex cursor-pointer  transform rounded-md pt-2 hover:border hover:border-indigo-200 hover:bg-indigo-100 scale-100 transition-all flex-col items-center ${
                         hoveredIndex !== null && hoveredIndex !== j
-                          ? "opacity-50 saturate-50"
-                          : "opacity-100 saturate-100"
-                      } hover:scale-[1.1]`}
+                          ? "opacity-50 saturate-0"
+                          : "opacity-100  saturate-100"
+                      } `}
                       onMouseEnter={() => setHoveredIndex(j)}
                       onMouseLeave={() => setHoveredIndex(null)}
                     >

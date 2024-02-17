@@ -14,16 +14,7 @@ import {
   PencilSquareIcon,
   PlusIcon,
 } from "@heroicons/react/24/solid";
-import {
-  Alert,
-  Avatar,
-  FloatButton,
-  Input,
-  Modal,
-  Radio,
-  Spin,
-  Upload,
-} from "antd";
+import { Avatar, FloatButton, Input, Modal, Radio, Spin, Upload } from "antd";
 import StallPreview from "./StallPreview";
 const provider = new GoogleAuthProvider();
 const getBase64 = (file) =>

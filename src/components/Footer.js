@@ -19,9 +19,6 @@ const showConfirm = ({ url }) => {
     onOk() {
       window.open(url, "_blank");
     },
-    // onCancel() {
-    //   console.log('Cancel');
-    // },
   });
 };
 function Footer() {

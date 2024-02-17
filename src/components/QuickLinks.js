@@ -1,22 +1,13 @@
-import { LinkIcon, PhoneArrowDownLeftIcon } from "@heroicons/react/24/solid";
-import {
-  EnvelopeIcon,
-  MapIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+import { LinkIcon } from "@heroicons/react/24/solid";
+
 import React, { useRef } from "react";
-import GoogleMapReact from "google-map-react";
-import mapImg from "../imgs/map-cont.png";
 import { useInView, motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import useReducer from "../hook/reducerHook";
 import { Modal } from "antd";
 function QuickLinks({ delay }) {
   const ref = useRef(null);
   const { confirm } = Modal;
   const isInView = useInView(ref, { once: true });
-  const { nav, setNav } = useReducer();
-  const navigate = useNavigate();
+
   const showConfirm = ({ url }) => {
     confirm({
       title: "External Link",

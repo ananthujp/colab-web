@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import Page from "./Page";
-import {
-  addDoc,
-  collection,
-  doc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import useReducer from "../hook/reducerHook";
 import { Form, Button, Input, Space, message } from "antd";
-import TextArea from "antd/es/input/TextArea";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { UserIcon } from "@heroicons/react/24/solid";
 const provider = new GoogleAuthProvider();

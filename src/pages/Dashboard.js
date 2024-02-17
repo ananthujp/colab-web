@@ -1,40 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FacebookOutlined,
-  InstagramOutlined,
-  LinkedinOutlined,
-  MailOutlined,
-  TwitterOutlined,
-} from "@ant-design/icons";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
-import {
-  LinkIcon,
-  PencilIcon,
-  TrashIcon,
-  UserPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
-import useReducer from "../hook/reducerHook";
-import { useNavigate } from "react-router-dom";
-import logo from "../imgs/colab-logo.svg";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 import Page from "./Page";
-import lalminar from "../imgs/lalminar.png";
-import gitlogo from "../imgs/github-mark.png";
-import { Input, Modal, Form, InputNumber, Button } from "antd";
-import Agenda from "../components/Agenda";
 
 function Dash() {
-  const { nav, setNav, about_data, user } = useReducer();
   const [data, setData] = useState();
   useEffect(() => {
     getDocs(collection(db, "requests")).then((item) =>

@@ -1,18 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
 import { motion, useInView } from "framer-motion";
 import {
-  BeakerIcon,
-  BuildingOffice2Icon,
   CalendarDaysIcon,
-  LinkIcon,
-  MicrophoneIcon,
   PencilIcon,
-  PencilSquareIcon,
-  PhotoIcon,
   TrashIcon,
-  UserGroupIcon,
-  UsersIcon,
 } from "@heroicons/react/24/solid";
 import {
   Form,
@@ -23,23 +14,15 @@ import {
   Progress,
   Popover,
   InputNumber,
-  Checkbox,
   Switch,
   Space,
 } from "antd";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import useReducer from "../hook/reducerHook";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { colors, icons } from "../pages/Colors";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Agenda({ delay }) {
   const ref = useRef(null);
@@ -67,12 +50,9 @@ function Agenda({ delay }) {
   const [open, setOpen] = useState(false);
   const { data, user } = useReducer();
   const [form] = Form.useForm();
-  const { nav, setNav } = useReducer();
+  const { setNav } = useReducer();
   const navigate = useNavigate();
-  const handleEdit = (editData) => {
-    form.resetFields();
-    edit.edit && setOpen(true);
-  };
+
   useEffect(() => {
     edit.edit && setOpen(true);
     edit.edit && form.setFieldsValue(edit.data);

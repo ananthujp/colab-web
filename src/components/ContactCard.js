@@ -3,18 +3,12 @@ import {
   PhoneIcon,
   UsersIcon,
 } from "@heroicons/react/24/solid";
-import {
-  EnvelopeIcon,
-  MapIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+import { EnvelopeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import React, { useRef, useState } from "react";
-import GoogleMapReact from "google-map-react";
-import mapImg from "../imgs/map-cont.png";
 import { useInView, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
-import { Button, Cascader, Form, Input, Modal, Select, message } from "antd";
+import { Button, Cascader, Form, Input, Modal, message } from "antd";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { cardVar } from "../pages/profData";

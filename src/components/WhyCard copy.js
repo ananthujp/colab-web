@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 import {
@@ -49,38 +49,40 @@ const WhyCard = ({ delay }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const { nav } = useReducer();
-  const [active, setActive] = useState(null);
   const items = [
     {
       category: "Innovation",
-      icon: <LightBulbIcon className="  w-20 mx-auto " />,
-      hoverColor: "bg-white border-yellow-500",
-      textColor: "text-yellow-500",
+      icon: (
+        <LightBulbIcon className="w-16 text-white group-hover:text-indigo-600 " />
+      ),
       bgColor: "rgb(199, 210, 254)",
       bgColorLight: "rgb(238,242,255)",
       textColorHover: "#4C5656",
+      textColor: "text-slate-600",
       boxShadowColor: "rgba(255, 215, 97, 0.48)",
       Tag: "Transforming Ideas into Reality",
     },
     {
       category: "Ecosystem",
-      icon: <BuildingOffice2Icon className=" w-20 mx-auto " />,
-      hoverColor: "bg-white border-green-500",
-      textColor: "text-green-500",
+      icon: (
+        <BuildingOffice2Icon className="w-16 text-white group-hover:text-cyan-600" />
+      ),
       bgColor: "#B8F9D3",
       bgColorLight: "#e2fced",
       textColorHover: "#4C5656",
+      textColor: "textslate-600",
       boxShadowColor: "rgba(184, 249, 211, 0.48)",
       Tag: "Pioneering Entrepreneurial Frontiers",
     },
     {
       category: "Collaboration",
-      icon: <UserGroupIcon className=" w-20 mx-auto" />,
-      hoverColor: "bg-white border-indigo-500",
-      textColor: "text-indigo-500",
+      icon: (
+        <UserGroupIcon className="w-16 text-white   group-hover:text-fuchsia-600" />
+      ),
       bgColor: "rgb(245 208 254)",
       bgColorLight: "rgb(253 244 255)",
       textColorHover: "#fff",
+      textColor: "text-fslate-600",
       boxShadowColor: "rgba(206, 178, 252, 0.48)",
       Tag: "Crafting Success through Industry Partnerships",
     },
@@ -122,68 +124,26 @@ const WhyCard = ({ delay }) => {
               translateY: 20,
               transition: { duration: 0.5 },
             }}
-            className=" px-4 pt-4 pb-2 w-full z-50 text-lg  flex items-start   flex-row font-pop font-semibold text-slate-800"
+            className="absolute p-4 w-full z-50 text-lg mb-4 md:mb-2 flex items-start gap-2 justify-between  flex-row font-pop font-semibold text-slate-800"
           >
             <div className="flex flex-row gap-2 items-center">
               <LightBulbIcon className="w-6" />
               <h1>Why IITGN</h1>
             </div>
           </motion.h1>
-          <div className="h-full w-full flex item flex-col">
-            <div className="flex flex-row justify-between   items-center relative w-full h-full">
-              <div
-                className="h-full absolute w-full pattern-dots pattern-slate-500 pattern-bg-white 
-  pattern-size-2 pattern-opacity-20"
+          <div className="grid grid-cols-3 transform gap-0 w-full justify-between">
+            {items.map((item, index) => (
+              <Card
+                icon={item.icon}
+                tag={item.Tag}
+                category={item.category}
+                bgColor={item.bgColor}
+                textColor={item.textColor}
+                bgColorLight={item.bgColorLight}
+                textColorHover={item.textColorHover}
+                boxShadowColor={item.boxShadowColor}
               />
-              {items.map((item, index) => (
-                <motion.h1
-                  onHoverStart={() => setActive(index)}
-                  onHoverEnd={() => setActive(null)}
-                  className={`text-slate-600 z-50 ${
-                    active === index && item.textColor
-                  } w-full flex transition-all flex-col`}
-                >
-                  {item.icon}
-                </motion.h1>
-              ))}
-            </div>
-            <div className="flex flex-row justify-between  items-center font-mont font-semibold pb-6 pt-3  w-full">
-              {items.map((item, index) => (
-                <motion.h1
-                  onHoverStart={() => setActive(index)}
-                  onHoverEnd={() => setActive(null)}
-                  className="relative text-center cursor-pointer w-full"
-                >
-                  {active === index && (
-                    <motion.span
-                      layoutId="why.card.hover"
-                      className={`absolute inset-0 border w-[90%] ${item.hoverColor} mx-auto my-auto  scale-110 rounded-md`}
-                    />
-                  )}
-                  <h1
-                    className={`relative flex flex-col items-center ${
-                      active === index && "text-slate-800 "
-                    }  z-10`}
-                  >
-                    <h1>{item.category}</h1>
-                    <h1 className="text-center text-xs w-[80%] h-8 font-mont font-thin">
-                      {item.Tag}
-                    </h1>
-                  </h1>
-                </motion.h1>
-                // <Card
-                //   key={index}
-                //   category={item.category}
-                //   bgColor={item.bgColor}
-                //   bgColorLight={item.bgColorLight}
-                //   textColorHover={item.textColorHover}
-                //   textColor={item.textColor}
-                //   boxShadowColor={item.boxShadowColor}
-                //   icon={item.icon}
-                //   tag={item.Tag}
-                // />
-              ))}
-            </div>
+            ))}
           </div>
         </>
       )}
