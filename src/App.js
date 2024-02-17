@@ -29,20 +29,30 @@ import Navbar from "./components/Navbar";
 import useReducer from "./hook/reducerHook";
 import Load from "./pages/Load";
 import Agenda from "./pages/Agenda";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dash from "./pages/Dashboard";
 import Privacy from "./pages/Privacy";
 import Virtual from "./pages/Virtual";
 import Create from "./pages/Create";
 import CreateLab from "./pages/CreateLab";
 import VirtualPost from "./pages/VirtualPost";
+import ReactGA from "react-ga4";
+ReactGA.initialize("G-5JCED7TBZT");
 
 function App() {
   const location = useLocation();
   const { load, user, logout } = useReducer();
   const { scrollY } = useScroll();
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname,
+      title: location.pathname,
+    });
 
+    console.log(location.pathname + location.search);
+  }, [location]);
   const [hidden, setHidden] = useState(false);
 
   const items = [

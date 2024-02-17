@@ -62,17 +62,18 @@ function Speakers() {
       {params.speakerId ? (
         <motion.div className="w-full font-mont items-center relative overflow-scroll gap-3 px-6 mt-4 flex flex-col h-full md:h-[90%]">
           <motion.img
-            initial={{ opacity: 0, translateY: -20 }}
-            animate={{
-              opacity: 1,
-              translateY: 0,
-              transition: { duration: 0.5 },
-            }}
-            exit={{
-              opacity: 0,
-              translateY: -20,
-              transition: { duration: 0.5 },
-            }}
+            layoutId={`image.speaker.${params.speakerId}`}
+            // initial={{ opacity: 0, translateY: -20 }}
+            // animate={{
+            //   opacity: 1,
+            //   translateY: 0,
+            //   transition: { duration: 0.5 },
+            // }}
+            // exit={{
+            //   opacity: 0,
+            //   translateY: -20,
+            //   transition: { duration: 0.5 },
+            // }}
             className=" h-1/2 aspect-square rounded-full object-cover border-2 border-white shadow-md"
             src={speakers[params.speakerId]?.img}
             alt=""

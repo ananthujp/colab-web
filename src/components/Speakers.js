@@ -29,7 +29,6 @@ export const AddSpeaker = ({
   useEffect(() => {
     edit.edit && setIsModalOpen(true);
     edit.edit && form.setFieldsValue(edit.data);
-    console.log(edit);
   }, [edit]);
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -182,12 +181,7 @@ function Speakers({ delay }) {
   const [isHovered, setIsHovered] = useState(false);
   const isInView = useInView(ref, { once: true });
   const { nav, setNav, speakers, user } = useReducer();
-  const chunkSize = 6;
-  const chunks = Array(Math.ceil(speakers?.length / chunkSize))
-    .fill()
-    .map((_, index) => index * chunkSize)
-    .map((begin) => speakers?.slice(begin, begin + chunkSize));
-  console.log(chunks);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   return (
@@ -264,22 +258,16 @@ function Speakers({ delay }) {
                 translateY: 10,
                 transition: { duration: 0.5 },
               }}
-              className=" h-56 pt-12 overflow-scroll"
+              className=" h-56 pt-12 overflow-y-scroll"
             >
-              {/* <Carousel dotPosition={"right"} autoplay> */}
               {
-                // chunks.map((chunk, i) => (
-                //   <div
-                //     key={i}
-                //     className="items-center justify-center gap-4 md:flex-wrap"
-                //   >
                 <motion.div className="grid grid-cols-3 gap-6 group">
                   {speakers?.map((item, j) => (
                     <motion.div
                       onClick={() => navigate(`/speakers/${j}`)}
                       key={`chunk.item.${j}`}
                       layout
-                      className={`flex cursor-pointer scale-100 transition-all flex-col items-center ${
+                      className={`flex cursor-pointer rounded-md pt-2 hover:border hover:border-indigo-200 hover:bg-indigo-100 scale-100 transition-all flex-col items-center ${
                         hoveredIndex !== null && hoveredIndex !== j
                           ? "opacity-50 saturate-50"
                           : "opacity-100 saturate-100"
@@ -287,21 +275,22 @@ function Speakers({ delay }) {
                       onMouseEnter={() => setHoveredIndex(j)}
                       onMouseLeave={() => setHoveredIndex(null)}
                     >
-                      <img
+                      <motion.img
+                        layoutId={`image.speaker.${j}`}
                         src={item.img}
                         className="w-16 border-2 shadow-md border-white h-16 rounded-full object-cover"
                         alt="speaker"
                       />
-                      <h1 className="text-xs font-mont text-center mt-1 xborder-tx xborder-slate-600 pb-1 ">
+                      <h1 className="text-xs font-mont text-center mt-1 xborder-tx font-semibold xborder-slate-600 pb-1 ">
                         {item?.name}
                       </h1>
+                      <p className="text-xs font-mont w-20 scale-90 text-center bg-opacity-75 border border-indigo-300 text-indigo-600 bg-white rounded-full px-1 py-0">
+                        {items[item?.type]}
+                      </p>
                     </motion.div>
                   ))}
                 </motion.div>
-                // </div>
-                // ))
               }
-              {/* </Carousel> */}
             </motion.div>
           ) : (
             <motion.div
