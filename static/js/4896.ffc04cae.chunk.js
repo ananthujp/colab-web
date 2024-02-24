@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcolab=self.webpackChunkcolab||[]).push([[4896],{64896:(e,o,l)=>{l.d(o,{bounce:()=>n});var i=l(14709);const c=e=>{void 0===e.collisionMaxSpeed&&(e.collisionMaxSpeed=(0,i.Gu)(e.options.collisions.maxSpeed)),e.velocity.length>e.collisionMaxSpeed&&(e.velocity.length=e.collisionMaxSpeed)};function n(e,o){(0,i.kR)((0,i.gy)(e),(0,i.gy)(o)),c(e),c(o)}}}]);
+//# sourceMappingURL=4896.ffc04cae.chunk.js.map

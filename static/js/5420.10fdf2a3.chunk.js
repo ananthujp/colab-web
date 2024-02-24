@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcolab=self.webpackChunkcolab||[]).push([[5420],{5420:(e,a,t)=>{async function n(e){let a=!(arguments.length>1&&void 0!==arguments[1])||arguments[1];await e.addParticleUpdater("life",(async e=>{const{LifeUpdater:a}=await t.e(1715).then(t.bind(t,21715));return new a(e)}),a)}t.d(a,{loadLifeUpdater:()=>n})}}]);
+//# sourceMappingURL=5420.10fdf2a3.chunk.js.map
