@@ -5,6 +5,8 @@ import useReducer from "../hook/reducerHook";
 import { colors, icons } from "./Colors";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Popover, Progress } from "antd";
+import avatar from "../imgs/user.png";
+
 function Agenda() {
   const { data } = useReducer();
   const params = useParams();
@@ -76,11 +78,11 @@ function Agenda() {
                       } rounded-md`}
                     >
                       <img
-                        src={item.url}
+                        src={item.url === " " ? avatar : item.url}
                         alt=""
-                        className="w-16 h-16 rounded-full"
+                        className="w-16 h-16 object-cover rounded-full"
                       />
-                      <div className="flex flex-col">
+                      <div className="flex flex-col w-full  items-start">
                         <h1 className="font-mont font-semibold">
                           {item.first.split("$")[0]}
                         </h1>

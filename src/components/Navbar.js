@@ -127,7 +127,7 @@ function Navbar({ sel, vert }) {
         }}
         className={`  ${
           vert
-            ? "md:flex flex-col bg-slate-400 bg-opacity-40 rounded-l-md bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:bg-slate-400/50"
+            ? "md:flex flex-col pattern-dots pattern-slate-300 pattern-bg-transparent pattern-size-2 pattern-opacity-40 rounded-l-md bg-clip-padding   border border-slate-300 "
             : "md:flex bg-yellow-100 bg-opacity-10 rounded-full bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:bg-slate-100/20"
         } ${
           sel !== 0 ? "flex scale-90 md:scale-100" : "hidden"
@@ -149,20 +149,29 @@ function Navbar({ sel, vert }) {
                 //style={{ borderRadius: 999999 }}
                 className={`absolute ${i === 0 && "rounded-l-full"} ${
                   i === items.length - 1 && "rounded-r-full"
-                } inset-0  bg-gradient-to-br border border-slate-300 from-slate-50 to-slate-200`}
+                } inset-0  ${
+                  !vert &&
+                  "bg-gradient-to-br border border-slate-300 from-slate-50 to-slate-200"
+                }`}
               />
             )}
             <span
               className={`z-50 text-xs md:text-sm relative xtext-slate-600  ${
-                sel === i ? " text-slate-600" : " text-white"
+                sel === i
+                  ? vert
+                    ? "text-slate-700"
+                    : " text-slate-600"
+                  : " text-white"
               } `}
             >
               {vert ? (
-                <div className=" flex group flex-row group">
-                  <h1 className="absolute group-hover:flex right-12 text-indigo-400/60 text-sm hidden">
+                <div className=" flex group flex-row group ">
+                  <h1 className="absolute group-hover:flex right-12  text-sm hidden">
                     {item.label}
                   </h1>
-                  {item.icon}
+                  <h1 className={`${sel !== i && "text-slate-400"}`}>
+                    {item.icon}
+                  </h1>
                 </div>
               ) : (
                 item.label

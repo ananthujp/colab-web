@@ -5,6 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import Page from "./Page";
+import { Link } from "react-router-dom";
 
 function Dash() {
   const [data, setData] = useState();
@@ -61,9 +62,23 @@ function Dash() {
           </div>
         </div>
         <div className="flex flex-col p-6 rounded-md border border-indigo-100 bg-indigo-50">
-          <h1 className="font-mont flex flex-row items-end gap-4 text-lg font-medium text-slate-800">
+          <h1 className="font-mont justify-between flex flex-row items-end gap-4 text-lg font-medium text-slate-800">
             {/* <UserPlusIcon className="w-8 h-8 text-slate-400" /> */}
-            Edit Agenda
+            <h1>Add Slides </h1>
+            <div className="flex gap-2">
+              <Link
+                to="/addslide"
+                className="p-2 bg-gradient-to-br from-green-400 to-green-500 hover:to-green-600 text-white px-4 rounded-full"
+              >
+                Add
+              </Link>
+              <Link
+                to="/addslide/dash"
+                className="p-2 bg-gradient-to-br from-blue-400 to-blue-500 hover:to-blue-600 text-white px-4 rounded-full"
+              >
+                Dashboard
+              </Link>
+            </div>
           </h1>
           {/* <div className="flex flex-col w-full xmd:flex-row gap-4 mt-2">
           

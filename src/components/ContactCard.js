@@ -13,21 +13,20 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { cardVar } from "../pages/profData";
 import TextArea from "antd/es/input/TextArea";
-
+export function transformData(inputArray) {
+  return inputArray.map((theme, i) => ({
+    value: theme.label,
+    label: theme.label,
+    children: theme.prof.map((prof, j) => ({
+      value: `${prof.name}`,
+      label: ` ${prof.name}`,
+    })),
+  }));
+}
 function Contact({ delay }) {
   const ref = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState({ visible: false });
 
-  function transformData(inputArray) {
-    return inputArray.map((theme, i) => ({
-      value: theme.label,
-      label: theme.label,
-      children: theme.prof.map((prof, j) => ({
-        value: `${prof.name}`,
-        label: ` ${prof.name}`,
-      })),
-    }));
-  }
   const Data = transformData(cardVar);
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -56,7 +55,7 @@ function Contact({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 md:mt-0 md:h-full bg-gradient-to-br from-slate-100/50 to-slate-200/50  border border-gray-200 hover:border-gray-400 flex flex-col justify-between p-4 rounded-lg"
+          className="mt-8 md:mt-0 md:h-full bg-white  border border-gray-200 hover:border-gray-400 flex flex-col justify-between p-4 rounded-lg"
         >
           <div className="flex flex-row mb-2 justify-between">
             <Modal
@@ -199,30 +198,9 @@ function Contact({ delay }) {
           </div>
 
           <motion.div className="flex flex-col w-full md:flex-row justify-between h-full">
-            <div className="flex flex-col md:group-hover:flex-row items-start w-full gap-2">
-              <motion.h1
-                initial={{ opacity: 0, translateY: -20 }}
-                animate={{
-                  opacity: 1,
-                  translateY: 0,
-                  transition: { duration: 0.5, delay: 0.5 * delay + 0.5 },
-                }}
-                className="text-lg group-hover:hidden font-semibold font-pop"
-              >
-                Indian Institute of Technology Gandhinagar
-              </motion.h1>
-              <motion.h1
-                initial={{ opacity: 0, translateY: -20 }}
-                animate={{
-                  opacity: 1,
-                  translateY: 0,
-                  transition: { duration: 0.5, delay: 0.5 * delay + 0.6 },
-                }}
-                className="text-xs group-hover:hidden font-light font-mont"
-              >
-                Palaj, Gandhinagar - 382055, Gujarat
-              </motion.h1>
+            <div className="flex flex-col  md:group-hover:flex-row items-start w-full gap-2">
               <motion.div
+                layoutId="contact.card.user"
                 onClick={() =>
                   setIsModalOpen({ ...isModalOpen, visible: true })
                 }

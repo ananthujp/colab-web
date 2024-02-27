@@ -7,6 +7,7 @@ import Page from "./Page";
 import {
   ArrowLeftIcon,
   LinkIcon,
+  PresentationChartBarIcon,
   UserIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/solid";
@@ -49,7 +50,7 @@ function Theme() {
     <Page
       no={3}
       page="themes"
-      title="Themes"
+      title="Domains in focus"
       backButton={
         params.postId && (
           <ArrowLeftIcon
@@ -189,57 +190,85 @@ function Theme() {
               />
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-2 mt-4">
-              {cardVar[params.postId].prof.map((item, i) => (
-                <motion.div
-                  onClick={() => item?.link && showConfirm({ url: item?.link })}
-                  initial={{ opacity: 0, translateY: -20 }}
-                  animate={{
-                    opacity: 1,
-                    translateY: 0,
-                    transition: { duration: 0.5, delay: i * 0.1 },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    translateY: 20,
-                    transition: { duration: 0.5, delay: i * 0.05 },
-                  }}
-                  className="grid cursor-pointer  md:grid-cols-[5em_auto_3em] w-full text-slate-600 p-3 rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 gap-4  font-pop "
-                >
-                  {item.img ? (
-                    <img
-                      src={item.img}
-                      alt={
-                        <UserIcon className="w-16 h-16 p-2 bg-indigo-600 rounded-full text-white mr-2" />
-                      }
-                      className="w-16 h-16 mx-auto object-cover bg-indigo-500 rounded-full"
-                    />
-                  ) : (
-                    <div className=" mx-auto">
-                      <UserIcon className="w-16 h-16 p-2 bg-indigo-600 rounded-full text-white mr-2" />
-                    </div>
-                  )}
-                  <div className="flex flex-col items-center md:items-start">
-                    <h1 className="font-semibold">{item.name}</h1>
-                    <h1 className="font-medium">{item.designation}</h1>
-                    <h1 className="font-light">{item.dept}</h1>
-                    <h1 className="font-light italic">{"e : " + item.email}</h1>
-                  </div>
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsModalOpen({
-                        fac: item.name,
-                        facEmail: item.email,
-                        visible: true,
-                      });
+              {cardVar[params.postId].prof
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((item, i) => (
+                  <motion.div
+                    initial={{ opacity: 0, translateY: -20 }}
+                    animate={{
+                      opacity: 1,
+                      translateY: 0,
+                      transition: { duration: 0.5, delay: i * 0.1 },
                     }}
-                    className="bg-gradient-to-br  py-2 border border-slate-300 hover:shadow-md hover:border-indigo-100 text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group md:flex-col items-center justify-around  md:w-20 md:-ml-10 rounded-lg bg-indigo-400"
+                    exit={{
+                      opacity: 0,
+                      translateY: 20,
+                      transition: { duration: 0.5, delay: i * 0.05 },
+                    }}
+                    className="  flex flex-col justify-between rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 gap-4  font-pop "
                   >
-                    <UserPlusIcon className="w-8 text-slate-600 group-hover:text-white" />
-                    Meet
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="grid p-3 gap-4 cursor-pointer  md:grid-cols-[5em_auto] w-full text-slate-600">
+                      {item.img ? (
+                        <img
+                          src={item.img}
+                          alt={
+                            <UserIcon className="w-16 h-16 p-2 bg-indigo-600 rounded-full text-white mr-2" />
+                          }
+                          className="w-16 h-16 mx-auto object-cover bg-indigo-500 rounded-full"
+                        />
+                      ) : (
+                        <div className=" mx-auto">
+                          <UserIcon className="w-16 h-16 p-2 bg-indigo-600 rounded-full text-white mr-2" />
+                        </div>
+                      )}
+                      <div className="flex flex-col items-center md:items-start">
+                        <h1 className="font-semibold">{item.name}</h1>
+                        <h1 className="font-medium">{item.designation}</h1>
+                        <h1 className="font-light">{item.dept}</h1>
+                        <h1 className="font-light italic">
+                          {"e : " + item.email}
+                        </h1>
+                      </div>
+                    </div>
+                    <div className="flex rounded-b-md overflow-hidden divide-x divide-x-indigo-200 flex-row justify-between border-t border-indigo-200">
+                      <div
+                        onClick={() =>
+                          item?.link && showConfirm({ url: item?.link })
+                        }
+                        className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full  bg-indigo-400"
+                      >
+                        <UserIcon className="w-5 text-slate-600 group-hover:text-white" />
+                        Profile
+                      </div>
+                      {item.hash && (
+                        <div
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/slidedeck/${item.hash}`);
+                          }}
+                          className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full  bg-indigo-400"
+                        >
+                          <PresentationChartBarIcon className="w-5 text-slate-600 group-hover:text-white" />
+                          Slide
+                        </div>
+                      )}
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setIsModalOpen({
+                            fac: item.name,
+                            facEmail: item.email,
+                            visible: true,
+                          });
+                        }}
+                        className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full  bg-indigo-400"
+                      >
+                        <UserPlusIcon className="w-5 text-slate-600 group-hover:text-white" />
+                        Meet
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
             </div>
           </div>
         ) : (

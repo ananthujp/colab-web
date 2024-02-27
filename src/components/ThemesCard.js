@@ -11,48 +11,8 @@ import climate from "../imgs/climate.png";
 import useReducer from "../hook/reducerHook";
 import { useNavigate } from "react-router-dom";
 import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
-const cardVar = [
-  {
-    label: "Bioengineering, Healthcare, Pharma",
-    bg: "hover:from-cyan-400 hover:to-blue-300",
-    img: bio,
-  },
-  {
-    label: "Manufacturing",
-    bg: "hover:from-fuchsia-300 hover:to-purple-400",
-    img: man,
-  },
-  {
-    label: "Energy and Water",
-    bg: "hover:from-green-400 hover:to-cyan-300",
-    img: ene,
-  },
-  {
-    label: "AI and Computing",
-    bg: "hover:from-purple-300 hover:to-indigo-300",
-    img: ai,
-  },
-  {
-    label: "Agro and Food processing",
-    bg: "hover:from-yellow-400 hover:to-orange-300",
-    img: food,
-  },
-  {
-    label: "Defence, Military & Space Technology ",
-    bg: "hover:from-pink-300 hover:to-rose-300",
-    img: def,
-  },
-  {
-    label: "Climate Challange & Solutions",
-    bg: "hover:from-blue-400 hover:to-indigo-300",
-    img: climate,
-  },
-  {
-    label: "Pharma and Healthcare",
-    bg: "hover:from-cyan-400  hover:to-blue-500",
-    img: pharma,
-  },
-];
+import { cardVar } from "../pages/profData";
+
 function ExpandCard() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -79,7 +39,7 @@ function ExpandCard() {
             }
           : null
       }
-      className=" flex flex-col md:flex-row mt-6 md:mt-8 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-indigo-200 hover:border-indigo-300"
+      className=" flex divide-x divide-slate-200 flex-col md:flex-row mt-6 md:mt-8 justify-between cursor-default transition-all m-1 w-[90%] md:w-full md:h-72 rounded-lg shadow-md border border-slate-200 hover:border-slate-300"
     >
       <div className="flex flex-col items-start justify-end p-2 md:p-0 bg-opacity-75 md:w-12 transition-all md:rounded-l-md bg-gradient-to-br from-indigo-400 to-indigo-400 ">
         <h1 className="whitespace-nowrap font-pop font-semibold text-white ml-2 border-b pr-1 border-white text-base transform origin-top-left md:-rotate-90">
@@ -87,12 +47,13 @@ function ExpandCard() {
           Domains in Focus
         </h1>
       </div>
-      {cardVar.map((item, index) => (
+      {cardVar?.map((item, index) => (
         <motion.div
           onClick={() => {
             setNav({ from: "/", to: "themes" });
             navigate("/themes/" + index);
           }}
+          layout
           initial={{ opacity: 0 }}
           animate={
             isInView
@@ -106,7 +67,7 @@ function ExpandCard() {
           key={`exp.card.${index}`}
           className={`relative cursor-pointer ${
             index === cardVar.length - 1 && " md:rounded-r-md"
-          } group bg-gradient-to-br group gap-3 hover:bg-opacity-20 from-slate-100 to-slate-300 group flex flex-row md:flex-col md:justify-around text-xs md:text-sm ${
+          } group bg-gradient-to-br from-white to-slate-100  group gap-3 xhover:bg-opacity-20 xfrom-slate-100 xto-slate-300 group flex flex-row md:flex-col md:justify-around text-xs md:text-sm ${
             item.bg
           } text-center font-mont w-full h-24 md:h-auto hover:p-6 transition-all duration-250 text-white flex justify-between items-center`}
         >
@@ -120,9 +81,11 @@ function ExpandCard() {
               />
             )}
           </div>
-          <h1 className="text-slate-400 font-regular px-2 group-hover:text-slate-600 sgroup-hover:font-medium">
-            {item.label}
-          </h1>
+          <div className="flex items-start justify-start md:h-1/4">
+            <h1 className="text-slate-400 mt-2 font-regular px-2 group-hover:text-slate-600 group-hover:font-semibold">
+              {item.label}
+            </h1>
+          </div>
           <div>
             {/* <motion.div
               onClick={() => {

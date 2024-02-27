@@ -94,7 +94,7 @@ const BlogSlider = ({ delay }) => {
             }
           : null
       }
-      className="bg-gradient-to-br from-slate-50/70 z-50 to-slate-50/70 h-64 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-300 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
+      className="bg-white h-64 bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-300 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
         <>
@@ -138,7 +138,7 @@ const BlogSlider = ({ delay }) => {
             </motion.button>
           </motion.h1>
           {isHovered ? (
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid  grid-cols-2 gap-2">
               {sliderItems.map((item, i) => (
                 <motion.div
                   onClick={() => navigate("program")}

@@ -106,7 +106,7 @@ const WhyCard = ({ delay }) => {
             }
           : null
       }
-      className="relative w-[90%] bg-slate-100/40 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-300 hover:border-gray-400 md:w-full flex flex-col justify-between rounded-lg"
+      className="relative w-[90%] bg-white xbg-slate-100/40 h-64 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-300 hover:border-gray-400 md:w-full flex flex-col justify-between rounded-lg"
     >
       {isInView && (
         <>

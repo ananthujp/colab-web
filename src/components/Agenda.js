@@ -23,7 +23,7 @@ import useReducer from "../hook/reducerHook";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { colors, icons } from "../pages/Colors";
 import { useNavigate } from "react-router-dom";
-
+import avatar from "../imgs/user.png";
 function Agenda({ delay }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -66,7 +66,6 @@ function Agenda({ delay }) {
       ? setDoc(doc(db, "agenda", edit.data.id), values)
           .then(() => {
             setOpen(false);
-            console.log(edit);
           })
           .catch((e) => console.log(e))
       : addDoc(collection(db, "agenda"), values).then(() => setOpen(false));
@@ -101,7 +100,7 @@ function Agenda({ delay }) {
         }
         // : null
       }
-      className="bg-slate-50 h-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-300 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
+      className="bg-white h-full bg-clip-padding backdrop-filter backdrop-blur-sm xbg-opacity-40 border border-gray-300 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg"
     >
       {isInView && (
         <div className="flex flex-col gap-3 h-[31rem] ">
@@ -424,7 +423,8 @@ function Agenda({ delay }) {
               <Popover
                 placement="topRight"
                 content={
-                  <div className="flex flex-col w-48">
+                  <div className="flex flex-col w-52">
+                    <h1 className="font-semibold">{item.title}</h1>
                     <p className="w-full border-b border-slate-200 pb-4">
                       {item.hover ? item.longdesc : ""}
                     </p>
@@ -432,7 +432,7 @@ function Agenda({ delay }) {
                       {item.users?.map((user, i) => (
                         <div className="flex flex-row my-2">
                           <img
-                            src={user.url}
+                            src={user.url !== " " ? user.url : avatar}
                             className="w-6 h-6 rounded-full"
                             alt=""
                           />
@@ -451,14 +451,14 @@ function Agenda({ delay }) {
                         </div>
                       ))}
                     </div>
-                    <h1 className="flex border-t border-slate-200 pt-2 my-2 flex-row font-mont text-xs font-semibold">
+                    <h1 className="inline-block border-t border-slate-200 pt-2 my-2 flex-row font-mont text-xs font-semibold">
                       Venue :&nbsp;
-                      <span className="font-light">{item?.venue}</span>
+                      <span className="font-light ">{item?.venue}</span>
                     </h1>
                   </div>
                 }
                 key={`pop.item${i}`}
-                title={item.title}
+                title={""}
                 open={
                   item?.hover && progress === 100 && eei === i ? true : false
                 }

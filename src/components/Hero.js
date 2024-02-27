@@ -9,7 +9,7 @@ function Hero() {
     <motion.div
       layoutId="hero.bg.black"
       className={
-        " md:h-[60vh] px-6 relative overflow-hidden pb-8 md:pb-0 md:px-24 w-full justify-center items-center  border-b-4 border-slate-100   xbg-white/40 flex " +
+        " md:h-[60vh] px-6 relative overflow-hidden pb-8 md:pb-0 md:px-24 w-full justify-center items-center  border-b-4 border-green-100   xbg-white/40 flex " +
         " bg-slate-900"
       }
     >
@@ -42,12 +42,12 @@ function Hero() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className=" shadow-red-600 mr-0 ml-auto flex flex-row md:justify-end items-end font-pop font-black bg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
+              className=" shadow-red-600 mr-0 ml-auto flex flex-row md:justify-end items-end font-pop font-black bg-white xbg-gradient-to-tl from-green-300 via-blue-600 to-purple-800 bg-clip-text text-transparent"
             >
               {/* <span className="text-7xl ">C</span> */}
               <img
                 src={logo}
-                className="w-16 md:w-24 h-16 md:h-24 -mr-3 -mb-1 -ml-2"
+                className="inline-block w-16 md:w-24 h-16 md:h-24 -mr-3 -mb-2 -ml-2"
                 alt=""
               />
               <span className="text-3xl md:text-5xl mx-0.5">O</span>

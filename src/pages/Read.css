@@ -4,7 +4,7 @@
   line-height: 1.42;
   height: auto;
   outline: none;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   /* padding: 0px 0px; */
   tab-size: 4;
   -moz-tab-size: 4;
@@ -49,13 +49,25 @@
 .ql-viewer > * {
   cursor: text;
 }
-.ql-viewer p,
+.ql-viewer h1 {
+  font-size: 1.8em;
+  font-weight: 400;
+  margin: 0.67em 0;
+}
+.ql-viewer h2 {
+  font-size: 1.4em;
+  font-weight: 400;
+  margin: 0.2em 0 0.05em;
+}
+.ql-viewer p {
+  font-size: 1.1em;
+}
 .ql-viewer ol,
-.ql-viewer ul,
+.ql-viewer ul {
+  font-size: 1.1em;
+}
 .ql-viewer pre,
 .ql-viewer blockquote,
-.ql-viewer h1,
-.ql-viewer h2,
 .ql-viewer h3,
 .ql-viewer h4,
 .ql-viewer h5,

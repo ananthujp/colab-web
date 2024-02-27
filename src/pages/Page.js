@@ -6,14 +6,14 @@ import useReducer from "../hook/reducerHook";
 import ray from "../imgs/ray.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Breadcrumb } from "antd";
-function Page({ children, page, no, title, backButton }) {
+function Page({ children, page, no, title, hideBreadcrumb }) {
   const { setNav } = useReducer();
   const navigate = useNavigate();
   const currentRoute = useLocation().pathname;
   return (
     <motion.div
       layoutId="hero.bg.black"
-      className="flex justify-center w-full h-full md:h-screen bg-gradient-to-br from-slate-900 to-slate-700 bg-no-repeat xbg-[url('tp238-background-03.png')] "
+      className="flex justify-center w-full  h-screen bg-gradient-to-br from-slate-900 to-slate-700 bg-no-repeat xbg-[url('tp238-background-03.png')] "
     >
       <div class="absolute w-full h-full pattern-boxes pattern-gray-500 pattern-size-6 pattern-opacity-5" />
       <div
@@ -29,10 +29,11 @@ function Page({ children, page, no, title, backButton }) {
         />
       </div>
 
-      <motion.div className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex">
-        <div className="flex relative flex-col w-[95%] gap-4 bg-gradient-to-br shadow-md border border-white from-white to-slate-200 mt-4 rounded-lg mb-32 md:mb-0 md:h-[85%] ">
+      <motion.div className="z-50 max-w-5xl flex flex-col w-full items-center justify-between font-mono text-sm lg:flex ">
+        <div className="flex relative flex-col w-[95%] gap-4 bg-gradient-to-br h-full shadow-md border border-white from-white to-slate-200 mt-4 rounded-lg mb-32 md:mb-0 md:h-[85%] ">
           <div className="absolute flex flex-row z-10 items-center w-full justify-between p-2 ml-1">
             <div className="md:hidden block" />
+
             <Breadcrumb separator=">" className="hidden md:block">
               {currentRoute?.split("/").map((item, index, arr) => (
                 <Breadcrumb.Item
@@ -55,6 +56,7 @@ function Page({ children, page, no, title, backButton }) {
                 </Breadcrumb.Item>
               ))}
             </Breadcrumb>
+
             <XMarkIcon
               onClick={() => {
                 setNav({ from: page, to: "/" });
@@ -63,7 +65,7 @@ function Page({ children, page, no, title, backButton }) {
               className="cursor-pointer hover:text-slate-400 text-slate-600 right-4 w-8 h-8 m-4"
             />
           </div>
-          <div className="mt-2 relative">
+          <div className={`${hideBreadcrumb ? "mt-12" : "mt-2"} relative`}>
             <motion.h1
               initial={{ opacity: 0, translateY: -20 }}
               animate={{

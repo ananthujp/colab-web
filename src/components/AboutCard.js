@@ -7,7 +7,7 @@ function Card() {
   const isInView = useInView(ref, { once: true });
   const navigate = useNavigate();
   const { nav, setNav } = useReducer();
-
+  const [hover, setHover] = useState(false);
   const [spotlightPosition, setSpotlightPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event) => {
@@ -20,6 +20,8 @@ function Card() {
   return (
     <motion.div
       onMouseMove={handleMouseMove}
+      onHoverStart={() => setHover(true)}
+      onHoverEnd={() => setHover(false)}
       ref={ref}
       layoutId={`pgm.about`}
       initial={nav.from !== "about" && { opacity: 0, translateY: -20 }}
@@ -39,28 +41,33 @@ function Card() {
             }
           : null
       }
-      className=" flex flex-col group relative justify-between font-mont transition-all gap-2 p-4 w-[90%] md:w-full  hover:border-orange-100  md:h-64 border border-indigo-400 bg-gradient-to-br from-purple-400 to-indigo-500 hover:to-indigo-600 rounded-lg shadow-md "
+      className=" flex cursor-none flex-col group relative justify-between font-mont transition-all gap-2 p-4 w-[90%] md:w-full  hover:border-orange-100  md:h-64 border border-indigo-400 bg-gradient-to-br from-purple-400 to-indigo-500 hover:to-indigo-600 rounded-lg shadow-md "
     >
-      <div
-        onMouseMove={handleMouseMove}
-        className="absolute hidden group-hover:block rounded-lg top-0 left-0 w-full h-full overflow-hidden"
-      >
-        <div
-          className="pattern-dots pattern-white pattern-size-2 pattern-opacity-80 "
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            // backgroundImage: `url('https://www.iitgn.ac.in/openhouse/assets/images/index-meta.jpeg')`, // replace 'your-image-url' with your image URL
-            backgroundSize: "cover",
-            maskImage: `radial-gradient(circle at ${spotlightPosition.x}px ${spotlightPosition.y}px, black 0%, transparent 20%)`,
-            WebkitMaskImage: `radial-gradient(circle at ${spotlightPosition.x}px ${spotlightPosition.y}px, black 0%, transparent 20%)`,
-          }}
-        />
-        {/* Rest of your component */}
-      </div>
+      {hover && (
+        <motion.div
+          key="spotlight.comp.card"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.5 } }}
+          exit={{ opacity: 0, transition: { duration: 0.5 } }}
+          onMouseMove={handleMouseMove}
+          className="absolute  rounded-lg top-0 left-0 w-full h-full overflow-hidden"
+        >
+          <div
+            className="flex opacity-20 items-center justify-center  "
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundImage: `url('https://news.iitgn.ac.in/wp/wp-content/uploads/2019/07/ANK383_2224a-1280x640.jpg')`, // replace 'your-image-url' with your image URL
+              backgroundSize: "cover",
+              maskImage: `radial-gradient(circle at ${spotlightPosition.x}px ${spotlightPosition.y}px, black 0%, transparent 50%)`,
+              WebkitMaskImage: `radial-gradient(circle at ${spotlightPosition.x}px ${spotlightPosition.y}px, black 0%, transparent 50%)`,
+            }}
+          />
+        </motion.div>
+      )}
       {isInView && (
         <div className="flex flex-row relative">
           <div className="flex flex-col gap-2 p-4">
@@ -110,7 +117,7 @@ function Card() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className="text-xs text-justify font-base text-white"
+              className={`text-xs  text-justify drop-shadow-md		 font-base text-white`}
             >
               CoLab 2024 is a dynamic convergence of academia and industry at
               the Indian Institute of Technology Gandhinagar. This event aims to

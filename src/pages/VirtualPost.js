@@ -7,22 +7,33 @@ import StallPreview from "./StallPreview";
 
 function VirtualPost() {
   const params = useParams();
-  const [stallData, setStallData] = useState({});
+  const [InitialValue, setInitialValue] = useState({});
   useEffect(() => {
-    if (params.virtualId && params.createId) {
-      getDoc(doc(db, "virtual", params.virtualId)).then((doc) => {
-        if (doc.exists()) {
-          setStallData(doc.data());
-        } else {
-          console.log("No such document!");
-        }
+    if (params.createId) {
+      getDoc(doc(db, "virtual", params.createId)).then((dc) => {
+        setInitialValue(dc.data());
       });
     }
   }, []);
+  // useEffect(() => {
+  //   if (params.virtualId && params.createId) {
+  //     getDoc(doc(db, "virtual", params.virtualId)).then((doc) => {
+  //       if (doc.exists()) {
+  //         setStallData(doc.data());
+  //       } else {
+  //         console.log("No such document!");
+  //       }
+  //     });
+  //   }
+  // }, []);
   return (
-    <Page page="themes" title={stallData ? stallData.name : "Virtual Stalls"}>
+    <Page
+      hideBreadcrumb
+      page="themes"
+      title={InitialValue ? InitialValue.title : "Virtual Stalls"}
+    >
       <div className="flex flex-col font-mont items-center h-full overflow-scroll w-full">
-        <StallPreview id="asd" />
+        <StallPreview InitialValue={InitialValue} />
       </div>
     </Page>
   );

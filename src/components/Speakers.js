@@ -8,7 +8,9 @@ import TextArea from "antd/es/input/TextArea";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { items } from "../pages/Speakers";
-import { GlobalOutlined, MailOutlined } from "@ant-design/icons";
+import { cardVar } from "../pages/profData";
+import avatar from "../imgs/user.png";
+export const domains = cardVar.map((obj) => obj.label);
 export const AddSpeaker = ({
   isModalOpen,
   setIsModalOpen,
@@ -86,6 +88,25 @@ export const AddSpeaker = ({
           ]}
         >
           <Input />
+        </Form.Item>
+        <Form.Item
+          label="Domain"
+          className="group"
+          name="domain"
+          rules={[
+            {
+              required: true,
+              message: "Please select an icon!",
+            },
+          ]}
+        >
+          <Select>
+            {domains.map((item, i) => (
+              <Select.Option key={`select.item.ico.${i}`} value={i}>
+                <div className="w-6 ">{item}</div>
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item
           label="Type"
@@ -171,11 +192,25 @@ function Speakers({ delay }) {
   const [isHovered, setIsHovered] = useState(false);
   const isInView = useInView(ref, { once: true });
   const { nav, setNav, speakers, user } = useReducer();
+  const [transform, setTransform] = useState(
+    "translate(-50%,-50%) rotateX(0deg)"
+  );
+
+  const onMouseEnter = () => {
+    setTransform("translate(-50%,-50%) rotateX(40deg) scale(0.8)");
+  };
+  const onMouseLeave = () => {
+    setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   return (
-    <div ref={ref} className="w-[90%] md:w-full md:h-auto">
+    <div
+      key={`about.card.home`}
+      ref={ref}
+      className="w-[90%] md:w-full md:h-auto overflow-hidden"
+    >
       <AddSpeaker isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       {isInView && (
         <motion.div
@@ -192,7 +227,9 @@ function Speakers({ delay }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className={`mt-8 md:mt-0 relative md:h-full  bg-slate-100/70  border border-gray-300 hover:border-gray-400 flex flex-col xjustify-between p-4 rounded-lg`}
+          className={`mt-8 md:mt-0 relative md:h-full ${
+            isHovered && "rotate-[90]"
+          } bg-white  border border-gray-300 hover:border-gray-400 flex flex-col xjustify-between p-4 rounded-lg`}
         >
           <div className="absolute z-50 w-[90%] top-4 flex flex-row  justify-between">
             <motion.h1
@@ -216,8 +253,8 @@ function Speakers({ delay }) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1, transition: { duration: 0.5 } }}
                   exit={{ opacity: 0, transition: { duration: 0.5 } }}
-                  key={`exp.card.btn`}
-                  className="rounded-full border font-semibold w-24 text-sm px-2 py-1 text-slate-600 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
+                  key={`exp.card.btn.1`}
+                  className="rounded-full cursor-pointer h-8 font-pop text-center border font-semibold w-24 text-sm px-2 py-1 text-slate-800 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
                 >
                   Add
                 </motion.div>
@@ -230,7 +267,7 @@ function Speakers({ delay }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: { duration: 0.5 } }}
                 exit={{ opacity: 0, transition: { duration: 0.5 } }}
-                key={`exp.card.btn`}
+                key={`exp.card.btn.2`}
                 className="rounded-full cursor-pointer h-8 font-pop text-center border font-semibold w-24 text-sm px-2 py-1 text-slate-800 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
               >
                 More
@@ -252,7 +289,7 @@ function Speakers({ delay }) {
               // }}
               className="flex h-56 pt-12 relative "
             >
-              <div className="bg-gradient-to-b from-slate-100 to-transparent z-10 h-16 absolute top-0 w-full " />
+              <div className="bg-gradient-to-b from-white to-transparent z-10 h-16 absolute top-0 w-full " />
 
               <div className=" absolute top-0 overflow-y-auto h-full">
                 <motion.div className="grid pt-10 grid-cols-3 gap-6 group">
@@ -285,8 +322,8 @@ function Speakers({ delay }) {
                     >
                       <motion.img
                         layoutId={`image.speaker.${j}`}
-                        src={item.img}
-                        className="w-16 border-2 shadow-md border-white h-16 rounded-full object-cover"
+                        src={item?.img === " " ? avatar : item?.img}
+                        className="w-16 border-2 bg-gradient-to-br from-slate-50 to-slate-200 shadow-md border-white h-16 rounded-full object-cover"
                         alt="speaker"
                       />
                       <h1 className="text-xs font-mont text-center mt-1 xborder-tx font-semibold xborder-slate-600 pb-1 ">
@@ -320,8 +357,8 @@ function Speakers({ delay }) {
                   <div className="h-44 my-auto md:h-36">
                     <div className="flex flex-row items-start gap-4">
                       <img
-                        src={item.img}
-                        className="w-36 h-36 rounded-full object-cover"
+                        src={item.img === " " ? avatar : item.img}
+                        className="w-36 bg-gradient-to-br from-slate-50 to-slate-200 h-36 rounded-full object-cover"
                         alt="speaker"
                       />
                       <div className="flex flex-col items-start gap-1">
@@ -331,10 +368,13 @@ function Speakers({ delay }) {
                         <p className="text-xs font-mont md:block hidden">
                           {item?.bio}
                         </p>
-                        <p className="text-xs w-20 scale-90 text-center bg-opacity-75 border border-indigo-300 text-indigo-600 bg-white rounded-full px-2 py-0.5">
+                        <p className="text-xs w-auto origin-left scale-90 text-center bg-opacity-75 border border-green-300 text-green-600 bg-white rounded-full px-2 py-0.5">
+                          {domains[item?.domain]}
+                        </p>
+                        <p className="text-xs w-20 origin-left scale-90 text-center bg-opacity-75 border border-indigo-300 text-indigo-600 bg-white rounded-full px-2 py-0.5">
                           {items[item?.type]}
                         </p>
-                        <div className="flex flex-col gap-">
+                        {/* <div className="flex flex-col gap-">
                           <p className="flex flex-row text-xs">
                             <MailOutlined className="w-4 inline-block" />{" "}
                             &nbsp;: &nbsp; {item?.mail}
@@ -344,7 +384,7 @@ function Speakers({ delay }) {
                             &nbsp;: &nbsp;
                             {item?.website}
                           </p>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

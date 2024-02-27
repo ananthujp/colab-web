@@ -10,7 +10,7 @@ import { Modal } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 const { confirm } = Modal;
-const showConfirm = ({ url }) => {
+export const showConfirm = ({ url }) => {
   confirm({
     title: "External Link",
     icon: <LinkIcon className="w-5 text-gray-400 mr-1" />,
