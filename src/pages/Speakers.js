@@ -18,7 +18,6 @@ const SpeakerCard = ({ data }) => (
       src={data?.img === " " ? avatar : data?.img}
       alt=""
     />
-
     <div className="flex flex-col  px-6 py-8 gap-2">
       <h1 className="text-lg font-semibold  border-b border-slate-600 pb-1 ">
         {data?.name}
@@ -30,16 +29,6 @@ const SpeakerCard = ({ data }) => (
       <p className="text-xs w-20 scale-90 origin-left text-center bg-opacity-75 border border-indigo-300 text-indigo-600 bg-white rounded-full px-2 py-0.5">
         {items[data?.type]}
       </p>
-      {/* <div className="flex flex-col gap-">
-        <p className="flex flex-row text-xs">
-          <MailOutlined className="w-4 inline-block" /> &nbsp;: &nbsp;{" "}
-          {data?.mail}
-        </p>
-        <p className="flex flex-row text-xs">
-          <GlobalOutlined className="w-4 inline-block" /> &nbsp;: &nbsp;
-          {data?.website}
-        </p>
-      </div> */}
     </div>
   </>
 );

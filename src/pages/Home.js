@@ -20,6 +20,7 @@ import Venue from "../components/Venue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import logo2 from "../imgs/iitgn-logo.png";
 import ray from "../imgs/ray.png";
+import SlideDeckCard from "../components/SlideDeckCard";
 
 function Home({ open, setOpen }) {
   const [hidden, setHidden] = useState(false);
@@ -146,7 +147,7 @@ function Home({ open, setOpen }) {
 
         <div className="flex bg-gradient-to-br  relative pt-4 justify-center bg-cover bg-no-repeat bg-opacity-20 xbg-[url('tp238-background-03.png')] w-full">
           <div className="absolute z-0 top-0 w-full h-full pattern-boxes pattern-gray-100 pattern-size-6 pattern-opacity-20" />
-          <div className="absolute top-0 inset-x-0 blur-3xl opacity-40 -hue-rotate-90 bg-top bg-[url('imgs/rayss.png')] h-[128rem] w-full xl:top-8" />
+          <div className="absolute top-0 inset-x-0 blur-3xl opacity-40 -hue-rotate-90 bg-top bg-[url('imgs/rayss.png')] h-[512rem] w-full xl:top-8" />
 
           <div className="flex z-50 flex-wrap w-full gap-4 justify-center md:justify-between max-w-5xl">
             <ExpandCard />
@@ -165,15 +166,14 @@ function Home({ open, setOpen }) {
               <Speakers />
             </div>
             <Venue />
-            <FAQCard />
-            <div className="grid grid-cols-1 w-[90%] justify-items-center md:w-full md:grid-cols-2 md:gap-6">
+            <div className="grid grid-cols-1 justify-items-center md:w-full md:grid-cols-[43%_55%] md:gap-6">
+              <FAQCard />
+              <SlideDeckCard />
+            </div>
+            <div className="grid grid-cols-1 w-[90%] justify-items-center md:w-full md:grid-cols-[55%_43%] md:gap-6">
               <QuickLinks />
               <Contact delay={1} />
             </div>
-            {/* <Imageslider /> */}
-
-            {/* <SwipeCard /> */}
-            {/* <Carousel /> */}
           </div>
         </div>
       </div>

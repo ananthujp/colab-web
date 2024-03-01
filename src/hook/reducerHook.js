@@ -17,6 +17,8 @@ export const AuthProvider = ({ children }) => {
   const [data, setAgenda] = useState();
   const [speakers, setSpeakers] = useState();
   const [about_data, setAbout] = useState();
+  const [slides, setSlides] = useState([]);
+
   const logout = () => {
     localStorage.removeItem("user");
     setUser(null);
@@ -29,6 +31,11 @@ export const AuthProvider = ({ children }) => {
     getDocs(collection(db, "speakers")).then((querySnapshot) => {
       setSpeakers(
         querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
+    });
+    getDocs(collection(db, "slides")).then((querySnapshot) => {
+      setSlides(
+        querySnapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
       );
     });
     onSnapshot(
@@ -86,8 +93,9 @@ export const AuthProvider = ({ children }) => {
       about_data,
       speakers,
       setSpeakers,
+      slides,
     }),
-    [load, user, speakers, nav, data, about_data]
+    [load, user, speakers, nav, data, about_data, slides]
   );
   return (
     <WrapContext.Provider value={memoedValue}>{children}</WrapContext.Provider>

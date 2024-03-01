@@ -3,7 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { useInView, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
-import { Button, Carousel, Form, Input, Modal, Select, message } from "antd";
+import {
+  Button,
+  Carousel,
+  Form,
+  Input,
+  Modal,
+  Popover,
+  Select,
+  message,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -11,6 +20,31 @@ import { items } from "../pages/Speakers";
 import { cardVar } from "../pages/profData";
 import avatar from "../imgs/user.png";
 export const domains = cardVar.map((obj) => obj.label);
+const Glinkgen = (form) => {
+  const [linkval, setLinkval] = useState("");
+  return (
+    <div className="flex flex-col p-1 gap-2">
+      <Input
+        placeholder="Google drive link"
+        onChange={(event) => setLinkval(event.target.value)}
+      />
+      <Button
+        onClick={() => {
+          form.setFieldValue(
+            "img",
+            `https://lh3.googleusercontent.com/d/${
+              linkval.match(/\/d\/([^/]+)/)[1]
+            }`
+          );
+        }}
+        className="bg-blue-500"
+        type="primary"
+      >
+        Ok
+      </Button>
+    </div>
+  );
+};
 export const AddSpeaker = ({
   isModalOpen,
   setIsModalOpen,
@@ -89,6 +123,13 @@ export const AddSpeaker = ({
         >
           <Input />
         </Form.Item>
+        <div className="w-full flex flex-row justify-end -mt-4 mb-2 items-end">
+          <Popover content={Glinkgen(form)} title="Google drive link">
+            <Button className=" bg-blue-500" type="primary">
+              Google Drive
+            </Button>
+          </Popover>
+        </div>
         <Form.Item
           label="Domain"
           className="group"
@@ -355,25 +396,33 @@ function Speakers({ delay }) {
               <Carousel dotPosition={"right"} autoplay>
                 {speakers?.map((item, i) => (
                   <div className="h-44 my-auto md:h-36">
-                    <div className="flex flex-row items-start gap-4">
+                    <div className="flex flex-row h-full items-start gap-4">
                       <img
                         src={item.img === " " ? avatar : item.img}
                         className="w-36 bg-gradient-to-br from-slate-50 to-slate-200 h-36 rounded-full object-cover"
                         alt="speaker"
                       />
-                      <div className="flex flex-col items-start gap-1">
-                        <h1 className="text-base md:text-lg font-semibold  border-b border-slate-600 pb-1 ">
-                          {item?.name}
-                        </h1>
-                        <p className="text-xs font-mont md:block hidden">
-                          {item?.bio}
-                        </p>
-                        <p className="text-xs w-auto origin-left scale-90 text-center bg-opacity-75 border border-green-300 text-green-600 bg-white rounded-full px-2 py-0.5">
-                          {domains[item?.domain]}
-                        </p>
-                        <p className="text-xs w-20 origin-left scale-90 text-center bg-opacity-75 border border-indigo-300 text-indigo-600 bg-white rounded-full px-2 py-0.5">
-                          {items[item?.type]}
-                        </p>
+                      <div className="flex flex-col w-full h-full items-start justify-between gap-1">
+                        <div className="flex relative flex-col items-start md:items-center w-full h-full md:flex-row mx-auto my-auto gap-0 justify-center md:justify-around">
+                          <div
+                            className="h-full absolute w-full pattern-dots pattern-slate-500 pattern-bg-white 
+  pattern-size-2 pattern-opacity-20"
+                          />
+                          <p className="flex items-center h-auto text-xs w-auto origin-left scale-90 text-center bg-opacity-75 border border-green-300 text-green-600 bg-white rounded-full px-2 py-0.5 overflow-hidden whitespace-nowrap">
+                            {domains[item?.domain]}
+                          </p>
+                          <p className="flex items-center h-auto text-xs w-auto origin-left scale-90 text-center bg-opacity-75 border border-blue-300 text-blue-600 bg-white rounded-full px-2 py-0.5">
+                            {items[item?.type]}
+                          </p>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <h1 className="text-base md:text-lg font-semibold  border-b border-slate-600 pb-1 ">
+                            {item?.name}
+                          </h1>
+                          <p className="text-xs font-mont md:block xhidden">
+                            {item?.bio}
+                          </p>
+                        </div>
                         {/* <div className="flex flex-col gap-">
                           <p className="flex flex-row text-xs">
                             <MailOutlined className="w-4 inline-block" />{" "}

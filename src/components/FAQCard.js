@@ -1,11 +1,15 @@
-import React from "react";
-import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
+import React, { useState } from "react";
+import {
+  ChatBubbleLeftRightIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import useReducer from "../hook/reducerHook";
-import { Collapse } from "antd";
+import { Collapse, Modal } from "antd";
 import { showConfirm } from "./Footer";
 function FAQCard({ delay = 0 }) {
+  const [open, setOpen] = useState({ index: 0, view: false });
   const Data = [
     {
       label: "About CoLab 2024",
@@ -201,6 +205,27 @@ function FAQCard({ delay = 0 }) {
   const { nav, setNav } = useReducer();
   return (
     <div className="bg-white bg-clip-padding backdrop-filter backdrop-blur-sm xbg-opacity-10 border border-gray-200 hover:border-gray-400 w-[90%] md:w-full flex flex-col justify-between p-4 rounded-lg">
+      <Modal
+        onCancel={() => setOpen({ ...open, view: false })}
+        open={open.view}
+        okButtonProps={{ hidden: true }}
+        cancelButtonProps={{ hidden: true }}
+      >
+        <div className="flex border-b pb-2 mb-2 border-slate-300 flex-row gap-2 items-center">
+          <ChatBubbleLeftRightIcon className="w-6" />
+          <h1>Frequently Asked Questions</h1>
+        </div>
+        <Collapse
+          items={items}
+          className="w-full min-w-full"
+          activeKey={[`${open.index}`]}
+          onChange={(value) =>
+            value.length > 1
+              ? setOpen({ ...open, index: value[1] })
+              : setOpen({ ...open, index: null })
+          }
+        />
+      </Modal>
       <motion.h1
         initial={{ opacity: 0, translateY: -20 }}
         animate={{
@@ -215,36 +240,25 @@ function FAQCard({ delay = 0 }) {
         }}
         className="text-lg mb-4 md:mb-2 flex items-start gap-2 justify-between  flex-row font-pop font-semibold text-slate-800"
       >
-        <div className="flex border-b pb-2 mb-2 border-slate-300 flex-row gap-2 items-center">
+        <div
+          onClick={() => setOpen(true)}
+          className="flex border-b pb-2 mb-2 border-slate-300 flex-row gap-2 items-center"
+        >
           <ChatBubbleLeftRightIcon className="w-6" />
           <h1>Frequently Asked Questions</h1>
         </div>
-        {/* <motion.button
-          //   onClick={() => {
-          //     setNav({ from: "/", to: "program" });
-          //     navigate("/" + "program");
-          //   }}
-          initial={{ opacity: 0, translateY: -20 }}
-          animate={{
-            opacity: 1,
-            translateY: 0,
-            transition: { duration: 0.5, delay: 0.4 },
-          }}
-          exit={{
-            opacity: 0,
-            translateY: 20,
-            transition: { duration: 0.5 },
-          }}
-          className="rounded-full font-semibold w-24 text-sm px-2 py-1 text-slate-600 bg-gradient-to-br from-slate-50 to-slate-200 hover:to-slate-300"
-        >
-          More
-        </motion.button> */}
       </motion.h1>
-      <Collapse
-        items={items}
-        className="w-full min-w-full"
-        //defaultActiveKey={["1"]}
-      />
+      <div className="flex flex-col h-full font-mont px-4 rounded-lg bg-slate-100 border border-slate-300 divide-y divide-slate-300">
+        {Data?.map((item, i) => (
+          <div
+            onClick={() => setOpen({ index: i, view: true })}
+            className="flex flex-row py-2 h-full cursor-pointer items-center gap-2 text-slate-900"
+          >
+            <ChevronRightIcon className="w-4" />
+            {item?.label}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

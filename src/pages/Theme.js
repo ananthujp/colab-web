@@ -86,6 +86,30 @@ function Theme() {
           autoComplete="off"
         >
           <Form.Item
+            label="Your Name"
+            name="name"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Organization"
+            name="organisation"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
             label="Email"
             name="email"
             rules={[
@@ -180,7 +204,7 @@ function Theme() {
                 translateY: 20,
                 transition: { duration: 0.5 },
               }}
-              className="absolute pointer-events-none bottom-0 right-4"
+              className="absolute -z-0 pointer-events-none bottom-0 right-4"
             >
               <img
                 key={`img.exp.${params.postId}`}
@@ -189,7 +213,7 @@ function Theme() {
                 className="w-full opacity-40 filter "
               />
             </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-2 mt-4">
+            <div className="grid z-10 grid-cols-1 md:grid-cols-2 w-full gap-2 mt-4">
               {cardVar[params.postId].prof
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((item, i) => (
@@ -205,7 +229,7 @@ function Theme() {
                       translateY: 20,
                       transition: { duration: 0.5, delay: i * 0.05 },
                     }}
-                    className="  flex flex-col justify-between rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 gap-4  font-pop "
+                    className="  flex flex-col justify-between rounded-md bg-indigo-50/40 hover:bg-indigo-100/70 border border-indigo-200 gap-4  font-pop "
                   >
                     <div className="grid p-3 gap-4 cursor-pointer  md:grid-cols-[5em_auto] w-full text-slate-600">
                       {item.img ? (
@@ -235,7 +259,7 @@ function Theme() {
                         onClick={() =>
                           item?.link && showConfirm({ url: item?.link })
                         }
-                        className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full  bg-indigo-400"
+                        className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white/40 to-slate-200/40 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full "
                       >
                         <UserIcon className="w-5 text-slate-600 group-hover:text-white" />
                         Profile
@@ -246,7 +270,7 @@ function Theme() {
                             e.stopPropagation();
                             navigate(`/slidedeck/${item.hash}`);
                           }}
-                          className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full  bg-indigo-400"
+                          className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white/40 to-slate-200/40 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full "
                         >
                           <PresentationChartBarIcon className="w-5 text-slate-600 group-hover:text-white" />
                           Slide
@@ -261,7 +285,7 @@ function Theme() {
                             visible: true,
                           });
                         }}
-                        className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white to-slate-200 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full  bg-indigo-400"
+                        className="bg-gradient-to-br  py-2  text-center cursor-pointer from-white/40 to-slate-200/40 hover:text-white hover:from-indigo-400 hover:to-indigo-500 text-xs flex group items-center justify-around w-full "
                       >
                         <UserPlusIcon className="w-5 text-slate-600 group-hover:text-white" />
                         Meet
@@ -273,24 +297,23 @@ function Theme() {
           </div>
         ) : (
           cardVar.map((item, i) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, translateY: -20 }}
+              animate={{
+                opacity: 1,
+                translateY: 0,
+                transition: { duration: 0.5, delay: i * 0.1 },
+              }}
+              exit={{
+                opacity: 0,
+                translateY: 20,
+                transition: { duration: 0.5, delay: i * 0.1 },
+              }}
               onClick={() => navigate(`${i}`)}
-              className="w-full cursor-pointer xmd:w-1/2 mx-4 my-2 p-2 rounded-md transition-all bg-indigo-100 border hover:shadow-lg border-indigo-200 hover:border-indigo-300 hover:bg-indigo-200"
+              className="flex w-full cursor-pointer xmd:w-1/2 mx-4 my-2 p-2 rounded-md transition-all bg-indigo-100 border hover:shadow-lg border-indigo-200 hover:border-indigo-300 hover:bg-indigo-200"
             >
               <div className="flex flex-row items-center text-slate-700 gap-4">
-                <motion.div
-                  initial={{ opacity: 0, translateY: -20 }}
-                  animate={{
-                    opacity: 1,
-                    translateY: 0,
-                    transition: { duration: 0.5, delay: i * 0.1 },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    translateY: 20,
-                    transition: { duration: 0.5, delay: i * 0.1 },
-                  }}
-                >
+                <motion.div>
                   <img
                     key={`img.exp.${i}`}
                     src={item.img}
@@ -299,7 +322,11 @@ function Theme() {
                   />
                 </motion.div>
 
-                <div className="flex flex-col ">
+                <div className="flex flex-col justify-between w-full h-full">
+                  <div
+                    className="flex flex-grow my-2  w-full pattern-dots pattern-slate-500 pattern-bg-transparent 
+  pattern-size-2 pattern-opacity-20"
+                  />
                   <motion.h1
                     initial={{ opacity: 0, translateY: -20 }}
                     animate={{
@@ -338,7 +365,7 @@ function Theme() {
                   </motion.h1>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))
         )}
       </motion.div>

@@ -17,6 +17,7 @@ import { db } from "../firebase";
 import { findChildObject } from "./StallPreview";
 import { cardVar } from "./profData";
 import { useNavigate, useParams } from "react-router-dom";
+import useReducer from "../hook/reducerHook";
 
 const directionFunction = (ind) => {
   switch (ind) {
@@ -93,7 +94,12 @@ const GradientTop = () => (
     <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
   </>
 );
-const SparklesCore = ({ minSize, maxSize, particleDensity, particleColor }) => {
+export const SparklesCore = ({
+  minSize,
+  maxSize,
+  particleDensity,
+  particleColor,
+}) => {
   const [init, setInit] = useState(false);
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -495,11 +501,11 @@ const SparklesCore = ({ minSize, maxSize, particleDensity, particleColor }) => {
 };
 const TextGradient = ({ text, keyID }) => {
   return (
-    <div className="bg-slate-800 border relative  border-slate-50/20 rounded-lg p-4 w-full h-full">
+    <div className="bg-slate-800 flex items-center border relative  border-slate-50/20 rounded-lg p-4 w-full h-full">
       <GradientTop />
       {/* Core component */}
 
-      <h1 className="absolute top-4 font-extrabold z-10  p-2 text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
+      <h1 className="xmd:absolute xtop-4 text-center my-auto font-extrabold z-10  p-2 text-transparent text-xl md:text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
         {text}
       </h1>
     </div>
@@ -561,21 +567,23 @@ const Backbutton = () => {
     <div
       key={`timer.back`}
       onClick={() => navigate(-1)}
-      className="flex  flex-col cursor-pointer items-center justify-around p-4 w-full h-full bg-gradient-to-br rounded-lg border border-slate-400/5 from-slate-800  to-slate-700 via-slate-800"
+      className="flex group flex-row md:flex-col cursor-pointer items-center justify-around p-4 w-full h-full bg-gradient-to-br rounded-lg border border-slate-400/5 from-slate-800  to-slate-700 via-slate-800 hover:from-slate-400  hover:to-slate-300 hover:via-slate-400"
     >
-      <ArrowUturnLeftIcon className="w-16 text-slate-100" />
-      <h1 className="text-lg font-medium text-white text-center">Back</h1>
+      <ArrowUturnLeftIcon className="w-8 md:w-16 text-slate-100 group-hover:text-slate-800" />
+      <h1 className="text-lg font-medium group-hover:text-slate-700 text-white text-center">
+        Back
+      </h1>
     </div>
   );
 };
 const Papers = ({ data }) => (
   <div className="flex  flex-col justify-between p-4 w-full h-full bg-gradient-to-br rounded-lg border border-slate-400/5 from-slate-800  to-slate-700 via-slate-800">
     <div className="flex flex-col gap-1">
-      {data?.map((item, j) => (
+      {data?.slice(0, 2).map((item, j) => (
         <div key={`pap.main.${j}`} className="flex flex-col gap-0">
           <h1 className="text-xs font-medium text-slate-200">{item.domain}</h1>
           <ol>
-            {item.title?.map((ite, i) => (
+            {item.title?.slice(0, 2).map((ite, i) => (
               <li
                 key={`paper.${i}`}
                 className="text-xs font-light text-slate-400"
@@ -605,7 +613,7 @@ const SideCards = ({ sect, domain, title, icon }) => (
     <div className="flex flex-col w-full h-full justify-between p-4 ">
       <div className="w-8 h-8 text-white">{icon}</div>
       {sect && (
-        <ol className="list-disc ml-4">
+        <ol className="list-disc py-4 md:py-0 ml-4">
           {sect.map((item, i) => (
             <li key={`sd.${i}`} className="text-xs text-slate-400">
               {item.data}
@@ -614,7 +622,7 @@ const SideCards = ({ sect, domain, title, icon }) => (
         </ol>
       )}
       {domain && (
-        <ol className="list-disc ml-4">
+        <ol className="list-disc py-4 md:py-0 ml-4">
           {domain.map((item, i) => (
             <li key={`dom.${i}`} className="text-xs text-slate-400">
               {item.data}
@@ -635,7 +643,7 @@ const ResearchBackground = ({ title, content, icon, obj, app }) => (
   pattern-size-2 pattern-opacity-20"
     />
     {app && (
-      <ol className="list-disc ml-8 mt-8">
+      <ol className="list-disc py-4 md:py-0 ml-8 mt-8">
         {app.map((item, i) => (
           <li key={`app.${i}`} className="text-xs text-slate-200">
             {item.data}
@@ -644,7 +652,9 @@ const ResearchBackground = ({ title, content, icon, obj, app }) => (
       </ol>
     )}
     {obj && (
-      <h1 className="ml-4 mt-8 text-xs font-light text-slate-200">{obj}</h1>
+      <h1 className="ml-4 mt-8 py-4 md:py-0 text-xs font-light text-slate-200">
+        {obj}
+      </h1>
     )}
     <div className="flex flex-row justify-between">
       <div className="flex flex-col">
@@ -720,9 +730,14 @@ function CardMain({ keyID, time, data }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.1, delay: 0 } }}
       exit={{ opacity: 1, transition: { duration: 0.1, delay: 0.5 } }}
-      className="max-w-5xl mx-auto  z-50 py-8 h-full gap-4 flex flex-col items-center justify-between w-full"
+      className="max-w-5xl mx-auto  z-50 py-8 px-6 md:px-0 h-full md:h-screen gap-4 flex flex-col items-center justify-between w-full"
     >
-      <div className="flex flex-row h-full w-full gap-4">
+      <div className="md:hidden w-full block">
+        <Card xkeyID={keyID} i={3}>
+          <TextGradient keyID={keyID} text={data?.title} />
+        </Card>
+      </div>
+      <div className="flex flex-col md:flex-row h-full w-full gap-4">
         <Card keyID={keyID} i={0}>
           <ResearchBackground
             title="Objective"
@@ -738,8 +753,8 @@ function CardMain({ keyID, time, data }) {
           />
         </Card>
       </div>
-      <div className="flex flex-row h-full w-full gap-4">
-        <div className="w-1/5">
+      <div className="flex flex-col md:flex-row h-full w-full gap-4">
+        <div className="md:w-1/5">
           <Card keyID={keyID} i={2}>
             <SideCards
               title="Domains"
@@ -748,10 +763,12 @@ function CardMain({ keyID, time, data }) {
             />
           </Card>
         </div>
-        <Card xkeyID={keyID} i={3}>
-          <TextGradient keyID={keyID} text={data?.title} />
-        </Card>
-        <div className="w-2/5">
+        <div className="hidden w-full md:block">
+          <Card xkeyID={keyID} i={3}>
+            <TextGradient keyID={keyID} text={data?.title} />
+          </Card>
+        </div>
+        <div className="md:w-2/5">
           <Card keyID={keyID} i={4}>
             <SideCards
               title="Key Sectors"
@@ -761,18 +778,18 @@ function CardMain({ keyID, time, data }) {
           </Card>
         </div>
       </div>
-      <div className="flex flex-row h-full w-full gap-4">
-        <div className="w-2/6">
+      <div className="flex flex-col md:flex-row h-full w-full gap-4">
+        <div className="md:w-2/6">
           <Card keyID={keyID} i={5}>
             <AuthorCard facArray={data?.faculty} />
           </Card>
         </div>
-        <div className="w-3/6">
+        <div className="md:w-3/6">
           <Card keyID={keyID} i={6}>
             <Papers data={data?.projects} />
           </Card>
         </div>
-        <div className="w-1/6">
+        <div className="md:w-1/6">
           <Card keyID={keyID} i={7}>
             {time !== 0 ? <Timer time={time} /> : <Backbutton />}
           </Card>
@@ -784,20 +801,20 @@ function CardMain({ keyID, time, data }) {
 function SliderDeck() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const params = useParams();
-  const [slides, setSlides] = useState([]);
+  const { slides } = useReducer();
   const handle = useFullScreenHandle();
   const time = 30;
-  useEffect(() => {
-    params.slideId
-      ? getDoc(doc(db, "slides", params.slideId)).then((item) =>
-          setSlides({ data: item.data(), id: item.id })
-        )
-      : getDocs(collection(db, "slides")).then((querySnapshot) => {
-          setSlides(
-            querySnapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
-          );
-        });
-  }, []);
+  // useEffect(() => {
+  //   params.slideId
+  //     ? getDoc(doc(db, "slides", params.slideId)).then((item) =>
+  //         setSlides({ data: item.data(), id: item.id })
+  //       )
+  //     : getDocs(collection(db, "slides")).then((querySnapshot) => {
+  //         setSlides(
+  //           querySnapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+  //         );
+  //       });
+  // }, []);
   useEffect(() => {
     const interval =
       slides &&
@@ -809,32 +826,14 @@ function SliderDeck() {
   }, [slides]);
   return (
     <FullScreen handle={handle}>
-      <div className="bg-gradient-to-br relative from-slate-900 to-slate-900 w-full h-screen">
-        {/* <img
-        src={glow}
-        alt=""
-        className="absolute rotate-180 z-0 blur-3xl opacity-20 -top-0 w-full"
-      /> */}
-        <SparklesCore
-          // background="transparent"
-          key={`sparkles.${"keyI"}`}
-          minSize={0.4}
-          maxSize={1}
-          particleDensity={50}
-          className="absolute opacity-20 z-50 bottom-0 h-auto w-full"
-          particleColor="rgb(203, 213, 225)"
-        />
-        {/* <ArrowsPointingOutIcon
-            onClick={() => handle.enter()}
-            className="absolute right-4 top-4 z-50 w-8 h-8 text-white"
-          /> */}
-        <div className="absolute   h-full top-0  w-full">
+      <div className="bg-gradient-to-br relative from-slate-900 to-slate-900 w-full  min-h-screen">
+        <div className="relative z-10  h-full top-0  w-full">
           {params.slideId ? (
             <CardMain
               time={0}
-              data={slides?.data}
-              key={slides?.id}
-              keyID={slides?.id}
+              data={slides?.find((item) => item.id === params.slideId).data}
+              key={params.slideId}
+              keyID={params.slideId}
             />
           ) : (
             <AnimatePresence mode="wait">
@@ -848,6 +847,17 @@ function SliderDeck() {
               )}
             </AnimatePresence>
           )}
+        </div>
+        <div className="absolute z-0 top-0 h-full w-full">
+          <SparklesCore
+            // background="transparent"
+            key={`sparkles.${"keyI"}`}
+            minSize={0.4}
+            maxSize={1}
+            particleDensity={50}
+            className="opacity-20 -z-0 top-0 h-auto w-full"
+            particleColor="rgb(203, 213, 225)"
+          />
         </div>
       </div>
     </FullScreen>
