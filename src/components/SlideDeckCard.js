@@ -40,7 +40,7 @@ const CardData = ({ data, ishover, nav, id, time }) => {
               translateY: 0,
               transition: { duration: 0.5, delay: 0.5 * 0.3 },
             }}
-            className="text-lg text-white border-b pb-2 mb-2 border-slate-300 flex items-center gap-2 ml-2  flex-row font-pop font-semibold "
+            className="text-lg text-slate-800 border-b pb-2 mb-2 border-slate-300 flex items-center gap-2 ml-2  flex-row font-pop font-semibold "
           >
             {ishover ? (
               <ArrowsPointingOutIcon className=" w-5" />
@@ -53,9 +53,9 @@ const CardData = ({ data, ishover, nav, id, time }) => {
             <Progress
               type="circle"
               size={40}
-              strokeColor="#ffffff"
+              strokeColor="rgb(148 163 184)"
               percent={val}
-              className="text-white"
+              className="text-slate-400"
               format={(percent) => `${time - parseInt((val * time) / 100)}s`}
             />
           </div>
@@ -70,8 +70,10 @@ const CardData = ({ data, ishover, nav, id, time }) => {
               />
             </div>
             <div className="flex flex-col items-start text-center font-mont">
-              <h1 className="text-xs font-medium text-white">{fac?.name}</h1>
-              <h1 className="text-xs w-auto overflow-hidden font-light text-white">
+              <h1 className="text-xs font-medium text-slate-800">
+                {fac?.name}
+              </h1>
+              <h1 className="text-xs w-auto overflow-hidden font-light text-slate-700">
                 {fac?.dept.length > fac?.name.length
                   ? fac?.dept.slice(0, fac?.name.length + 2) + ".."
                   : fac?.dept}
@@ -82,60 +84,131 @@ const CardData = ({ data, ishover, nav, id, time }) => {
         </div>
         <div className="flex flex-row gap-2 overflow-hidden max-h-44 justify-between">
           <div className="flex flex-col  overflow-hidden w-full h-full gap-2 justify-between">
-            <div className="flex flex-col rounded-md border  cbg-white/20 border-white/40 w-full  p-2 ">
-              <div className="flex gap-1 items-center font-semibold text-white">
+            <motion.div
+              initial={{ opacity: 0, translateY: -20 }}
+              animate={{
+                opacity: 1,
+                translateY: 0,
+                transition: { duration: 0.5, delay: 0.5 },
+              }}
+              exit={{
+                opacity: 0,
+                translateY: 20,
+                transition: { duration: 0.5 },
+              }}
+              className="flex flex-col rounded-md border  cbg-white/20 border-slate-400/60 w-full  p-2 "
+            >
+              <div className="flex gap-1 items-center font-semibold text-slate-700">
                 <ChartPieIcon className="w-4 h-4" />
                 Approaches Used
               </div>
               <ol className="list-disc  ml-6">
                 {data.app?.map((item, i) => (
-                  <li key={`dom.${i}`} className="text-xs font-thin text-white">
+                  <li
+                    key={`dom.${i}`}
+                    className="text-xs font-thin text-slate-700"
+                  >
                     {item.data}
                   </li>
                 ))}
               </ol>
-            </div>
-            <div className="flex flex-col rounded-md border cbg-white/20 border-white/40 w-full h-full  p-2 ">
-              <div className="flex gap-1 items-center font-semibold text-white">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, translateY: -20 }}
+              animate={{
+                opacity: 1,
+                translateY: 0,
+                transition: { duration: 0.5, delay: 0.5 + 0.1 * 1 },
+              }}
+              exit={{
+                opacity: 0,
+                translateY: 20,
+                transition: { duration: 0.5 },
+              }}
+              className="flex flex-col rounded-md border cbg-white/20 border-slate-400/60 w-full h-full  p-2 "
+            >
+              <div className="flex gap-1 items-center font-semibold text-slate-800">
                 <ChartPieIcon className="w-4 h-4" />
                 Domains
               </div>
-              <h1 className="text-xs ml-4 font-thin text-white inline-block">
+              <h1 className="text-xs ml-4 font-thin text-slate-600 inline-block">
                 {data.domains?.map((item, i) => (
                   <span
                     key={`dom.span.item.${i}`}
-                    className="text-xs font-thin text-white"
+                    className="text-xs font-thin text-slate-600"
                   >
                     {item.data},&nbsp;
                   </span>
                 ))}
               </h1>
-            </div>
+            </motion.div>
           </div>
-          <div className="flex flex-col  overflow-hidden h-full rounded-md border cbg-white/20 border-white/40 w-auto p-2 ">
-            <div className="flex gap-1 items-center font-semibold text-white">
+          <motion.div
+            initial={{ opacity: 0, translateY: -20 }}
+            animate={{
+              opacity: 1,
+              translateY: 0,
+              transition: { duration: 0.5, delay: 0.5 + 0.1 * 2 },
+            }}
+            exit={{
+              opacity: 0,
+              translateY: 20,
+              transition: { duration: 0.5 },
+            }}
+            className="flex flex-col  overflow-hidden h-full rounded-md border cbg-white/20 border-slate-400/60 w-auto p-2 "
+          >
+            <div className="flex gap-1 items-center font-semibold text-slate-800">
               <BuildingOffice2Icon className="w-4 h-4" />
               Key Sectors
             </div>
             <ol className="list-disc pt-4 md:py-0 ml-6">
               {data.sect?.map((item, i) => (
-                <li key={`dom.${i}`} className="text-xs font-thin text-white">
+                <li
+                  key={`dom.${i}`}
+                  className="text-xs font-thin text-slate-800"
+                >
                   {item.data}
                 </li>
               ))}
             </ol>
-          </div>
+          </motion.div>
         </div>
         <div className="flex flex-col justify-center items-center"></div>
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-col w-full">
-          <h1 className="xmd:absolute font-pop xtop-4 text-left my-auto font-semibold z-10  px-2 text-white text-lg  ">
+          <motion.h1
+            initial={{ opacity: 0, translateY: -20 }}
+            animate={{
+              opacity: 1,
+              translateY: 0,
+              transition: { duration: 0.5, delay: 0.5 + 0.1 * 3 },
+            }}
+            exit={{
+              opacity: 0,
+              translateY: 20,
+              transition: { duration: 0.5 },
+            }}
+            className="xmd:absolute font-pop xtop-4 text-left my-auto font-semibold z-10  px-2 text-slate-800 text-lg  "
+          >
             {data.title}
-          </h1>
-          <h1 className="inline-block px-2 font-mont text-white text-xs font-semibold">
+          </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, translateY: -20 }}
+            animate={{
+              opacity: 1,
+              translateY: 0,
+              transition: { duration: 0.5, delay: 0.5 + 0.1 * 4 },
+            }}
+            exit={{
+              opacity: 0,
+              translateY: 20,
+              transition: { duration: 0.5 },
+            }}
+            className="inline-block px-2 font-mont text-slate-700 text-xs font-semibold"
+          >
             Objective : <span className="font-thin ">{data.obj}</span>
-          </h1>
+          </motion.h1>
         </div>
       </div>
     </>
@@ -186,7 +259,7 @@ function SlideDeckCard({ delay = 0 }) {
             translateY: 20,
             transition: { duration: 0.5 },
           }}
-          className="mt-8 md:mt-0 md:h-full cursor-pointer transition-all relative bg-gradient-to-br from-purple-700 to-indigo-600 hover:to-indigo-800  border border-gray-200 hover:border-gray-400 flex flex-col justify-between p-4 rounded-lg"
+          className="mt-8 md:mt-0 md:h-full cursor-pointer transition-all relative bg-gradient-to-br from-white to-slate-50 hover:to-slate-100  border border-gray-200 hover:border-gray-400 flex flex-col justify-between p-4 rounded-lg"
         >
           <div className="absolute pointer-events-none z-0 top-0 h-full w-full">
             <SparklesCore
@@ -196,7 +269,7 @@ function SlideDeckCard({ delay = 0 }) {
               maxSize={1}
               particleDensity={50}
               className="opacity-20  -z-0 top-0 h-auto w-full"
-              particleColor="rgb(203, 213, 225)"
+              particleColor="rgb(30,41,59)"
             />
           </div>
           {slides.length > 1 && (

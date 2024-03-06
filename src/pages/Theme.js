@@ -229,7 +229,9 @@ function Theme() {
                       translateY: 20,
                       transition: { duration: 0.5, delay: i * 0.05 },
                     }}
-                    className="  flex flex-col justify-between rounded-md bg-indigo-50/40 hover:bg-indigo-100/70 border border-indigo-200 gap-4  font-pop "
+                    className={` ${
+                      item.hide && "hidden"
+                    }  flex flex-col justify-between rounded-md bg-indigo-50/40 hover:bg-indigo-100/70 border border-indigo-200 gap-4  font-pop `}
                   >
                     <div className="grid p-3 gap-4 cursor-pointer  md:grid-cols-[5em_auto] w-full text-slate-600">
                       {item.img ? (

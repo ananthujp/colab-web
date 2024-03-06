@@ -1,13 +1,15 @@
 import {
   collection,
   getDocs,
+  getDocsFromCache,
+  loadBundle,
+  namedQuery,
   onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { db } from "../firebase";
-
 const WrapContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -18,68 +20,141 @@ export const AuthProvider = ({ children }) => {
   const [speakers, setSpeakers] = useState();
   const [about_data, setAbout] = useState();
   const [slides, setSlides] = useState([]);
-
+  const [queryt, setQuery] = useState();
   const logout = () => {
     localStorage.removeItem("user");
     setUser(null);
   };
+  const loadData = async () => {
+    const agendaColl = await namedQuery(db, "agenda");
+    const agnedaSnap = await getDocsFromCache(agendaColl);
+    setAgenda(
+      agnedaSnap.docs
+        .sort((a, b) => a.data().key - b.data().key)
+        .map((doc) => ({
+          id: doc.id,
+          key: doc.data().key,
+          time_f: doc.data().time_f,
+          time_t: doc.data().time_t,
+          title: doc.data().title,
+          desc: doc.data().desc,
+          icon: doc.data().icon,
+          color: doc.data().color,
+          hover: doc.data().hover,
+          longdesc: doc.data().longdesc,
+          venue: doc.data().venue,
+          users: doc.data().users,
+        }))
+    );
+
+    const slidesColl = await namedQuery(db, "slides");
+    const slidesSnap = await getDocsFromCache(slidesColl);
+    setSlides(slidesSnap.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
+
+    const aboutColl = await namedQuery(db, "about");
+    const aboutSnap = await getDocsFromCache(aboutColl);
+    setAbout(
+      aboutSnap.docs.map((doc) => ({
+        id: doc.id,
+        key: doc.data().key,
+        name: doc.data().name,
+        role: doc.data().role,
+        bio: doc.data().bio,
+        img: doc.data().img,
+        facebook: doc.data().facebook,
+        instagram: doc.data().instagram,
+        linkedin: doc.data().linkedin,
+        twitter: doc.data().twitter,
+        email: doc.data().email,
+      }))
+    );
+    const speakersColl = await namedQuery(db, "speakers");
+    const speakersSnap = await getDocsFromCache(speakersColl);
+    setSpeakers(
+      speakersSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+    );
+  };
+  useEffect(() => {
+    // const bundle = JSON.parse(localStorage.getItem("bundle"));
+
+    fetch("https://colab-server.onrender.com/", { method: "GET" })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.arrayBuffer();
+      })
+      .then((bundleBuffer) => {
+        const bundleUint8Array = new Uint8Array(bundleBuffer);
+        // localStorage.setItem("bundle", JSON.stringify(bundleUint8Array));
+        return loadBundle(db, bundleUint8Array);
+      })
+      .then(async () => await loadData())
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }, []);
   useEffect(() => {
     user && localStorage.setItem("user", JSON.stringify(user));
     !user && setUser(JSON.parse(localStorage.getItem("user")));
   }, [user]);
-  useEffect(() => {
-    getDocs(collection(db, "speakers")).then((querySnapshot) => {
-      setSpeakers(
-        querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-      );
-    });
-    getDocs(collection(db, "slides")).then((querySnapshot) => {
-      setSlides(
-        querySnapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
-      );
-    });
-    onSnapshot(
-      query(collection(db, "agenda"), orderBy("key", "asc")),
-      (querySnapshot) => {
-        setAgenda(
-          querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            key: doc.data().key,
-            time_f: doc.data().time_f,
-            time_t: doc.data().time_t,
-            title: doc.data().title,
-            desc: doc.data().desc,
-            icon: doc.data().icon,
-            color: doc.data().color,
-            hover: doc.data().hover,
-            longdesc: doc.data().longdesc,
-            venue: doc.data().venue,
-            users: doc.data().users,
-          }))
-        );
-      }
-    );
-    onSnapshot(
-      query(collection(db, "about"), orderBy("key", "asc")),
-      (querySnapshot) => {
-        setAbout(
-          querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            key: doc.data().key,
-            name: doc.data().name,
-            role: doc.data().role,
-            bio: doc.data().bio,
-            img: doc.data().img,
-            facebook: doc.data().facebook,
-            instagram: doc.data().instagram,
-            linkedin: doc.data().linkedin,
-            twitter: doc.data().twitter,
-            email: doc.data().email,
-          }))
-        );
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  // onSnapshot(collection(db, "speakers"), (querySnapshot) => {
+  //   setSpeakers(
+  //     querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+  //   );
+  // });
+  // onSnapshot(collection(db, "slides"), (querySnapshot) => {
+  //   setSlides(
+  //     querySnapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+  //   );
+  // });
+
+  // onSnapshot(
+  //   query(collection(db, "agenda"), orderBy("key", "asc")),
+  //   (querySnapshot) => {
+  //     setAgenda(
+  //       querySnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         key: doc.data().key,
+  //         time_f: doc.data().time_f,
+  //         time_t: doc.data().time_t,
+  //         title: doc.data().title,
+  //         desc: doc.data().desc,
+  //         icon: doc.data().icon,
+  //         color: doc.data().color,
+  //         hover: doc.data().hover,
+  //         longdesc: doc.data().longdesc,
+  //         venue: doc.data().venue,
+  //         users: doc.data().users,
+  //       }))
+  //     );
+  //   }
+  // );
+  // onSnapshot(
+  //   query(collection(db, "about"), orderBy("key", "asc")),
+  //   (querySnapshot) => {
+  //     setAbout(
+  //       querySnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         key: doc.data().key,
+  //         name: doc.data().name,
+  //         role: doc.data().role,
+  //         bio: doc.data().bio,
+  //         img: doc.data().img,
+  //         facebook: doc.data().facebook,
+  //         instagram: doc.data().instagram,
+  //         linkedin: doc.data().linkedin,
+  //         twitter: doc.data().twitter,
+  //         email: doc.data().email,
+  //       }))
+  //     );
+  //   }
+  // );
+  // }, []);
   const memoedValue = useMemo(
     () => ({
       user,

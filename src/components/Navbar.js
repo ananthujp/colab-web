@@ -115,23 +115,24 @@ function Navbar({ sel, vert }) {
   return (
     <AnimatePresence>
       <motion.div
+        key={`nav.bar.anim.comp.{vert}`}
         //layoutId="nav_bar-lay"
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: { duration: 0.5 },
-        }}
-        exit={{
-          opacity: 0,
-          transition: { duration: 0.5 },
-        }}
+        // initial={{ opacity: 0 }}
+        // animate={{
+        //   opacity: 1,
+        //   transition: { duration: 0.5 },
+        // }}
+        // exit={{
+        //   opacity: 0,
+        //   transition: { duration: 0.5 },
+        // }}
         className={`  ${
           vert
             ? "md:flex flex-col pattern-dots pattern-slate-300 pattern-bg-transparent pattern-size-2 pattern-opacity-40 rounded-l-md bg-clip-padding   border border-slate-300 "
             : "md:flex bg-yellow-100 bg-opacity-10 rounded-full bg-clip-padding backdrop-filter backdrop-blur-sm  border border-gray-200 hover:bg-slate-100/20"
         } ${
           sel !== 0 ? "flex scale-90 md:scale-100" : "hidden"
-        } mx-2  font-medium flex-row transition-all  font-mont `}
+        } mx-2  font-medium flex-row   font-mont `}
       >
         {items.map((item, i) => (
           <motion.div

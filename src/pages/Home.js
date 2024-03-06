@@ -171,8 +171,8 @@ function Home({ open, setOpen }) {
               <SlideDeckCard />
             </div>
             <div className="grid grid-cols-1 w-[90%] justify-items-center md:w-full md:grid-cols-[55%_43%] md:gap-6">
-              <QuickLinks />
               <Contact delay={1} />
+              <QuickLinks />
             </div>
           </div>
         </div>

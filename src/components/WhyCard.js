@@ -110,7 +110,7 @@ const WhyCard = ({ delay }) => {
     >
       {isInView && (
         <>
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, translateY: -20 }}
             animate={{
               opacity: 1,
@@ -128,7 +128,7 @@ const WhyCard = ({ delay }) => {
               <LightBulbIcon className="w-6" />
               <h1>Why IITGN</h1>
             </div>
-          </motion.h1>
+          </motion.div>
           <div className="h-full w-full flex item flex-col">
             <div className="flex flex-row justify-between   items-center relative w-full h-full">
               <div
@@ -137,6 +137,7 @@ const WhyCard = ({ delay }) => {
               />
               {items.map((item, index) => (
                 <motion.h1
+                  key={`why.card.item${index}`}
                   onHoverStart={() => setActive(index)}
                   onHoverEnd={() => setActive(null)}
                   className={` z-50 ${
@@ -149,7 +150,8 @@ const WhyCard = ({ delay }) => {
             </div>
             <div className="flex flex-row justify-between  items-center font-mont font-semibold pb-6 pt-3  w-full">
               {items.map((item, index) => (
-                <motion.h1
+                <motion.div
+                  key={`why.card.item.r${index}`}
                   onHoverStart={() => setActive(index)}
                   onHoverEnd={() => setActive(null)}
                   className="relative text-center cursor-pointer w-full"
@@ -160,7 +162,7 @@ const WhyCard = ({ delay }) => {
                       className={`absolute inset-0 border w-[90%] ${item.hoverColor} mx-auto my-auto h-16 rounded-md`}
                     />
                   )}
-                  <h1
+                  <div
                     className={`relative flex flex-col items-center ${
                       active === index && "text-slate-600 "
                     }  z-10`}
@@ -169,8 +171,8 @@ const WhyCard = ({ delay }) => {
                     <h1 className="text-center text-slate-400 text-xs w-[80%] h-8 font-mont font-normal">
                       {item.Tag}
                     </h1>
-                  </h1>
-                </motion.h1>
+                  </div>
+                </motion.div>
                 // <Card
                 //   key={index}
                 //   category={item.category}

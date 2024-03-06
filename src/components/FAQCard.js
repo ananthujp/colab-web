@@ -251,6 +251,7 @@ function FAQCard({ delay = 0 }) {
       <div className="flex flex-col h-full font-mont px-4 rounded-lg bg-slate-100 border border-slate-300 divide-y divide-slate-300">
         {Data?.map((item, i) => (
           <div
+            key={`faq.card.${i}`}
             onClick={() => setOpen({ index: i, view: true })}
             className="flex flex-row py-2 h-full cursor-pointer items-center gap-2 text-slate-900"
           >
