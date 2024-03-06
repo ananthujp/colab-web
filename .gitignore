@@ -17,9 +17,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
-/src/firebase.js
-/src/userData.js
-/src/pages/profData.js
+./src/firebase.js
+./src/userData.js
+./src/pages/profData.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
