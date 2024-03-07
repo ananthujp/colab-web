@@ -12,6 +12,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { db } from "../firebase";
 const WrapContext = createContext({});
 
+const xhr = new XMLHttpRequest();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); //role: "admin"
   const [nav, setNav] = useState({ from: null, to: null });
@@ -77,25 +78,52 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // const bundle = JSON.parse(localStorage.getItem("bundle"));
 
-    fetch("https://colab-server.onrender.com/", { method: "GET" })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.arrayBuffer();
-      })
-      .then((bundleBuffer) => {
-        const bundleUint8Array = new Uint8Array(bundleBuffer);
-        // localStorage.setItem("bundle", JSON.stringify(bundleUint8Array));
-        return loadBundle(db, bundleUint8Array);
-      })
-      .then(async () => await loadData())
-      .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-      });
+    // fetch("https://colab-server.onrender.com/", { method: "GET" })
+    //   .then((res) => {
+    //     if (!res.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     return res.arrayBuffer();
+    //   })
+    //   .then((bundleBuffer) => {
+    //     const bundleUint8Array = new Uint8Array(bundleBuffer);
+    //     // localStorage.setItem("bundle", JSON.stringify(bundleUint8Array));
+    //     return loadBundle(db, bundleUint8Array);
+    //   })
+    //   .then(async () => await loadData())
+    //   .catch((error) => {
+    //     console.error(
+    //       "There has been a problem with your fetch operation:",
+    //       error
+    //     );
+    //   });
+    xhr.open("GET", "https://colab-server.onrender.com/", true);
+    xhr.responseType = "arraybuffer";
+
+    xhr.onprogress = function (event) {
+      if (event.lengthComputable) {
+        const percentComplete = (event.loaded / event.total) * 100;
+        console.log(`Download ${percentComplete}% complete`);
+      }
+    };
+
+    xhr.onload = function (event) {
+      if (xhr.status === 200) {
+        const bundleUint8Array = new Uint8Array(xhr.response);
+        loadBundle(db, bundleUint8Array)
+          .then(async () => await loadData())
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      } else {
+        console.error("An error occurred while downloading the bundle");
+      }
+    };
+
+    xhr.send();
   }, []);
   useEffect(() => {
     user && localStorage.setItem("user", JSON.stringify(user));
