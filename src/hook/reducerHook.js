@@ -1,3 +1,6 @@
+//Read Me
+//Make the bundle.txt from server and put it in public folder.
+//Firebase is completely removed from the project. The data is fetched from the bundle.txt file.
 import {
   collection,
   getDocs,
@@ -97,33 +100,49 @@ export const AuthProvider = ({ children }) => {
     //       error
     //     );
     //   });
-    xhr.open("GET", "https://colab-server.onrender.com/", true);
-    xhr.responseType = "arraybuffer";
+    // xhr.open("GET", "https://colab-server.onrender.com/", true);
+    // xhr.responseType = "arraybuffer";
 
-    xhr.onprogress = function (event) {
-      if (event.lengthComputable) {
-        const percentComplete = (event.loaded / event.total) * 100;
-        console.log(`Download ${percentComplete}% complete`);
-      }
-    };
+    // xhr.onprogress = function (event) {
+    //   if (event.lengthComputable) {
+    //     const percentComplete = (event.loaded / event.total) * 100;
+    //     console.log(`Download ${percentComplete}% complete`);
+    //   }
+    // };
 
-    xhr.onload = function (event) {
-      if (xhr.status === 200) {
-        const bundleUint8Array = new Uint8Array(xhr.response);
-        loadBundle(db, bundleUint8Array)
-          .then(async () => await loadData())
-          .catch((error) => {
-            console.error(
-              "There has been a problem with your fetch operation:",
-              error
-            );
-          });
-      } else {
-        console.error("An error occurred while downloading the bundle");
-      }
-    };
+    // xhr.onload = function (event) {
+    //   if (xhr.status === 200) {
+    //     const bundleUint8Array = new Uint8Array(xhr.response);
+    //     loadBundle(db, bundleUint8Array)
+    //       .then(async () => await loadData())
+    //       .catch((error) => {
+    //         console.error(
+    //           "There has been a problem with your fetch operation:",
+    //           error
+    //         );
+    //       });
+    //   } else {
+    //     console.error("An error occurred while downloading the bundle");
+    //   }
+    // };
 
-    xhr.send();
+    // xhr.send();
+    db &&
+      fetch(process.env.PUBLIC_URL + "/bundle.txt")
+        .then((response) => response.arrayBuffer())
+        .then((bundleBuffer) => {
+          const bundleUint8Array = new Uint8Array(bundleBuffer);
+          return loadBundle(db, bundleUint8Array);
+        })
+        .then(async () => {
+          await loadData();
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        });
   }, []);
   useEffect(() => {
     user && localStorage.setItem("user", JSON.stringify(user));

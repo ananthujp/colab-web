@@ -147,7 +147,7 @@ function Home({ open, setOpen }) {
 
         <div className="flex bg-gradient-to-br  relative pt-4 justify-center bg-cover bg-no-repeat bg-opacity-20 xbg-[url('tp238-background-03.png')] w-full">
           <div className="absolute z-0 top-0 w-full h-full pattern-boxes pattern-gray-100 pattern-size-6 pattern-opacity-20" />
-          <div className="absolute top-0 inset-x-0 blur-3xl opacity-40 -hue-rotate-90 bg-top bg-[url('imgs/rayss.png')] h-[512rem] w-full xl:top-8" />
+          <div className="absolute top-0 inset-x-0 blur-3xl opacity-40 -hue-rotate-90 bg-top xbg-[url('imgs/rayss.png')] h-[512rem] w-full xl:top-8" />
 
           <div className="flex z-50 flex-wrap w-full gap-4 justify-center md:justify-between max-w-5xl">
             <ExpandCard />

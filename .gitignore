@@ -19,6 +19,7 @@
 .env.production.local
 /src/firebase.js
 /src/userData.js
+/src/hook/reducerHook.js
 /src/pages/profData.js
 /server
 npm-debug.log*
